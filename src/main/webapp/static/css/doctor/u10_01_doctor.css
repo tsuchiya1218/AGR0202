@@ -1,0 +1,56 @@
+.main_box{
+    width: 50%;     
+    margin: 0 auto;
+}
+.item_con{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+.item_box{
+    width: 100%;
+}
+.items{
+    text-align: center;
+    margin: 0;
+}
+.items_text{
+    display: inline-block;
+    margin-bottom: 10px;
+    
+}
+.items input[type="file"]{
+    margin: 10px 0;
+    margin-bottom: 50px;
+}
+.items_btn{
+    padding: 10px 0;
+    text-align: center;
+}
+.items_btn button{
+    margin: 0 20px;
+    cursor: pointer;
+    width: 30%;
+    font-size: 16px;
+}
+.submit_btn{
+    background-color: #3c485e;
+    color: white;
+    border: 1px solid #3c485e;
+}
+.submit_btn:hover{
+    background-color: white;
+    color: #55b1df;
+    border: 1px solid #55b1df;
+    transition: all .2s ease;
+}
+.submit_btn:focus{
+    outline: none;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+}
+
+

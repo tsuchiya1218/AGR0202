@@ -1,0 +1,178 @@
+.main_box{
+    width: 50%;
+    margin: 0 auto;
+ }
+ .item_con{
+     margin-bottom: 10px;   
+ }
+ .hospital_info{
+     background-color: white;
+     margin-bottom: 10px;   
+ }
+ .item_box{
+     width: 100%;
+     margin-right: 10px;
+     text-align: center;
+     padding-bottom: 10px;
+ }
+ .member_name{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.member_name span{
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+ .items{
+     margin-bottom: 10px;
+     box-sizing: border-box;
+     text-align: left;
+     padding: 0 30px;
+ }
+ .itembox{
+     background-color: white;
+ }
+.items_img{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+.items_img .items_title{
+    text-align: center;
+}
+.items_img img{
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+}
+ .items_title{
+     display: inline-block;
+     width: 200px;
+     margin-right: 10px;
+     font-size: 20px;
+     font-weight: bold;
+     text-align: left;
+}
+.items_text{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+textarea{
+    width: 100%;
+    height: 200px;
+     padding: 10px;
+     border: 1px solid gray;
+     border-radius: 10px;
+     transition: all .2s ease;
+     font-size: 18px;
+}
+textarea:focus{
+     padding: 10px;
+     border: 1px solid gray;
+     border-radius: 10px;
+     transition: all .2s ease;
+     font-size: 18px;
+}
+textarea:disabled{
+     text-align: center;
+     color: black;
+     border: none;
+ }
+ textarea:focus{
+     border: 1px solid #55b1df;
+     border-radius: 10px;
+     transition: all .2s ease;
+     outline: none;
+ }
+
+
+ .items_medicine{
+     height: 100%;
+     margin-bottom: 10px;
+     padding: 10px 0;
+     border: 1px solid gray;
+     border-radius: 25px;
+     box-sizing: border-box;
+ }
+.item_box p{
+    display: inline-block;
+    font-size: 16px;
+    word-break: break-all;
+    color:black;
+}
+
+
+ .btn_box{
+     padding-top: 10px;
+     text-align: center;
+     padding-bottom: 20px;
+ }
+ .submit_btn{
+    margin: 0 20px;
+    cursor: pointer;
+    width: 30%;
+    font-size: 16px;
+    background-color: #3c485e;
+    color: white;
+    border: 1px solid #3c485e;
+}
+.submit_btn:hover{
+    background-color: white;
+    color: #55b1df;
+    border: 1px solid #55b1df;
+    transition: all .2s ease;
+}
+.submit_btn:focus{
+    outline: none;
+}
+
+@media(max-width: 1030px){
+     .item_con{
+         display:flex;
+         justify-content: center;
+         flex-direction: column;
+         align-items: center;
+     }
+     .hospital_info{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+     }
+     
+     .info_text{
+         font-size: 12px;
+         width: 60%;
+     }
+     .items_title{
+         width: 100%;
+         display:inline-block;
+         font-size: 16px;
+         text-align: center;
+     }
+     .items_text{
+        width: 100%;
+         font-size: 14px;
+         text-align: center;
+         word-break: break-all;
+     }
+     .items_title_another{
+        font-size: 16px;
+     }
+     .btn_box{
+         display:inline-block;
+         width: 100%;
+    }
+    .submit_btn{
+         font-size: 16px;
+         width: 50%;
+     }
+   
+ }

@@ -1,0 +1,106 @@
+.main_box{
+    margin: 0 auto;
+}
+.item_con{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.search_items{
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+.items{
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+.info_text{
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 0;
+    text-align: center;
+}
+table{
+    width: 100%;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin: 0;
+    padding:0;
+}
+
+table th{
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+    background-color: gainsboro;
+    padding: 10px;
+    margin: 0;
+}
+table td{
+    text-align: center;
+    word-break: break-all;
+    padding: 10px;
+}
+
+select{
+    text-align: center;
+}
+input[type="text"],
+input[type="text"]:focus{
+    outline: none;
+}
+.btn_box{
+    text-align: left;
+}
+.btn_td{
+    display: flex;
+}
+button{
+    cursor: pointer;
+}
+
+.delete_btn{
+    border: 1px solid #e75152;
+    background-color: #e75152;
+    color: white;
+}
+.delete_btn:hover{
+    border: 1px solid #FFC898;
+    background-color: #FFC898;
+    color: black;
+    transition: all 0.2s ease;
+}
+.delete_btn:active{
+    outline: none;
+    border: 1px solid #FFC898;
+    background-color: #FFC898;
+}
+.add_btn{
+    float: right;
+}
+footer{
+    position: unset;
+}
+@media(max-width: 1030px) {
+    table th{
+        padding: 5px;
+        font-size: 14px;
+    }
+    table td{
+        padding: 5px;
+        font-size: 12px;
+    }
+    button{
+        font-size: 12px;
+    }
+}

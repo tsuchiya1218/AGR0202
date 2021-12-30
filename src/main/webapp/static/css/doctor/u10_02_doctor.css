@@ -1,0 +1,211 @@
+.main_box{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+.item_con{
+    width: 100%;
+}
+.item_box{
+    width: 100%;
+    margin-right: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: white;
+}
+.member_name{
+    text-align: center;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+.member_name span{
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.member_name select{
+    padding: 5px 10px;
+    text-align: center;
+    outline: none;
+}
+.items{
+    display:flex;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    word-break: break-all;
+}
+
+.items_row{
+    border-collapse: collapse;
+    border: 1px solid gray;
+    width: 100%;
+    margin: 0 10px;
+    height: 100%;
+    text-align: left;
+}
+.items_title{
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    padding: 0 5px;
+    background-color: #d3e8e1;
+    border: 1px solid #d3e8e1;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    word-break: break-all;
+    font-size: 18px;
+}
+.select_msg{
+    font-size: 16px;
+}
+.items_text{
+    display:inline;
+    text-align: left;
+    padding: 0 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    word-break: break-all;
+}
+
+.prescription_btn{
+    padding-right: 30px;
+    text-align: right;
+}
+.prescription_btn button{
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+    color: black;
+    border: 1px solid gray;
+}
+
+.prescription_btn button:hover{
+    background-color: white;
+    color: #55b1df;
+    border: 1px solid #55b1df;
+    transition: all .2s ease;
+}
+.prescription_btn button:focus{
+    outline: none;
+}
+.table_items{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+table{
+    border: 1px solid #3c485e;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+table th{
+    box-sizing: border-box;
+    padding: 5px 10px;
+    background-color: #3c485e;
+    border: 1px solid #3c485e;
+    color: white;
+    font-weight: 100;
+}
+
+table td{
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border-bottom: 1px solid #3c485e;
+}
+table td:last-child{
+    box-sizing: border-box;
+}
+.table_items button{
+    cursor: pointer;
+}
+.table_items button:focus{
+    outline: none;
+}
+
+
+@media(max-width: 1030px){
+    .item_con{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .items{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        margin: 0 auto;
+        padding:0;
+    }
+    .member_name{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .member_name span{
+        display: inline-block;
+        font-size: 18px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+    .member_name select{
+        display: inline-block;
+        width: 30%;
+        padding: 5px 10px;
+        margin: 10px 0;
+    }
+
+    .items_row{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .items_title{
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 18px;
+    }
+    .items_text{
+        font-size: 16px;
+    }
+    .prescription_btn{
+        padding: 0;
+        text-align: center;
+    }
+    .prescription_btn button{
+        width: 40%;
+        font-size: 14px; 
+        margin: 0;
+        height: 40px;
+    }
+
+    .table_items{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    table{
+        font-size: 16px;
+    }
+    table th{
+        padding: 0 5px;
+    }
+    table td{
+        padding: 5px 10px;
+    }
+    .select_msg{
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,25 @@
+.main_con{
+    background-color: white;
+    padding: 10px;text-align: center;
+}
+
+.items{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.items_title{
+    font-weight: bold;
+}
+button{
+    cursor: pointer;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+}
+input{
+    outline: none;
+}

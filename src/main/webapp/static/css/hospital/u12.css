@@ -1,0 +1,155 @@
+.main_box{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+.item_box{
+    width: 100%;
+    margin-right: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: white;
+}
+.items{
+    display:flex;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    word-break: break-all;
+}
+.search_days{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+    padding-bottom: 30px;
+}
+.search_days span{
+    display: inline-block;
+    margin: 0 10px;
+}
+.search_days button{
+    margin-left: 10px;
+    cursor: pointer;
+}
+.table_items{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+table{
+    border: 1px solid #3c485e;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+table th{
+    box-sizing: border-box;
+    padding: 5px 10px;
+    background-color: #3c485e;
+    border: 1px solid #3c485e;
+    color: white;
+    font-weight: 100;
+}
+
+table td{
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border-bottom: 1px solid #3c485e;
+}
+table td:last-child{
+    box-sizing: border-box;
+}
+.table_items button{
+    cursor: pointer;
+}
+.table_items button:focus{
+    outline: none;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+}
+@media(max-width: 1030px){
+    .item_con{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .items{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        margin: 0 auto;
+        padding:0;
+    }
+    .member_name{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .member_name span{
+        display: inline-block;
+        font-size: 18px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+    .member_name select{
+        display: inline-block;
+        width: 30%;
+        padding: 5px 10px;
+        margin: 10px 0;
+    }
+
+    .items_row{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .items_title{
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 18px;
+    }
+    .items_text{
+        font-size: 16px;
+    }
+    .prescription_btn{
+        padding: 0;
+        text-align: center;
+    }
+    .prescription_btn button{
+        width: 40%;
+        font-size: 14px; 
+        margin: 0;
+        height: 40px;
+    }
+
+    .table_items{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    table{
+        font-size: 16px;
+    }
+    table th{
+        padding: 0 5px;
+    }
+    table td{
+        padding: 5px 10px;
+    }
+}

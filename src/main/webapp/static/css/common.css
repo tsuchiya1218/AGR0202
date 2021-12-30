@@ -1,0 +1,468 @@
+body{
+    margin: 0;
+    box-sizing: border-box;
+    padding-top: 5rem
+}
+main{
+    padding: 0 5rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    justify-content: center;
+    
+}
+section{
+    background-color: white;
+}
+
+form{
+    margin: 0;
+    padding: 0;
+}
+
+.site-header{
+    position: fixed;
+    display:flex;
+    padding: 1rem 5rem;
+    /* background: rgba(255,255,255,0.9); */
+    transition: .5s;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #d3e8e1;
+	align-items: center;
+}
+.site-header.transform{
+    display: flex;
+    /* background: rgba(255,255,255,0.5); */
+    padding: 0 5rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #3c485e;
+}
+.logo_box{
+    width: 150px;
+    padding-top: 1%;
+    float: left;
+}
+.logo_text{
+    color: black;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.logo_text.transform{
+    color: white;
+}
+
+nav{
+    width: 90%;
+}
+nav ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+    height:100%;
+    font-size: 18px;
+}
+.menu_bar.transform li a{
+    color:white;
+}
+.menu_bar.transform li{
+    border-bottom:3px solid #FFC898;
+}
+
+.menu_bar.transform li:hover{
+    background-color: #FFC898;
+    transition: all 0.3s;
+}
+
+.menu_bar.transform .menu_li_active{
+    background-color:#FFC898;
+}
+.menu_bar.transform li .menu_a_active{
+    color:black;
+}
+.menu_bar.transform a:hover{
+    color:black;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+nav ul li{
+    display:flex;
+    text-decoration: none;
+    border-bottom: 3px solid white;
+}
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+}
+
+nav ul li:hover{
+    border-bottom: 3px solid #FFC898;
+    transition: all 0.3s;
+}
+
+nav ul li a:hover{
+    color:#e75152;
+    transition: all 0.3s;
+}
+nav ul .menu_li_active{
+    border-bottom: 3px solid #FFC898;
+}
+
+nav ul li .menu_a_active{
+    color:#e75152;
+}
+
+.account_box{
+    display: flex;
+}
+
+.login_btn, .singup_btn{
+    margin-top: 10px;
+    width: 70px;
+    height: 20px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #f7f7f7;
+    border-left: solid 6px #3c485e;/*蟾ｦ邱�*/
+    color: #3c485e;/*譁�蟄苓牡*/
+    font-weight: bold;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    transition: all 0.5s;
+}
+.login_btn.active, .singup_btn.active{
+	background: #3c485e;
+    color:white;
+}
+.member_box{
+	width: 100%;
+}
+.member_name{
+	font-size: 0.6rem;
+	font-weight: bold;
+}
+.member_name.transform{
+	color:white;
+}
+
+.logout_btn{
+    width: 80px;
+    height: 15px;
+    display: flex;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #f7f7f7;
+    border-left: solid 6px #3c485e;/*蟾ｦ邱�*/
+    color: #3c485e;/*譁�蟄苓牡*/
+    font-weight: bold;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    transition: all 0.5s;
+    font-size: 12px;
+}
+.login_btn:active, .singup_btn:active, .logout_btn:active{
+    box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+    transform: translateY(2px);
+}
+
+.login_btn.transform, .singup_btn.transform, .logout_btn.transform{
+    border-left: solid 6px #FFC898;
+    height: auto;
+    padding-top: 1em;
+    margin-top: 0;
+    transition: all 0.5s;
+}
+
+.login_btn:hover, .singup_btn:hover, .logout_btn:hover{
+    background: #3c485e;
+    color:white;
+    transition: all 0.5s;
+}
+
+.login_btn.transform:hover, .singup_btn.transform:hover,
+.logout_btn.transform:hover{
+    background: #FFC898;
+    color:black;
+    transition: all 0.5s;
+}
+
+.account-btn {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    display: none;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    transition: all 0.5s;
+}
+
+.account-btn.transform{
+    width: 60px;
+    height: 20px;
+    top: 10px;
+    transition: all 0.5s;
+}
+
+/*X繧定｡ｨ遉ｺ縺吶ｋ*/
+.account-btn span,
+.account-btn span:before,
+.account-btn span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background-color: black;
+    transition: all 0.5s;
+    position: absolute;
+}
+
+#account-btn-check:checked ~ .account-btn span,
+#account-btn-check:checked ~ .account-btn span:before,
+#account-btn-check:checked ~ .account-btn span:after {
+    background-color: white;
+    transition: all 0.5s;
+}
+
+.account-btn.transform span,
+.account-btn.transform span:before,
+.account-btn.transform span:after {
+    background-color: white;
+}
+
+
+.account-btn span:before {
+    bottom: 8px;
+}
+.account-btn span:after {
+    top: 8px;
+}
+
+#account-btn-check {
+    display: none;
+}
+/*繝｡繝九Η繝ｼ繧ｪ繝ｼ繝励Φ譎ゅ�ｯ逵溘ｓ荳ｭ縺ｮ邱壹ｒ騾乗�弱↓縺吶ｋ*/
+#account-btn-check:checked ~ .account-btn span {
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+/*X縺ｮ邱�*/
+#account-btn-check:checked ~ .account-btn span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+#account-btn-check:checked ~ .account-btn span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+.account-content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    z-index: 85;
+    background-color: #3c485e;
+    transition: all 0.5s;
+}
+.account-content > h2{
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
+
+#account-btn-check:checked ~ .account-content {
+    left: 0;/*繝｡繝九Η繝ｼ繧堤判髱｢蜀�縺ｸ*/
+}
+.account-content ul {
+    padding: 70px 10px 0;
+}
+.account-content ul li {
+    border-bottom: solid 1px #ffffff;
+    list-style: none;
+}
+.account-content ul li a {
+    text-align: center;
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+    color:#ffffff;
+    text-decoration: none;
+    padding: 9px 15px 10px 0;
+    position: relative;
+}
+.account-content ul li a::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-top: solid 2px #ffffff;
+    border-right: solid 2px #ffffff;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 11px;
+    top: 16px;
+}
+
+.account-content ul li a:hover{
+    color: #e75152;
+}
+
+footer{
+    box-sizing: border-box;
+    left: 0;
+    width: 100%;
+    background-color: #3c485e;
+    transition: all 0.5s;
+}
+.footer_link{
+    padding-top: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.footer_link span{
+    margin-right: 10px;
+}
+.footer_link span::before{
+    content: ">";
+    color:#FFC898;
+    font-weight: 100;
+    padding:10px 0;
+}
+.footer_link a {
+    color: white;
+    text-decoration: none;
+}
+.footer_link a:hover{
+    text-decoration: underline;
+}
+
+.footer_bottom{
+    padding-bottom: 10px;
+    text-align: center;
+}
+.footer_bottom span{
+    color:white;
+    font-size:0.9rem;
+}
+
+.subtitle{
+    text-align: center;
+    background-color: #3c485e;
+    color:white;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+h2{
+    font-size: 1.3rem;
+}
+
+/*go top btn*/
+.top_btn_con{ 
+    display: none; 
+    position: fixed; 
+    right: 30px; 
+    bottom: 100px; 
+    outline: 0; 
+    border: 0; 
+    background: transparent; 
+    cursor: pointer; 
+    color: white; 
+    background-color: #3c485e;
+    padding: 5px;
+}
+.top_btn_text { 
+    font-size: 1rem; 
+    font-weight: bold; 
+    width: 100%; 
+    height: 100%; 
+    border: 0; 
+    cursor: pointer; 
+    color: white; 
+    background-color: #3c485e;
+}
+
+#account-btn-check:checked ~ .top_btn_con,
+#account-btn-check:checked ~ .top_btn_text{
+    position: unset;
+}
+
+@media(max-width: 1030px){
+    body{
+        background-color: white;
+    }
+    main{
+        padding: 0;
+    }
+    .logo_box{
+        margin-right:10px;
+    }
+    .logo_box a{
+        font-size: 1.2rem;
+    }
+    nav ul{
+        font-size: 0.8rem;
+    }
+    .account-btn{
+        display: flex;
+        cursor: pointer;
+    }
+    .login_btn, .singup_btn, .member_box{
+        display: none;
+    }
+    .footer_link{
+        font-size: 0.6rem;
+    }
+    
+    .footer_bottom span{
+        font-size: 0.5rem;
+    }
+    .subtitle{
+        width: 40vmin;
+        margin: 0 auto;
+        border-radius: 20px;
+        padding: 0;
+    }
+    h2{
+        font-size: 1rem;
+    }
+    footer{
+        position: unset;
+    }
+}
+
+@media(max-width: 550px){
+    .logo_box{
+        padding-bottom: 5px;
+        margin-left: 10px;
+    }
+    nav{
+        display: none;
+    }
+    .site-header.transform{
+        margin: 0;
+        padding: 0;
+    }
+    .site-header{
+        padding: 10px 0;
+    }
+    .account-btn{
+        top: 1%;
+    }
+    .subtitle{
+    	width: 80%;
+    }
+    
+}

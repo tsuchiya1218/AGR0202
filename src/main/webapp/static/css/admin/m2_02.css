@@ -1,0 +1,101 @@
+.main_box{
+    width: 50%;
+    margin: 0 auto;
+ }
+ .item_con{
+     padding-bottom: 10px;
+}
+.item_box{
+    width: 100%;
+    margin-right: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.items{
+    text-align: left;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding: 0 20px;
+}
+
+.items_title{
+    display: inline-block;
+    width: 40%;
+    margin-right: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.items input[type="text"],
+.items input[type="email"],
+.items input[type="number"]{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: all .2s ease;
+    font-size: 14px;
+}
+.items input[type="text"]:focus,
+.items input[type="email"]:focus,
+.items input[type="number"]:focus{
+    border: 1px solid #55b1df;
+    border-radius: 10px;
+    transition: all .2s ease;
+    outline: none;
+}
+
+.tel input[type="number"]{
+    width: 12%;
+}
+.btn_box{
+    text-align: left;
+}
+button{
+    cursor: pointer;
+}
+.add_btn{
+    float: right;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+}
+
+
+@media(max-width: 1080px){
+    .main_box{
+        width: 80%;
+    }
+    .items{
+        text-align: center;
+    }
+    .items input[type="text"],
+    .items input[type="email"],
+    .items input[type="number"]{
+        width: 50%;
+        height: 10px;
+        margin-bottom: 10px;
+    }
+    .items_title{
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+    }
+    input{
+        text-align: center;
+    }
+    .tel input[type="number"]{
+        width: 15%;
+    }
+    .btn_box{
+        text-align: center;
+        width: 100%;
+    }
+    .add_btn{
+        float:none;
+        margin-left: 30%;
+    }
+    
+}

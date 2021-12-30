@@ -1,0 +1,154 @@
+.contents{
+    background-color: white;
+    padding-top: 1px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.account_manage_table,.questionTable{
+    margin: 0 auto;
+    width: 55%;
+    border-collapse : 	collapse;
+}
+
+.account_manage_title,.questionTitle{
+    text-align: center;
+    width: 55%;
+    font-size: 20px;
+    line-height: 1.6em;
+    color: #FFFFFF;
+    background-color: #3c485e;
+    border: 1px solid #6AA1B7;
+    font-weight: bold;
+    padding: 6px 6px 6px 6px;
+    margin: 8px auto 16px auto;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    /* background: linear-gradient(to bottom, #4169E1, rgb(52, 84, 180)); */
+    text-shadow: 1px 1px 1px #555555;
+}
+
+th{
+    background-color: #d3e8e1;
+    font-weight: normal;
+    width: 30%;
+    font-size: 18px;
+    font-weight: bold;
+}
+th > label > span{
+    color: red;
+}
+
+td{
+    padding: 10px 10px;
+}
+
+td input[type="text"], td input[type="email"]{
+    width: 80%;
+}
+input,textarea{
+    font-size: 16px;
+    line-height: 1.0em;
+    padding: 2px;
+    margin: 0px 0px 0px 0px;
+    outline: none;
+}
+
+h3,p{
+    text-align: center;
+}
+
+p{
+    font-size: 16px;
+}
+strong{
+    color: red;
+    font-size: 16px;
+}
+
+.twobtns,.finishBtn{
+    text-align: center;
+}
+
+.registFinish p{
+    text-align: center;
+}
+.hoken_td input[type="text"]{
+    width: 20%;
+}
+#hoken1, #hoken2{
+    width: 30%;
+}
+.birthday input[type="text"]{
+    width: 20%;
+}
+.postnum input[type="text"]{
+    width: 20%;
+}
+button{
+    cursor: pointer;
+}
+
+.account_manage_btn_box{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.account_manage_btn_box button{
+    
+}
+.member_update{
+
+}
+.questionnaire_btn_box{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.member_leave_btn_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.member_leave_btn_box a:hover{
+    color: gray;
+}
+@media(max-width: 1030px){
+    main{
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+    .contents > h3{
+        font-size: 16px;
+    }
+    h3{
+        font-size: 16px;
+    }
+    input,textarea{
+        font-size: 14px;
+    }
+    p{
+        font-size: 14px;
+    }
+    th{
+        font-size: 16px;
+    }
+    td{
+        font-size: 14px;
+    }
+
+    .member_leave_btn_box p{
+        font-size: 14px;
+    }
+
+
+    
+}

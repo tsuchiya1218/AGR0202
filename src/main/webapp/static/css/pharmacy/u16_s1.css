@@ -1,0 +1,110 @@
+.main_box{
+    width: 50%;
+    margin: 0 auto;
+ }
+ .item_con{
+     margin-bottom: 10px;
+     
+}
+.item_box{
+     width: 100%;
+     margin-right: 10px;
+     text-align: center;
+     padding-bottom: 10px;
+ }
+.items{
+     margin-bottom: 10px;
+ }
+.img_box{
+    margin-bottom: 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.img_title{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 18px;
+}
+.img_box img{
+    width: 50%;
+    background-position: center;
+    background-size: contain;
+ }
+ .update_img{
+     padding-top: 20px;
+     border-top: 1px solid gray;
+     margin-bottom: 10px;
+ }
+ 
+ .items_title{
+     display: inline-block;
+     width: 100px;
+     margin-right: 10px;
+     font-size: 18px;
+     text-align: right;
+ }
+ #items_req::after{
+    content: "(必須)";
+    color: red;
+ }
+ 
+ .items input[type="text"]{
+     width: 50%;
+     padding: 10px;
+     border: 1px solid gray;
+     border-radius: 10px;
+     transition: all .2s ease;
+     
+ }
+ .items input[type="text"]:focus{
+     border: 1px solid #55b1df;
+     border-radius: 10px;
+     transition: all .2s ease;
+     outline: none;
+ }
+ 
+ .items_btn{
+    padding: 10px 0;
+    text-align: center;
+ }
+ .items_btn button{
+    margin: 0 20px;
+    cursor: pointer;
+    width: 30%;
+    font-size: 16px;
+ }
+ .submit_btn{
+     background-color: #3c485e;
+     color: white;
+     border: 1px solid #3c485e;
+ }
+ .submit_btn:hover{
+     background-color: white;
+     color: #55b1df;
+     border: 1px solid #55b1df;
+     transition: all .2s ease;
+ }
+ .submit_btn:focus{
+     outline: none;
+ }
+ footer{
+     position: absolute;
+     bottom: 0;
+ }
+ 
+ @media(max-width: 1030px){
+     .item_con{
+         display:flex;
+         justify-content: center;
+         flex-direction: column;
+         align-items: center;
+     }
+     .items input[type="text"]{
+         width: 50%;
+         height: 10px;
+     }
+     .items_title{
+         font-size: 16px;
+     }
+ }

@@ -1,0 +1,37 @@
+.main_box{
+    margin: 3% auto;
+    text-align: center;
+    width: 100%;
+    background-color: white;
+    padding-bottom: 20px;
+}
+
+.medcineTable table{
+    width: 80%;
+    margin: 4% auto;
+    border-collapse : collapse;
+    box-sizing: border-box;
+    
+}
+
+.medcineTable table th{
+    color: #FFFFFF;
+    background-color: #3c485e;
+}   
+.medcineTable table td{
+    border-bottom: 1px solid gray;
+}
+.searchTag input{
+    width: 5em;
+    text-align:right;
+} 
+footer{
+    position: absolute;
+    bottom: 0;
+}
+
+@media(max-width: 1030px){
+    footer{
+        position: unset;
+    }
+}

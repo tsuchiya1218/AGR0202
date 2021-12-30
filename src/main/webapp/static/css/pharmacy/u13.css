@@ -1,0 +1,121 @@
+.main_box{
+    width: 50%;
+    margin: 0 auto;
+ }
+ .item_con{
+     margin-bottom: 10px;   
+ }
+ 
+ .item_box{
+     width: 100%;
+     margin-right: 10px;
+     text-align: center;
+     padding-bottom: 10px;
+ }
+ .items{
+     margin-bottom: 10px;
+     box-sizing: border-box;
+ }
+
+ .items_title{
+     display: inline-block;
+     width: 40%;
+     margin-right: 10px;
+     font-size: 20px;
+     text-align: left;
+     font-weight: bold;
+}
+
+.items_text{
+    display: inline-block;
+    width: 55%;
+    font-size: 18px;
+    
+}
+
+ .items_medicine input{
+     text-align: center;
+ }
+ .items_another{
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    text-align: right;
+    width: 100%;
+    padding: 0 20px;
+ }
+ 
+.item_box p{
+    display: inline-block;
+    font-size: 16px;
+    word-break: break-all;
+    color:black;
+}
+
+ .btn_box{
+     padding-top: 10px;
+     text-align: center;
+     padding-bottom: 20px;
+ }
+ .submit_btn{
+    margin: 0 20px;
+    cursor: pointer;
+    width: 30%;
+    font-size: 16px;
+    background-color: #3c485e;
+    color: white;
+    border: 1px solid #3c485e;
+}
+.submit_btn:hover{
+    background-color: white;
+    color: #55b1df;
+    border: 1px solid #55b1df;
+    transition: all .2s ease;
+}
+.submit_btn:focus{
+    outline: none;
+}
+.medicine_box{
+    border: 1px solid gray;
+    border-radius: 25px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media(max-width: 1030px){
+     .item_con{
+         display:flex;
+         justify-content: center;
+         flex-direction: column;
+         align-items: center;
+     }
+    
+     .items_radio .items_title{
+         text-align: center;
+         width: 100%;
+     }
+     
+    
+     .items_text{
+         font-size: 16px;
+     }
+     .items_title{
+         font-size: 18px;
+         width: 70%;
+         text-align: center;
+     }
+     
+     .btn_box{
+         display:inline-block;
+         width: 100%;
+    }
+    .submit_btn{
+         font-size: 14px;
+         width: 50%;
+     }
+    
+     .item_box p{
+         width: 80%;
+         font-size: 14px;
+     }
+     
+ }

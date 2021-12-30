@@ -1,0 +1,18 @@
+.main_con{
+    background-color: white;
+    text-align: center;
+}
+.items{
+    margin: 10px 0;
+}
+.items_title{
+    font-weight: bold;
+}
+button{
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+}

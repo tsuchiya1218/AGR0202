@@ -1,0 +1,83 @@
+.main_box{
+    width: 40%;
+    margin: 0 auto;
+ }
+.item_con{
+    text-align: center;
+}
+
+.items_box{
+    border-radius: 20px;
+    border: 1px solid gray;
+    display: block;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    flex-direction: column;
+}
+.items{
+    border-bottom: 1px solid gainsboro;
+    padding: 10px 0;
+}
+.items_title{
+    font-weight: bold;
+}
+.items_text{
+	word-break: break-all;
+}
+button{
+    cursor: pointer;
+}
+.btn_box{
+    padding-top: 20px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_box button{
+    margin: 0 auto;
+    width: 5rem;
+    border-radius: 20px;
+}
+.update_btn{
+    border: 1px solid gray;
+}
+.update_btn:hover{
+    background-color: ghostwhite;
+}
+
+.delete_btn{
+    background-color: #FFC898;
+    border: 1px solid #FFC898;
+}
+.delete_btn:hover{
+    background-color: #e75152;
+    color: white;
+}
+
+@media(max-width: 1030px){
+	.main_box{
+        width: 50%;
+    }
+    .items{
+        text-align: center;
+    }
+
+    .items_box{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn_box{
+    	margin: 0 20px;
+    }
+}
+
+@media(max-width: 550px){
+	.btn_box {
+	    margin: 0 20px;
+	    border-radius: 20px;
+	}
+}

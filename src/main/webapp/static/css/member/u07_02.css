@@ -1,0 +1,150 @@
+.main_box{
+    width: 40%;
+    margin: 0 auto;
+ }
+ .item_con{
+     padding-bottom: 10px;
+}
+.item_box{
+    width: 100%;
+    margin-right: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.items, .items_req{
+    text-align: left;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 0 2rem;
+    
+}
+
+.items_title{
+    display: inline-block;
+    width: 40%;
+    margin-right: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.items input[type="text"],
+.items_req input[type="text"],
+.child_num input[type="number"],
+textarea{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: all .2s ease;
+    font-size: 14px;
+}
+.brith input[type="number"]{
+    width: 10%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: all .2s ease;
+    font-size: 14px;
+}
+
+.insurance input[type="number"], .insurance input[type="text"]{
+    width: 15%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: all .2s ease;
+    font-size: 14px;
+}
+
+.insurance .items_title{
+    width: 100%;
+}
+.items input[type="text"]:focus,
+.items_req input[type="text"]:focus,
+.child_num input[type="number"]:focus,
+.brith input[type="number"]:focus,
+.insurance input[type="number"]:focus,
+textarea:focus{
+    border: 1px solid #55b1df;
+    border-radius: 10px;
+    transition: all .2s ease;
+    outline: none;
+}
+
+.btn_box{
+    text-align: left;
+}
+button{
+    cursor: pointer;
+}
+.add_btn{
+    float: right;
+}
+
+
+@media(max-width: 1080px){
+    .main_box{
+        width: 80%;
+    }
+    .items, .items_req{
+        text-align: center;
+    }
+    .items input[type="text"],
+    .items_req input[type="text"],
+    .child_num input[type="number"]{
+        width: 20%;
+        height: 10px;
+        margin-bottom: 10px;
+    }
+    .brith input[type="number"]{
+        width: 10%;
+    }
+    .items_title{
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+    }
+    input{
+        text-align: center;
+    }
+    
+    .btn_box{
+        text-align: center;
+        width: 100%;
+    }
+    .add_btn{
+        float:none;
+        margin-left: 30%;
+    }
+    .insurance{
+    	display: flex;
+    	flex-direction: column;
+    }
+    .insurance input[type="number"], .insurance input[type="text"]{
+        width: 20%;
+        margin-bottom: 10px;
+    }
+    
+}
+@media(max-width: 550px){
+	.items, items_req{
+		display: flex;
+		flex-direction: column;
+	}	
+	.insurance input[type="number"], .insurance input[type="text"]{
+        width: 50%;
+    }
+    .brith input[type="number"]{
+        width: 50%;
+    }
+    textarea{
+    	width: 100%;
+    }
+    .items input[type="text"],
+    .items_req input[type="text"],
+    .child_num input[type="number"]{
+    	width: 80%;
+    }
+}
