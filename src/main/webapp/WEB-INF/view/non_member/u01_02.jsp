@@ -48,7 +48,7 @@
 	                <tr class="birthday">
 	                    <th><label>生年月日</label></th>
 	                    <td>
-	                    	<c:out value="${sessionScope.memberBean.m_brith }"/>
+	                    	<c:out value="${sessionScope.memberBean.m_birth }"/>
 	                    </td>
 	                </tr>
 	                <tr>

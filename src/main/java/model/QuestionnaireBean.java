@@ -1,6 +1,10 @@
 package model;
 
-public class QuestionnaireBean {
+import java.io.Serializable;
+
+public class QuestionnaireBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int q_num;
 	private String q_blood_type;

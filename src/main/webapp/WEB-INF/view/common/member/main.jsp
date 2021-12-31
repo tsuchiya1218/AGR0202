@@ -29,7 +29,7 @@
                             <span>QRコード画像を保存したい</span>
                         </div>
                         <div class="manual_text">
-                            <span>1.<a href="MemberController?view=u09_01">My QRコード</a>
+                            <span>1.<a href="MemberController?view=u09">My QRコード</a>
                                 にアクセス</span><br>
                             <span>2.QRコードを送信ボタンを押す。</span><br>
                             <span>3.登録したメールにQRコード画像が送られます。</span><br>
@@ -67,7 +67,7 @@
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="MemberController?view=u09_01">My QRコード</a><br>
+                    <a class="item_title" href="MemberController?view=u09">My QRコード</a><br>
                     <span>
                         自分のQRコードが確認できます。<br>
                         QRコード画像をメールアドレスに送られます。

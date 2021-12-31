@@ -40,8 +40,8 @@ public class U01_04 implements Action {
 			return forward;
 		}
 		 
-		String[] m_numANDm_brith = memberDAO.findbyEmailToM_numAndBrith(m_email);
-		if(!memberDAO.generateQRcode(Integer.parseInt(m_numANDm_brith[0]), m_numANDm_brith[1])) {
+		String[] m_numANDm_birth = memberDAO.findbyEmailToM_numAndBirth(m_email);
+		if(!memberDAO.generateQRcode(Integer.parseInt(m_numANDm_birth[0]), m_numANDm_birth[1])) {
 			forward.setErrorMsg("QRコード登録のエラーが発生しました。\\n管理者に問い合わせしてください。");
 			return forward;
 		}

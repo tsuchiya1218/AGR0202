@@ -1,6 +1,7 @@
 package action.member;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import model.ChildBean;
 import model.MemberBean;
 import util.XssFilter;
 
-public class U07_02 implements Action {
+public class U07_s1_02 implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -87,34 +88,44 @@ public class U07_02 implements Action {
 		MemberBean member = (MemberBean) session.getAttribute("member");
 
 		ChildDAO childDAO = ChildDAO.getInstance();
-		ChildBean childBean = new ChildBean();
+		List<ChildBean> child = childDAO.getChild(member.getM_num());
+		int index = Integer.parseInt(request.getParameter("index"));
+		
+		if(!child.get(index).getC_medical_num().equals(map.get("medical_num"))) {
+			if (childDAO.isDuplicateMedical_num(map.get("medical_num"))) {
+				forward.setErrorMsg("既に登録されている子ども医療費番号です。");
+				return forward;
+			}
+		}
+		if(!child.get(index).getC_i_num().equals(map.get("insurance_num"))) {
+			if (childDAO.isDuplicateC_i_num(map.get("insurance_num"))) {
+				forward.setErrorMsg("既に登録されている保険証番号です。");
+				return forward;
+			}
+		}
 
-		if (childDAO.isDuplicateMedical_num(map.get("medical_num"))) {
-			forward.setErrorMsg("既に登録されている子ども医療費番号です。");
+		child.get(index).setC_m_num(member.getM_num());
+		child.get(index).setC_medical_num(map.get("medical_num"));
+		child.get(index).setC_i_num(map.get("insurance_num"));
+		child.get(index).setC_i_expiry_date(map.get("insurance_expiry_date"));
+		child.get(index).setC_i_mark(map.get("insurance_mark"));
+		child.get(index).setC_name(map.get("name"));
+		child.get(index).setC_kana(map.get("kana"));
+		child.get(index).setC_birth(map.get("birth"));
+		child.get(index).setC_gender(map.get("gender"));
+		child.get(index).setC_blood_type(map.get("blood_type"));
+		child.get(index).setC_medical_history(map.get("medical_history"));
+		child.get(index).setC_medication(map.get("medication"));
+		child.get(index).setC_allergy(map.get("allergy"));
+		
+		if(!childDAO.updateChild(child.get(index))) {
+			forward.setErrorMsg("子供情報の変更が失敗しました。");
 			return forward;
 		}
-		if (childDAO.isDuplicateC_i_num(map.get("insurance_num"))) {
-			forward.setErrorMsg("既に登録されている保険証番号です。");
-			return forward;
-		}
-
-		childBean.setC_m_num(member.getM_num());
-		childBean.setC_medical_num(map.get("medical_num"));
-		childBean.setC_i_num(map.get("insurance_num"));
-		childBean.setC_i_expiry_date(map.get("insurance_expiry_date"));
-		childBean.setC_i_mark(map.get("insurance_mark"));
-		childBean.setC_name(map.get("name"));
-		childBean.setC_kana(map.get("kana"));
-		childBean.setC_birth(map.get("birth"));
-		childBean.setC_gender(map.get("gender"));
-		childBean.setC_blood_type(map.get("blood_type"));
-		childBean.setC_medical_history(map.get("medical_history"));
-		childBean.setC_medication(map.get("medication"));
-		childBean.setC_allergy(map.get("allergy"));
-
-		session.setAttribute("childBean", childBean);
-		forward.setPath("u07_03");
-
+		
+		session.setAttribute("child", child);
+		forward.setMsg("子供の情報が変更されました。");
+		forward.setPath("u07_01");
 		return forward;
 	}
 

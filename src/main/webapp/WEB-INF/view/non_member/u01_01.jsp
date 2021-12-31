@@ -54,9 +54,9 @@
 	                <tr class="birthday">
 	                    <th><label>生年月日<span>(*)</span></label></th>
 	                    <td>
-	                        <input type="number" name="brith" id=brith_year placeholder="1986" min="1900" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-	                        <input type="number" name="brith" placeholder="01" autocomplete="off" min="01" max="12" maxlength="2" oninput="maxLengthCheck(this)">-
-	                        <input type="number" name="brith" placeholder="24" autocomplete="off" min="01" max="31" maxlength="2" oninput="maxLengthCheck(this)">
+	                        <input type="number" name="birth" placeholder="1986" min="1900" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input type="number" name="birth" placeholder="01" autocomplete="off" min="01" max="12" maxlength="2" oninput="maxLengthCheck(this)">-
+	                        <input type="number" name="birth" placeholder="24" autocomplete="off" min="01" max="31" maxlength="2" oninput="maxLengthCheck(this)">
 	                    </td>
 	                </tr>
 	                <tr>

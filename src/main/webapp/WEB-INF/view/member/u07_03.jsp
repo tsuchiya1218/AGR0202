@@ -38,7 +38,7 @@
                         <div class="items">
                             <span class="items_title">生年月日</span>
                             <span class="items_text">
-                            	<c:out value="${sessionScope.childBean.c_brith }"/>
+                            	<c:out value="${sessionScope.childBean.c_birth }"/>
                             </span>
                         </div>
                         <div class="items">

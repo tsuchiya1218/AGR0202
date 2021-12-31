@@ -30,7 +30,7 @@ public class ChildDAO {
 	public boolean addChild(ChildBean child) throws SQLException {
 		String SQL = "INSERT INTO child VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
-			Date brith = Date.valueOf(child.getC_brith());
+			Date birth = Date.valueOf(child.getC_birth());
 			
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
@@ -42,7 +42,7 @@ public class ChildDAO {
 			pstmt.setString(5, child.getC_i_mark());
 			pstmt.setString(6, child.getC_name());
 			pstmt.setString(7, child.getC_kana());
-			pstmt.setDate(8, brith);
+			pstmt.setDate(8, birth);
 			pstmt.setString(9, child.getC_gender());
 			pstmt.setString(10, child.getC_blood_type());
 			pstmt.setString(11, child.getC_medical_history());
@@ -100,10 +100,10 @@ public class ChildDAO {
 
 	public boolean updateChild(ChildBean child) throws SQLException {
 		String SQL = "UPDATE child SET c_medical_num = ?, c_i_num = ?, c_i_expiry_date = ?,"
-				+ "c_i_mark = ?, c_name = ?, c_kana = ?, c_brith = ?, c_gender = ?, c_blood_type = ?,"
+				+ "c_i_mark = ?, c_name = ?, c_kana = ?, c_birth = ?, c_gender = ?, c_blood_type = ?,"
 				+ "c_medical_history = ?, c_medication = ?, c_allergy = ? WHERE c_num = ?";
 		try {
-			Date brith = Date.valueOf(child.getC_brith());
+			Date birth = Date.valueOf(child.getC_birth());
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
@@ -113,7 +113,7 @@ public class ChildDAO {
 			pstmt.setString(4, child.getC_i_mark());
 			pstmt.setString(5, child.getC_name());
 			pstmt.setString(6, child.getC_kana());
-			pstmt.setDate(7, brith);
+			pstmt.setDate(7, birth);
 			pstmt.setString(8, child.getC_gender());
 			pstmt.setString(9, child.getC_blood_type());
 			pstmt.setString(10, child.getC_medical_history());
@@ -124,8 +124,8 @@ public class ChildDAO {
 			int result = pstmt.executeUpdate();
 			conn.commit();
 
-			if (result > 0)
-				return true;
+			if (result > 0) return true;
+			
 			return false;
 		} catch (SQLException sqle) {
 			conn.rollback();
@@ -231,14 +231,15 @@ public class ChildDAO {
 		}
 	}
 	
-	public String countBrith(String c_brith) throws SQLException{
+	
+	public String countBirth(String c_birth) throws SQLException{
 		String SQL = "SELECT ROUND((TO_DAYS(NOW()) - (TO_DAYS(?))) / 365) AS age;";
 		try {
-			String[] brith = c_brith.split("-");
+			String[] birth = c_birth.split("-");
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, brith[0]+brith[1]+brith[2]);
+			pstmt.setString(1, birth[0]+birth[1]+birth[2]);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {

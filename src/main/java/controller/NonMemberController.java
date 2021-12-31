@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -108,9 +109,10 @@ public class NonMemberController extends HttpServlet {
 			}
 		} else {
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('権限がありません。');");
+			writer.println("alert('権限がありません。\\nもう一度、ログインしてください。');");
 			writer.println("</script>");
 			writer.close();
+			session.invalidate();
 		}
 	}
 }

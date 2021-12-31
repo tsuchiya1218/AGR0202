@@ -1,12 +1,12 @@
 function addSubmit(form){
     let items = document.querySelectorAll('.items_req input');
     
-	if(checkBrith()) {
-		alret('正しい生年月日を入力してください。\n例) 2010 02 09');
+	if(checkBirth()) {
+		alert('正しい生年月日を入力してください。\n例 2010 02 09');
 		return;
 	}
 	if(checkI_expiry_date()){
-		alert('正しい保険証有効期限を入力してください。\n例) 2025 01 25');
+		alert('正しい保険証有効期限を入力してください。\n例 2025 01 25');
 		return;
 	}
     //space tap enterがあればreturn true
@@ -28,7 +28,7 @@ function addSubmit(form){
     }
     if(!regNum.test(items[6].value)){
         isError = true;
-        alrte('子供医療証の番号は 7桁以下です。');
+        alert('子供医療証の番号は 7桁以下です。');
 		return;
     }
     if(!isError) form.submit();
@@ -70,28 +70,25 @@ function isSubmit(form){
 }
 
 function isDelete(form){
-	if(confirm('子供情報を削除しますか？')) {
-		document.getElementById('action').value = 'u07_s2';
-		form.submit();
-	}
+	if(confirm('子供情報を削除しますか？')) form.submit();
     else return;
 }
 
-function checkBrith(){
-    let brith = document.querySelectorAll(".birthday input[type='number']");
-    if(brith[0].value.length < 4) return true;
-    if(brith[1].value.length < 2) return true;
-    if(brith[2].value.length < 2) return true;
+function checkBirth(){
+    let brith = document.querySelectorAll(".birth input[type='number']");
+    if(brith[0].value.length != 4) return true;
+    if(brith[1].value.length != 2) return true;
+    if(brith[2].value.length != 2) return true;
     if(brith[1].value < 1 || brith[1].value > 12) return true;
     if(brith[2].value < 1 || brith[2].value > 31) return true;
 	return false;
 }
 
 function checkI_expiry_date(){
-	let expiry_date = document.querySelectorAll(".insurance input[type='number']");
-    if(expiry_date[0].value.length < 4) return true;
-    if(expiry_date[1].value.length < 2) return true;
-    if(expiry_date[2].value.length < 2) return true;
+	let expiry_date = document.querySelectorAll(".expiry_date input[type='number']");
+    if(expiry_date[0].value.length != 4) return true;
+    if(expiry_date[1].value.length != 2) return true;
+    if(expiry_date[2].value.length != 2) return true;
     if(expiry_date[1].value < 1 || expiry_date[1].value > 12) return true;
     if(expiry_date[2].value < 1 || expiry_date[2].value > 31) return true;
 	return false;

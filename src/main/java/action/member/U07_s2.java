@@ -28,20 +28,17 @@ public class U07_s2 implements Action {
 			return forward;
 		}
 		MemberBean member = (MemberBean) session.getAttribute("member");
-		System.out.println("member children" + member.getM_children());
 		
 		int countChild = 0;
 		List<ChildBean> child = childDAO.getChild(member.getM_num());
 		if(!child.isEmpty()) {
 			for(ChildBean c : child) {
-				c.setAge(childDAO.countBrith(c.getC_brith()));
+				c.setAge(childDAO.countBirth(c.getC_birth()));
 				countChild++;
 			}
-			session.removeAttribute("child");
 			session.setAttribute("child", child);
 		}
 		member.setM_children(String.valueOf(countChild));
-		session.removeAttribute("member");
 		session.setAttribute("member", member);
 		forward.setMsg("子供の情報が削除されました。");
 		forward.setPath("u07_01");

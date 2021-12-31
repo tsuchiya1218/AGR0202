@@ -37,7 +37,7 @@
                     <!-- 　生年月日　 -->
                     <th><label>生年月日</label></th>
                     <td>
-                    	<c:out value="${sessionScope.member.m_brith }"/>
+                    	<c:out value="${sessionScope.member.m_birth }"/>
                     	<c:out value="(${sessionScope.member.age }歳)"/>
                     </td>
                 </tr>

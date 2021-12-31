@@ -67,14 +67,14 @@ public class U02 implements Action {
 			session.setAttribute("who", who);
 			
 			MemberBean member = memberDAO.getMemberBean(m_email);
-			member.setAge(memberDAO.countBrith(member.getM_brith()));
+			member.setAge(memberDAO.countBirth(member.getM_birth()));
 			
 			ChildDAO childDAO = ChildDAO.getInstance();
 			List<ChildBean> child = childDAO.getChild(member.getM_num());
 			int countChild = 0;
 			if(!child.isEmpty()) {
 				for(ChildBean c : child) {
-					c.setAge(childDAO.countBrith(c.getC_brith()));
+					c.setAge(childDAO.countBirth(c.getC_birth()));
 					countChild++;
 				}
 				session.setAttribute("child", child);

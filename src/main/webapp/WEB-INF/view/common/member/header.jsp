@@ -13,7 +13,7 @@
 		            <li class="menu_li_active">
 		            	<a href="MemberController?view=u08_01" class="menu_a_active">薬歴</a>
 		            </li>
-		            <li><a href="MemberController?view=u09_01">My QRコード</a></li>
+		            <li><a href="MemberController?view=u09">My QRコード</a></li>
 		            <li><a href="MemberController?view=u07_01">子供情報</a></li>
 		            <li><a href="MemberController?view=u06_01">マイページ</a></li>
 	        	</c:when>
@@ -21,7 +21,7 @@
 	        		<li><a href="MemberController?view=index">ホーム</a></li>
 		            <li><a href="MemberController?view=u08_01">薬歴</a></li>
 		            <li class="menu_li_active">
-		            	<a href="MemberController?view=u09_01" class="menu_a_active">My QRコード</a>
+		            	<a href="MemberController?view=u09" class="menu_a_active">My QRコード</a>
 		            </li>
 		            <li><a href="MemberController?view=u07_01">子供情報</a></li>
 		            <li><a href="MemberController?view=u06_01">マイページ</a></li>
@@ -29,7 +29,7 @@
 	        	<c:when test="${requestScope.nav eq 'u07' }">
 	        		<li><a href="MemberController?view=index">ホーム</a></li>
 		            <li><a href="MemberController?view=u08_01">薬歴</a></li>
-		            <li><a href="MemberController?view=u09_01">My QRコード</a></li>
+		            <li><a href="MemberController?view=u09">My QRコード</a></li>
 		            <li class="menu_li_active">
 		            	<a href="MemberController?view=u07_01" class="menu_a_active">子供情報</a>
 		            </li>
@@ -38,7 +38,7 @@
 	        	<c:when test="${requestScope.nav eq 'u06' }">
 		            <li><a href="MemberController?view=index">ホーム</a></li>
 		            <li><a href="MemberController?view=u08_01">薬歴</a></li>
-		            <li><a href="MemberController?view=u09_01">My QRコード</a></li>
+		            <li><a href="MemberController?view=u09">My QRコード</a></li>
 		            <li><a href="MemberController?view=u07_01">子供情報</a></li>
 		            <li class="menu_li_active">
 		            	<a href="MemberController?view=u06_01" class="menu_a_active">マイページ</a>
@@ -49,7 +49,7 @@
             			<a href="MemberController?view=index" class="menu_a_active">ホーム</a>
 		            </li>
 		            <li><a href="MemberController?view=u08_01">薬歴</a></li>
-		            <li><a href="MemberController?view=u09_01">My QRコード</a></li>
+		            <li><a href="MemberController?view=u09">My QRコード</a></li>
 		            <li><a href="MemberController?view=u07_01">子供情報</a></li>
 		            <li><a href="MemberController?view=u06_01">マイページ</a></li>
 	        	</c:otherwise>
@@ -64,7 +64,7 @@
             <ul>
                 <li><a href="MemberController?view=index">ホーム</a></li>
 	            <li><a href="MemberController?view=u08_01">薬歴</a></li>
-	            <li><a href="MemberController?view=u09_01">My QRコード</a></li>
+	            <li><a href="MemberController?view=u09">My QRコード</a></li>
 	            <li><a href="MemberController?view=u07_01">子供情報</a></li>
 	            <li><a href="MemberController?view=u06_01">マイページ</a></li>
                 <li><a href="MemberController?action=u04">ログアウト</a></li>

@@ -47,11 +47,11 @@
                             </label>
                         </div>
                         <div class="items_req">
-                            <label class="brith">
+                            <label class="birth">
                                 <span class="items_title">生年月日</span>
-                                <input type="number" name="brith" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)">
-                                <input type="number" name="brith" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
-                                <input type="number" name="brith" placeholder="12" maxlength="2" oninput="maxLengthCheck(this)">
+                                <input type="number" name="birth" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)">
+                                <input type="number" name="birth" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
+                                <input type="number" name="birth" placeholder="12" maxlength="2" oninput="maxLengthCheck(this)">
                             </label>
                         </div>
                         <div class="items_req">
@@ -63,26 +63,31 @@
                         </div>
                         <div class="items_req">
                             <label class="child_num">
-                                <span class="items_title">こども医療証<br>受給者番号</span>
+                                <span class="items_title">子ども医療証<br>受給者番号</span>
                                 <input type="number" name="medical_num" placeholder="1237894" maxlength="7" oninput="maxLengthCheck(this)">
                             </label>
                         </div>
                         <div class="items">
 	                        <div class="insurance">
-	                                <span class="items_title">保険証情報</span>
+                                <span class="items_title">保険証情報</span>
 	                            <label>
 	                                番号:<input type="number" name="insurance_num" placeholder="01234567" maxlength="8" oninput="maxLengthCheck(this)">
 	                            </label>
 								<label>
 	                                枝番:<input type="number" name="insurance_num" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
 								</label>
+	                        </div>
+                        </div>
+                        <div class="items">
+	                        <div class="insurance">
+                                <span class="items_title">保険証記号</span>
 	                            <label>
 	                                記号:<input type="text" name="insurance_mark" maxlength="10">
 	                            </label>
 	                        </div>
                         </div>
                         <div class="items">
-                            <label class="brith">
+                            <label class="expiry_date">
                                 <span class="items_title">保険証 有効期限</span>
                                 <input type="number" name="insurance_expiry_date" placeholder="2024" maxlength="4" oninput="maxLengthCheck(this)">
                                 <input type="number" name="insurance_expiry_date" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">

@@ -23,12 +23,12 @@ public class U01_01 implements Action {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession(true);
 		
-		String[] check_datetype_brith = request.getParameterValues("brith");
+		String[] check_datetype_birth = request.getParameterValues("birth");
 		String[] check_datetype_insurance_expiry_date = request.getParameterValues("insurance_expiry_date");
 
 
-		String brith = request.getParameterValues("brith")[0] + "-" + request.getParameterValues("brith")[1] + "-"
-				+ request.getParameterValues("brith")[2];
+		String birth = request.getParameterValues("birth")[0] + "-" + request.getParameterValues("birth")[1] + "-"
+				+ request.getParameterValues("birth")[2];
 		String tel = request.getParameterValues("tel")[0] + "-" + request.getParameterValues("tel")[1] + "-"
 				+ request.getParameterValues("tel")[2];
 		String zip_code = request.getParameterValues("zip_code")[0] + "-" + request.getParameterValues("zip_code")[1];
@@ -41,11 +41,11 @@ public class U01_01 implements Action {
 		/* 会員情報 */
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", request.getParameter("email"));
-		map.put("frist_name", request.getParameter("frist_name").replaceAll("\\t", ""));
-		map.put("last_name", request.getParameter("last_name").replaceAll("\\t", ""));
-		map.put("frist_kana", request.getParameter("frist_kana").replaceAll("\\t", ""));
-		map.put("last_kana", request.getParameter("last_kana").replaceAll("\\t", ""));
-		map.put("brith", brith);
+		map.put("name", request.getParameter("frist_name").replaceAll("\\t", "") + " "
+				+ request.getParameter("last_name").replaceAll("\\t", ""));
+		map.put("kana", request.getParameter("frist_kana").replaceAll("\\t", "") + " "
+				+ request.getParameter("last_kana").replaceAll("\\t", ""));
+		map.put("birth", birth);
 		map.put("tel", tel);
 		map.put("gender", request.getParameter("gender"));
 		map.put("zip_code", zip_code);
@@ -83,6 +83,14 @@ public class U01_01 implements Action {
 			forward.setErrorMsg("既に存在しているメールアドレスです。\\n別のメールアドレスを入力してください。'");
 			return forward;
 		}
+		if(map.get("name").length() > 50) {
+			forward.setErrorMsg("「名前」が50文字以上のため、登録できません。");
+			return forward;
+		}
+		if(map.get("kana").length() > 50) {
+			forward.setErrorMsg("「ふりがな」が50文字以上のため、登録できません。");
+			return forward;
+		}
 
 		// input text type
 		for (String ary : map.keySet()) {
@@ -92,7 +100,7 @@ public class U01_01 implements Action {
 			}
 		}
 		
-		if(!map.get("brith").replaceAll("-", "").matches(patternNum)) {
+		if(!map.get("birth").replaceAll("-", "").matches(patternNum)) {
 			forward.setErrorMsg("生年月日は数字のみです。");
 			return forward;
 		}
@@ -108,7 +116,7 @@ public class U01_01 implements Action {
 		}
 
 		try {
-			if (map.get("brith").length() != 10 || Integer.parseInt(check_datetype_brith[1]) < 1 || Integer.parseInt(check_datetype_brith[1]) > 12) {
+			if (map.get("birth").length() != 10 || Integer.parseInt(check_datetype_birth[1]) < 1 || Integer.parseInt(check_datetype_birth[1]) > 12) {
 				forward.setErrorMsg("正しい生年月日を入力してください。 \\n例)1998 01 05");
 				return forward;
 			}
@@ -146,12 +154,12 @@ public class U01_01 implements Action {
 		MemberBean member = new MemberBean();
 		member.setM_email(map.get("email"));
 		member.setM_pw(pw[0]);
-		member.setM_name(map.get("frist_name") + " " + map.get("last_name"));
-		member.setM_kana(map.get("frist_kana") + " " + map.get("last_kana"));
+		member.setM_name(map.get("name"));
+		member.setM_kana(map.get("kana"));
 		member.setM_gender(map.get("gender"));
 		member.setM_address(map.get("address"));
 		member.setM_i_mark(map.get("insurance_mark"));
-		member.setM_brith(map.get("brith"));
+		member.setM_birth(map.get("birth"));
 		member.setM_tel(map.get("tel"));
 		member.setM_zip_code(map.get("zip_code"));
 		member.setM_i_num(map.get("insurance_num"));

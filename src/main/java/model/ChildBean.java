@@ -1,6 +1,11 @@
 package model;
 
-public class ChildBean {
+import java.io.Serializable;
+
+public class ChildBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private int c_num;
 	private int c_m_num;
 	private String c_medical_num;
@@ -9,7 +14,7 @@ public class ChildBean {
 	private String c_i_mark;
 	private String c_name;
 	private String c_kana;
-	private String c_brith;
+	private String c_birth;
 	private String c_gender;
 	private String c_blood_type;
 	private String c_medical_history;
@@ -19,26 +24,6 @@ public class ChildBean {
 	private String age;
 	
 	public ChildBean() {}
-
-	public ChildBean(int c_num, int c_m_num, String c_medical_num, String c_i_num, String c_i_expiry_date,
-			String c_i_mark, String c_name, String c_kana, String c_brith, String c_gender, String c_blood_type,
-			String c_medical_history, String c_medication, String c_allergy) {
-		this.c_num = c_num;
-		this.c_m_num = c_m_num;
-		this.c_medical_num = c_medical_num;
-		this.c_i_num = c_i_num;
-		this.c_i_expiry_date = c_i_expiry_date;
-		this.c_i_mark = c_i_mark;
-		this.c_name = c_name;
-		this.c_kana = c_kana;
-		this.c_brith = c_brith;
-		this.c_gender = c_gender;
-		this.c_blood_type = c_blood_type;
-		this.c_medical_history = c_medical_history;
-		this.c_medication = c_medication;
-		this.c_allergy = c_allergy;
-	}
-
 
 	public int getC_num() {
 		return c_num;
@@ -104,12 +89,12 @@ public class ChildBean {
 		this.c_kana = c_kana;
 	}
 
-	public String getC_brith() {
-		return c_brith;
+	public String getC_birth() {
+		return c_birth;
 	}
 
-	public void setC_brith(String c_brith) {
-		this.c_brith = c_brith;
+	public void setC_birth(String c_birth) {
+		this.c_birth = c_birth;
 	}
 
 	public String getC_gender() {
@@ -128,14 +113,6 @@ public class ChildBean {
 		this.c_blood_type = c_blood_type;
 	}
 
-	public String getC_allergy() {
-		return c_allergy;
-	}
-
-	public void setC_allergy(String c_allergy) {
-		this.c_allergy = c_allergy;
-	}
-
 	public String getC_medical_history() {
 		return c_medical_history;
 	}
@@ -152,6 +129,13 @@ public class ChildBean {
 		this.c_medication = c_medication;
 	}
 
+	public String getC_allergy() {
+		return c_allergy;
+	}
+
+	public void setC_allergy(String c_allergy) {
+		this.c_allergy = c_allergy;
+	}
 
 	public String getAge() {
 		return age;
@@ -161,15 +145,33 @@ public class ChildBean {
 		this.age = age;
 	}
 
+	public ChildBean(int c_num, int c_m_num, String c_medical_num, String c_i_num, String c_i_expiry_date,
+			String c_i_mark, String c_name, String c_kana, String c_birth, String c_gender, String c_blood_type,
+			String c_medical_history, String c_medication, String c_allergy) {
+		this.c_num = c_num;
+		this.c_m_num = c_m_num;
+		this.c_medical_num = c_medical_num;
+		this.c_i_num = c_i_num;
+		this.c_i_expiry_date = c_i_expiry_date;
+		this.c_i_mark = c_i_mark;
+		this.c_name = c_name;
+		this.c_kana = c_kana;
+		this.c_birth = c_birth;
+		this.c_gender = c_gender;
+		this.c_blood_type = c_blood_type;
+		this.c_medical_history = c_medical_history;
+		this.c_medication = c_medication;
+		this.c_allergy = c_allergy;
+	}
+
 	@Override
 	public String toString() {
 		return "ChildBean [c_num=" + c_num + ", c_m_num=" + c_m_num + ", c_medical_num=" + c_medical_num + ", c_i_num="
 				+ c_i_num + ", c_i_expiry_date=" + c_i_expiry_date + ", c_i_mark=" + c_i_mark + ", c_name=" + c_name
-				+ ", c_kana=" + c_kana + ", c_brith=" + c_brith + ", c_gender=" + c_gender + ", c_blood_type="
+				+ ", c_kana=" + c_kana + ", c_birth=" + c_birth + ", c_gender=" + c_gender + ", c_blood_type="
 				+ c_blood_type + ", c_medical_history=" + c_medical_history + ", c_medication=" + c_medication
-				+ ", c_allergy=" + c_allergy + "]";
+				+ ", c_allergy=" + c_allergy + ", age=" + age + "]";
 	}
-
 
 	
 	

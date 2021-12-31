@@ -1,12 +1,17 @@
 package model;
 
-public class MemberBean {
+import java.io.Serializable;
+
+public class MemberBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int m_num;
 	private String m_email;
 	private String m_pw;
 	private String m_name;
 	private String m_kana;
-	private String m_brith;
+	private String m_birth;
 	private String m_tel;
 	private String m_gender;
 	private String m_zip_code;
@@ -26,7 +31,7 @@ public class MemberBean {
 
 
 
-	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_brith,
+	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_birth,
 			String m_tel, String m_gender, String m_zip_code, String m_address, int m_q_num, String m_i_num,
 			String m_i_expiry_date, String m_i_mark, String m_qr_num, boolean m_auth, boolean m_leave) {
 		super();
@@ -35,7 +40,7 @@ public class MemberBean {
 		this.m_pw = m_pw;
 		this.m_name = m_name;
 		this.m_kana = m_kana;
-		this.m_brith = m_brith;
+		this.m_birth = m_birth;
 		this.m_tel = m_tel;
 		this.m_gender = m_gender;
 		this.m_zip_code = m_zip_code;
@@ -92,12 +97,12 @@ public class MemberBean {
 	}
 
 
-	public String getM_brith() {
-		return m_brith;
+	public String getM_birth() {
+		return m_birth;
 	}
 
-	public void setM_brith(String m_brith) {
-		this.m_brith = m_brith;
+	public void setM_birth(String m_birth) {
+		this.m_birth = m_birth;
 	}
 
 	public String getM_tel() {
@@ -217,7 +222,7 @@ public class MemberBean {
 	@Override
 	public String toString() {
 		return "MemberBean [m_num=" + m_num + ", m_email=" + m_email + ", m_pw=" + m_pw + ", m_name=" + m_name
-				+ ", m_kana=" + m_kana + ", m_brith=" + m_brith + ", m_tel=" + m_tel + ", m_gender=" + m_gender
+				+ ", m_kana=" + m_kana + ", m_birth=" + m_birth + ", m_tel=" + m_tel + ", m_gender=" + m_gender
 				+ ", m_zip_code=" + m_zip_code + ", m_address=" + m_address + ", m_q_num=" + m_q_num + ", m_i_num="
 				+ m_i_num + ", m_i_expiry_date=" + m_i_expiry_date + ", m_i_mark=" + m_i_mark + ", m_qr_num=" + m_qr_num
 				+ ", m_auth=" + m_auth + ", m_leave=" + m_leave + "]";

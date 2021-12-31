@@ -26,9 +26,9 @@ public class MemberDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	public boolean generateQRcode(int m_num,String m_brith) throws SQLException{
+	public boolean generateQRcode(int m_num,String m_birth) throws SQLException{
 		String SQL = "UPDATE member SET m_qr_num = ? WHERE m_num = ?";
-		String qr_name = GenerateQRcode.generateQRcode(m_num, m_brith);
+		String qr_name = GenerateQRcode.generateQRcode(m_num, m_birth);
 		if(qr_name == null) {
 			return false;
 		}
@@ -61,7 +61,7 @@ public class MemberDAO {
 	public boolean singUp(MemberBean member) throws SQLException {
 		String SQL = "INSERT INTO member VALUES(null,?,?,?,?,?,?,?,?,?,null,?,?,?,null,false,false)";
 		try {
-			Date brith = Date.valueOf(member.getM_brith());
+			Date birth = Date.valueOf(member.getM_birth());
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
@@ -69,7 +69,7 @@ public class MemberDAO {
 			pstmt.setString(2, SHA256.getEncrypt(member.getM_pw()));
 			pstmt.setString(3, member.getM_name());
 			pstmt.setString(4, member.getM_kana());
-			pstmt.setDate(5, brith);
+			pstmt.setDate(5, birth);
 			pstmt.setString(6, member.getM_tel());
 			pstmt.setString(7, member.getM_gender());
 			pstmt.setString(8, member.getM_zip_code());
@@ -227,8 +227,8 @@ public class MemberDAO {
 			}
 		}
 	}
-	public String[] findbyEmailToM_numAndBrith(String m_email) {
-		String SQL = "SELECT m_num,m_brith FROM member WHERE m_email = ?";
+	public String[] findbyEmailToM_numAndBirth(String m_email) {
+		String SQL = "SELECT m_num,m_birth FROM member WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -237,7 +237,7 @@ public class MemberDAO {
 			String[] result = new String[2];
 			if(rs.next()) {
 				result[0] = String.valueOf(rs.getInt("m_num"));
-				result[1] = rs.getString("m_brith");
+				result[1] = rs.getString("m_birth");
 				return result;
 			}
 			return null;
@@ -265,7 +265,7 @@ public class MemberDAO {
 						rs.getString("m_pw"),
 						rs.getString("m_name"),
 						rs.getString("m_kana"),
-						rs.getString("m_brith").toString(),
+						rs.getString("m_birth").toString(),
 						rs.getString("m_tel"),
 						rs.getString("m_gender"),
 						rs.getString("m_zip_code"),
@@ -388,7 +388,7 @@ public class MemberDAO {
 	}
 	
 	public boolean updateMemberBean(MemberBean member) throws SQLException{
-		String SQL = "UPDATE member SET m_name = ?, m_kana = ?, m_brith = ?,m_tel = ?,"
+		String SQL = "UPDATE member SET m_name = ?, m_kana = ?, m_birth = ?,m_tel = ?,"
 				+ "m_gender = ?, m_zip_code = ?, m_address = ?, m_i_num = ?, m_i_expiry_date = ?,"
 				+ "m_i_mark = ? WHERE m_email = ?";
 		try {
@@ -397,7 +397,7 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, member.getM_name());
 			pstmt.setString(2, member.getM_kana());
-			pstmt.setString(3, member.getM_brith());
+			pstmt.setString(3, member.getM_birth());
 			pstmt.setString(4, member.getM_tel());
 			pstmt.setString(5, member.getM_gender());
 			pstmt.setString(6, member.getM_zip_code());
@@ -428,7 +428,7 @@ public class MemberDAO {
 	}
 	
 	public boolean updateMemberBeanWithPassword(MemberBean member) throws SQLException{
-		String SQL = "UPDATE member SET m_pw = ?, m_name = ?, m_kana = ?, m_brith = ?,m_tel = ?,"
+		String SQL = "UPDATE member SET m_pw = ?, m_name = ?, m_kana = ?, m_birth = ?,m_tel = ?,"
 				+ "m_gender = ?, m_zip_code = ?, m_address = ?, m_i_num = ?, m_i_expiry_date = ?,"
 				+ "m_i_mark = ? WHERE m_email = ?";
 		try {
@@ -438,7 +438,7 @@ public class MemberDAO {
 			pstmt.setString(1, SHA256.getEncrypt(member.getM_pw()));
 			pstmt.setString(2, member.getM_name());
 			pstmt.setString(3, member.getM_kana());
-			pstmt.setString(4, member.getM_brith());
+			pstmt.setString(4, member.getM_birth());
 			pstmt.setString(5, member.getM_tel());
 			pstmt.setString(6, member.getM_gender());
 			pstmt.setString(7, member.getM_zip_code());
@@ -530,14 +530,14 @@ public class MemberDAO {
 			}
 		}
 	}
-	public String countBrith(String m_brith) throws SQLException{
+	public String countBirth(String m_birth) throws SQLException{
 		String SQL = "SELECT ROUND((TO_DAYS(NOW()) - (TO_DAYS(?))) / 365) AS age;";
 		try {
-			String[] brith = m_brith.split("-");
+			String[] birth = m_birth.split("-");
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, brith[0]+brith[1]+brith[2]);
+			pstmt.setString(1, birth[0]+birth[1]+birth[2]);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {

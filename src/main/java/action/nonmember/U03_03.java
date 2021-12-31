@@ -29,7 +29,7 @@ public class U03_03 implements Action {
 				forward.setErrorMsg("正しくないリクエストです。");
 				return forward;
 			}
-			if(!"".equals(pw) || !"".equals(pw_check)) {
+			if("".equals(pw) || "".equals(pw_check)) {
 				forward.setErrorMsg("パスワードを入力してください。");
 				return forward;
 			}

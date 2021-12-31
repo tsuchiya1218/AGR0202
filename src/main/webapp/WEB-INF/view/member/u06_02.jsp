@@ -55,11 +55,11 @@
 	                    </td>
 	                </tr>
                     <tr class="birthday">
-                    	<c:set var="m_brith" value="${fn:split(member.m_brith,'-')}" />
+                    	<c:set var="m_birth" value="${fn:split(member.m_birth,'-')}" />
                         <th>生年月日</th>
-                        <td><input type="number" name="brith" value="${m_brith[0] }" maxlength="4" oninput="maxLengthCheck(this)" required>
-                            <input type="number" name="brith" value="${m_brith[1] }" maxlength="2" oninput="maxLengthCheck(this)" required>
-                            <input type="number" name="brith" value="${m_brith[2] }" maxlength="2" oninput="maxLengthCheck(this)" required>
+                        <td><input type="number" name="birth" value="${m_birth[0] }" maxlength="4" oninput="maxLengthCheck(this)" required>
+                            <input type="number" name="birth" value="${m_birth[1] }" maxlength="2" oninput="maxLengthCheck(this)" required>
+                            <input type="number" name="birth" value="${m_birth[2] }" maxlength="2" oninput="maxLengthCheck(this)" required>
                         </td>
                     </tr>
                     <tr>

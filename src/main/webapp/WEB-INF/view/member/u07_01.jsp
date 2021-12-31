@@ -42,109 +42,118 @@
                 	</p>
                 	<c:forEach var="childList" items="${sessionScope.child }" varStatus="status">
 	                	<div class="items_box">
-			                <form action="MemberController" method="POST">
-			                <input type="hidden" name="action" value="u07_s1" id="action">
-			                <input type="hidden" name="c_num" value="${childList.c_num }">
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>名前</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_name }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>ふりがな</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_kana }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>生年月日</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_brith }"/>
-	                                    <c:out value="(${childList.age }歳)"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>性別</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_gender }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>こども医療証</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_medical_num }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>保険証情報</span>
-	                                </div>
-	                                <div class="items_text">
-	                                	<c:set var="c_i_num" value="${fn:split(childList.c_i_num,'-')}" />
-	                                	<strong>番号:</strong><c:out value="${c_i_num[0] }"/>
-	                                	<strong>枝番:</strong><c:out value="${c_i_num[1] }"/>
-	                                	<strong>記号:</strong><c:out value="${childList.c_i_mark }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>保険証 有効期限</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_brith }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>血液型</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_blood_type }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>病歴</span>
-	                                </div>
-	                                <div class="items_text">
-	                                	<c:set var="c_medical_history" value="${fn:replace(childList.c_medical_history,'&lt;/br&gt;','<br>')}" />
-	                                    <c:out escapeXml="false" value="${c_medical_history }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>服用中の薬</span>
-	                                </div>
-	                                <div class="items_text">
-	                                    <c:out value="${childList.c_medication }"/>
-	                                </div>
-	                            </div>
-	                            <div class="items">
-	                                <div class="items_title">
-	                                    <span>アレルギー情報</span>
-	                                </div>
-	                                <div class="items_text">
-	                                	<c:set var="c_allergy" value="${fn:replace(childList.c_allergy,'&lt;/br&gt;','<br>')}" />
-	                                   	<c:out escapeXml="false" value="${c_allergy }"/>
-	                                </div>
-	                            </div>
-	                            <div class="btn_box">
-	                                <button type="button" class="delete_btn" onclick="isDelete(form);">削除</button>
-	                                <button type="submit" class="update_btn">変更</button>
-	                            </div>
-		                	</form>
-                        </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>名前</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_name }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>ふりがな</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_kana }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>生年月日</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_birth }"/>
+                                    <c:out value="(${childList.age }歳)"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>性別</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_gender }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>こども医療証</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_medical_num }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>保険証番号</span>
+                                </div>
+                                <div class="items_text">
+                                	<c:set var="c_i_num" value="${fn:split(childList.c_i_num,'-')}" />
+                                	番号:<c:out value="${c_i_num[0] }"/>
+                                	枝番:<c:out value="${c_i_num[1] }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>保険証記号</span>
+                                </div>
+                                <div class="items_text">
+                                	<c:out value="${childList.c_i_mark }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>保険証 有効期限</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_i_expiry_date }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>血液型</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_blood_type }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>病歴</span>
+                                </div>
+                                <div class="items_text">
+                                	<c:set var="c_medical_history" value="${fn:replace(childList.c_medical_history,'&lt;/br&gt;','<br>')}" />
+                                    <c:out escapeXml="false" value="${c_medical_history }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>服用中の薬</span>
+                                </div>
+                                <div class="items_text">
+                                    <c:out value="${childList.c_medication }"/>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="items_title">
+                                    <span>アレルギー情報</span>
+                                </div>
+                                <div class="items_text">
+                                	<c:set var="c_allergy" value="${fn:replace(childList.c_allergy,'&lt;/br&gt;','<br>')}" />
+                                   	<c:out escapeXml="false" value="${c_allergy }"/>
+                                </div>
+                            </div>
+                            <div class="btn_box">
+                            <form action="MemberController?action=u07_s2" method="POST">
+				                <input type="hidden" name="c_num" value="${childList.c_num }">
+                                <button type="button" class="delete_btn" onclick="isDelete(form);">削除</button>
+                			</form>
+                			<form action="MemberController?action=u07_s1_01" method="POST">
+                				<input type="hidden" name="c_num" value="${childList.c_num }">
+                                <button type="submit" class="update_btn">変更</button>
+                            </form>
+                            </div>
+                       </div>
                 	</c:forEach>
                 </c:if>
             </section>
