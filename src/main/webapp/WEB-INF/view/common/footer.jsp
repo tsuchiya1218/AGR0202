@@ -11,7 +11,7 @@
         <span><a href="">お知らせ</a></span>
         <span><a href="">会社情報</a></span>
     </div>
-    <div class="footer_bottom">
-        <span> Copyright &copy; 株式会社COCO薬局 All Rights Reserved.</span>
-    </div>
+	<div class="footer_bottom">
+	    <span> Copyright &copy; 株式会社COCO薬局 All Rights Reserved.</span>
+	</div>
 </footer>

@@ -44,11 +44,11 @@
     width: 100%;
     margin: 0 10px;
     height: 100%;
-    text-align: left;
+    text-align: center;
 }
 .items_title{
     display: inline-block;
-    width: 33%;
+    width: 100%;
     text-align: center;
     padding: 0 5px;
     background-color: #d3e8e1;
@@ -63,7 +63,7 @@
 }
 .items_text{
     display:inline;
-    text-align: left;
+    text-align: center;
     padding: 0 10px;
     font-size: 16px;
     box-sizing: border-box;

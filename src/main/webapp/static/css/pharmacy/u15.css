@@ -127,6 +127,10 @@ table td:last-child{
     color: black;
     transition: all 0.3s;
 }
+.page_con li .page_active{
+	background-color: orange;
+}
+
 
 
 @media(max-width: 1030px){

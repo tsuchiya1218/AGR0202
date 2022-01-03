@@ -119,16 +119,12 @@ public class MemberDAO {
 	}
 	
 	public String login(String m_email, String m_pw) throws SQLException {
-		String SQL_member = "SELECT m_pw FROM member WHERE m_email = ? AND  m_leave = ?";
-		String SQL_doctor = "SELECt d_pw FROM doctor WHERE d_email = ? AND d_leave = ?";
-		String SQL_pharmacy = "SELECt p_pw FROM pharmacy WHERE p_email = ?";
-		String SQL_hospital = "SELECt h_pw FROM hospital WHERE h_email = ?";
-		String SQL_admin = "SELECt a_pw FROM admin WHERE a_email = ?";
+		String member = "SELECT m_pw FROM member WHERE m_email = ? AND  m_leave = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL_member);
+			pstmt = conn.prepareStatement(member);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
 			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
@@ -360,7 +356,7 @@ public class MemberDAO {
 		}
 	}
 	
-	public boolean updateLeave(String m_email) throws SQLException{
+	public boolean leave(String m_email) throws SQLException{
 		String SQL = "UPDATE member SET m_leave = ? WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
@@ -381,6 +377,31 @@ public class MemberDAO {
 		}finally {
 			try {
 				Close.close(conn, pstmt, null);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public void sortM_num() throws SQLException {
+		try {
+			String SQL = "SET @COUNT=0;";
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.executeQuery();
+			SQL = "UPDATE member SET m_num =@count:=@count+1;";
+			pstmt.executeUpdate(SQL);
+			conn.commit();
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			conn.rollback();
+			throw new RuntimeException(nule.getMessage());
+		} finally {
+			try {
+				Close.close(conn, pstmt, rs);
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage());
 			}

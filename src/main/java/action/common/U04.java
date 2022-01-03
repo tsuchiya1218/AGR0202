@@ -12,9 +12,9 @@ public class U04 implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
-		forward.setPath("index");
 		HttpSession session = request.getSession();
         session.invalidate();
+        forward.setPath("index");
 		return forward;
 	}
 

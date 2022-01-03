@@ -14,8 +14,7 @@
 	<jsp:include page="../common/member/header.jsp"/>
     <main>
         <div class="main_con">
-            <form action="MemberController" method="POST">
-            <input type="hidden" name="action" value="u05">
+            <form action="MemberController?action=u05" method="POST">
                 <div class="subtitle">
                     <h2>退会手続き</h2>
                 </div>

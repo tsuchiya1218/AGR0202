@@ -122,7 +122,7 @@
                                     <span>病歴</span>
                                 </div>
                                 <div class="items_text">
-                                	<c:set var="c_medical_history" value="${fn:replace(childList.c_medical_history,'&lt;/br&gt;','<br>')}" />
+                                	<c:set var="c_medical_history" value="${fn:replace(childList.c_medical_history,'&lt;br&gt;','<br>')}" />
                                     <c:out escapeXml="false" value="${c_medical_history }"/>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                     <span>アレルギー情報</span>
                                 </div>
                                 <div class="items_text">
-                                	<c:set var="c_allergy" value="${fn:replace(childList.c_allergy,'&lt;/br&gt;','<br>')}" />
+                                	<c:set var="c_allergy" value="${fn:replace(childList.c_allergy,'&lt;br&gt;','<br>')}" />
                                    	<c:out escapeXml="false" value="${c_allergy }"/>
                                 </div>
                             </div>

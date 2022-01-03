@@ -89,7 +89,11 @@ public class MemberController extends HttpServlet {
 							writer.println("location='MemberController?view="+forward.getPath()+"';");
 							writer.println("</script>");
 						}else {
-							dispatcher = request.getRequestDispatcher(path + forward.getPath() + ".jsp");
+							if("index".equals(forward.getPath())) {
+								dispatcher = request.getRequestDispatcher(forward.getPath() + ".jsp");
+							}else {
+								dispatcher = request.getRequestDispatcher(path + forward.getPath() + ".jsp");
+							}
 							dispatcher.forward(request, response);
 						}
 					}else {
@@ -103,17 +107,30 @@ public class MemberController extends HttpServlet {
 					if ("index".equals(view)) {
 						response.sendRedirect("index.jsp");
 					} else {
-						forward.setPath(path + view + ".jsp"); // webapp/web-inf/view/member/
+						forward.setPath(path + view + ".jsp");
 						dispatcher = request.getRequestDispatcher(forward.getPath());
 						dispatcher.forward(request, response);
 					}
 				}
-			} catch (Exception e) {
+			}catch(NullPointerException e) {
+				writer.println("<script type='text/javascript'>");
+				writer.println("alert('正しくないリクエストです。');");
+				writer.println("history.back();");
+				writer.println("</script>");
+				writer.close();
 				e.printStackTrace();
+			}catch (Exception e) {
+				e.printStackTrace();
+				writer.println("<script type='text/javascript'>");
+				writer.println("alert('エラーが発生しました。');");
+				writer.println("history.back();");
+				writer.println("</script>");
+				writer.close();
 			}
 		}else {	
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('権限がありません。');");
+			writer.println("history.back();");
 			writer.println("</script>");
 			writer.close();
 		}

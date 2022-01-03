@@ -15,8 +15,7 @@
 	<jsp:include page="../common/header.jsp"/>
     <main>
         <div class="main_box" id="main_box">
-            <form action="NonMemberController" method="POST">
-            	<input type="hidden" name="action" value="u02">
+            <form action="NonMemberController?action=u02" method="POST">
                 <h2 class="subtitle">ログイン</h2>
                 <div class="form-item">
                     <p class="formLabel">Email</p>

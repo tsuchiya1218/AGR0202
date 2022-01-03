@@ -28,7 +28,7 @@ public class U07_03 implements Action{
 			return forward;
 		}
 		MemberBean member = (MemberBean) session.getAttribute("member");
-		List<ChildBean> child = childDAO.getChild(member.getM_num());
+		List<ChildBean> child = childDAO.getChildList(member.getM_num());
 		
 		int countChild = 0;
 		if(!child.isEmpty()) {

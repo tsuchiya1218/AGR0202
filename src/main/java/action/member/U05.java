@@ -29,16 +29,17 @@ public class U05 implements Action {
 			return forward;
 		}
 		MemberDAO memberDAO = MemberDAO.getInstance();
-		if(!memberDAO.updateLeave(member.getM_email())) {
+		if(!memberDAO.leave(member.getM_email())) {
 			forward.setErrorMsg("データベースエラーが発生しました。もう一度やり直してください。");
 			return forward;
 		}else {
 			Gmail gmail = Gmail.getInstance();
 			String beforeHashEmail = (String) session.getAttribute("beforeHashEmail");
 			if(!gmail.sendLeaveMail(beforeHashEmail,member.getM_name())) {
-				forward.setErrorMsg("メール送信が失敗しました。\\n退会は完了しましたので、ご安心してください。");
+				forward.setErrorMsg("メール送信は失敗しましたが、\\n退会は完了しましたので、ご安心してください。");
 				return forward;
 			}
+			memberDAO.sortM_num();
 			forward.setPath("u05_02");
 			session.invalidate();
 			return forward;

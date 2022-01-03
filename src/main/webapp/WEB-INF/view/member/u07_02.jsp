@@ -20,8 +20,7 @@
                     <div class="subtitle">
                         <h2>子供登録</h2>
                     </div>
-                    <form action="MemberController" method="post">
-                    <input type="hidden" name="action" value="u07_02">
+                    <form action="MemberController?action=u07_02" method="post">
                         <div class="items_req">
                             <label>
                                 <span class="items_title">名前(姓)</span>

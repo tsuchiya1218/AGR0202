@@ -27,10 +27,11 @@ public class U07_s2 implements Action {
 			forward.setErrorMsg("子供の情報削除ができませんでした。");
 			return forward;
 		}
+		childDAO.sortC_Num();
 		MemberBean member = (MemberBean) session.getAttribute("member");
 		
 		int countChild = 0;
-		List<ChildBean> child = childDAO.getChild(member.getM_num());
+		List<ChildBean> child = childDAO.getChildList(member.getM_num());
 		if(!child.isEmpty()) {
 			for(ChildBean c : child) {
 				c.setAge(childDAO.countBirth(c.getC_birth()));

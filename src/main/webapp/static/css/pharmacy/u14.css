@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .main_box{
    width: 50%;
    margin: 0 auto;
@@ -16,24 +18,25 @@
     margin-bottom: 10px;
 }
 
-.items_title, .items_title2{
+.items_title{
     display: inline-block;
     width: 100px;
     margin-right: 10px;
     font-size: 18px;
     text-align: right;
 }
-
-.items_title2::after{
-    content: "(必須)";
-    color: red;
+.items img{
+    background-position: center;
+    background-size: contain;
 }
+
 .items input[type="file"]{
     width: 50%;
     padding: 10px;
     cursor: pointer;
 }
-.items input[type="text"]{
+.items input[type="text"],
+.items input[type="nummber"]{
     width: 50%;
     padding: 10px;
     border: 1px solid gray;
@@ -42,6 +45,7 @@
     
 }
 .items input[type="text"]:focus,
+.items input[type="number"]:focus,
 .items textarea:focus{
     border: 1px solid #55b1df;
     border-radius: 10px;
@@ -89,10 +93,6 @@
 .submit_btn:focus{
     outline: none;
 }
-footer{
-    position: absolute;
-    bottom: 0;
-}
 
 @media(max-width: 1030px){
     .item_con{
@@ -101,11 +101,12 @@ footer{
         flex-direction: column;
         align-items: center;
     }
-    .items input[type="text"]{
+    .items input[type="text"],
+    .items input[type="number"]{
         width: 50%;
         height: 10px;
     }
-    .items_title, .items_title2{
+    .items_title{
         font-size: 16px;
     }
     .items_btn button{

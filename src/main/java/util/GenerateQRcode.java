@@ -16,7 +16,7 @@ public class GenerateQRcode {
 		QRCodeWriter write = new QRCodeWriter();
 		String path = "C:\\Users\\ksmzz\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code";
 		try {
-			//파일 경로가 없으면 생성하기
+			//Fileのパスがない場合作る
 			File file = new File(path); 
 			if(!file.exists()) { 
 		   	 	file.mkdirs(); 

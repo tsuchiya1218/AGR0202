@@ -97,6 +97,31 @@ public class ChildDAO {
 			}
 		}
 	}
+	
+	public void sortC_Num() throws SQLException {
+		try {
+			String SQL = "SET @COUNT=0;";
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.executeQuery();
+			SQL = "UPDATE child SET c_num =@count:=@count+1;";
+			pstmt.executeUpdate(SQL);
+			conn.commit();
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			conn.rollback();
+			throw new RuntimeException(nule.getMessage());
+		} finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
 
 	public boolean updateChild(ChildBean child) throws SQLException {
 		String SQL = "UPDATE child SET c_medical_num = ?, c_i_num = ?, c_i_expiry_date = ?,"
@@ -142,7 +167,7 @@ public class ChildDAO {
 		}
 	}
 
-	public List<ChildBean> getChild(int c_m_num) throws SQLException {
+	public List<ChildBean> getChildList(int c_m_num) throws SQLException {
 		String SQL = "SELECT * FROM child WHERE c_m_num = ?";
 		List<ChildBean> childList = new ArrayList<>();
 		try {

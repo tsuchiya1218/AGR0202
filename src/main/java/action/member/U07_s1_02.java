@@ -88,7 +88,7 @@ public class U07_s1_02 implements Action {
 		MemberBean member = (MemberBean) session.getAttribute("member");
 
 		ChildDAO childDAO = ChildDAO.getInstance();
-		List<ChildBean> child = childDAO.getChild(member.getM_num());
+		List<ChildBean> child = childDAO.getChildList(member.getM_num());
 		int index = Integer.parseInt(request.getParameter("index"));
 		
 		if(!child.get(index).getC_medical_num().equals(map.get("medical_num"))) {

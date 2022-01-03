@@ -86,7 +86,7 @@
                 <tr>
                     <th><label>今までにかかった病気</label></th>
                     <td>
-                    	<c:set var="q_medical_history" value="${fn:replace(questionnaire.q_medical_history,'&lt;/br&gt;','<br>')}" />
+                    	<c:set var="q_medical_history" value="${fn:replace(questionnaire.q_medical_history,'&lt;br&gt;','<br>')}" />
                     	<c:out escapeXml="false" value="${q_medical_history }"/>
                     </td>
                 </tr>
@@ -132,7 +132,7 @@
                 <tr>
                     <th><label>アレルギー情報</label></th>
                     <td>
-                    	<c:set var="q_allergy" value="${fn:replace(questionnaire.q_allergy,'&lt;/br&gt;','</br>')}" />
+                    	<c:set var="q_allergy" value="${fn:replace(questionnaire.q_allergy,'&lt;br&gt;','<br>')}" />
                     	<c:out escapeXml="false" value="${q_allergy}"/>
                     </td>
                 </tr>

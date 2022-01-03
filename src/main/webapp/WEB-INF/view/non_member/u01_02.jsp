@@ -17,8 +17,7 @@
     <main>
         <div class="contents">
             <p>入力内容をご確認いただき、お間違いなければ「確定」をクリックしてください。</p>
-            <form class="form" action="NonMemberController" method="POST">
-            	<input type="hidden" name="action" value="u01_02">
+            <form class="form" action="NonMemberController?action=u01_02" method="POST">
                 <h3 class="registTitle">入力内容確認</h3>
                 <table class="registTable" border="1">
 	                <tr>
@@ -110,7 +109,7 @@
                             <label class="itemTitle">今までにかかった病気</label>
                         </th>
                         <td>
-                        	<c:set var="q_medical_history" value="${fn:replace(sessionScope.questionnaireBean.q_medical_history,'&lt;/br&gt;','<br>')}" />
+                        	<c:set var="q_medical_history" value="${fn:replace(sessionScope.questionnaireBean.q_medical_history,'&lt;br&gt;','<br>')}" />
                        	    <c:out value="${q_medical_history}" escapeXml="false"/>
                         </td>
                     </tr>
@@ -166,7 +165,7 @@
                             <label class="itemTitle">アレルギー情報</label>
                         </th>
                         <td>
-                        	<c:set var="q_allergy" value="${fn:replace(sessionScope.questionnaireBean.q_allergy,'&lt;/br&gt;','<br>')}" />
+                        	<c:set var="q_allergy" value="${fn:replace(sessionScope.questionnaireBean.q_allergy,'&lt;br&gt;','<br>')}" />
                            	<c:out value="${q_allergy }" escapeXml="false" />
                         </td>
                     </tr>

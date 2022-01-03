@@ -143,8 +143,11 @@ nav ul li .menu_a_active{
     color:white;
 }
 .member_box{
-	width: 100%;
+	display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
 .member_name{
 	font-size: 0.6rem;
 	font-weight: bold;

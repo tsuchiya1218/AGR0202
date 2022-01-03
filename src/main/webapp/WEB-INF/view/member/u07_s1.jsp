@@ -146,7 +146,7 @@
                             <label>
                                 <span class="items_title">病歴</span>
                                 <span>
-                                	<c:set var="c_medical_history" value="${fn:replace(sessionScope.child[index].c_medical_history,'&lt;/br&gt;','&#10;')}" />
+                                	<c:set var="c_medical_history" value="${fn:replace(sessionScope.child[index].c_medical_history,'&lt;br&gt;','&#10;')}" />
 	                                <textarea name="medical_history" rows="3" cols="40" maxlength="200" 
 	                                oninput="maxLengthCheck(this)" placeholder="今までにかかったことがある病気をかいてください。">${c_medical_history }</textarea><br>
                                 </span>
@@ -162,7 +162,7 @@
                         <div class="items">
                             <label>
                                 <span class="items_title">アレルギー情報</span>
-                            	<c:set var="c_allergy" value="${fn:replace(sessionScope.child[index].c_allergy,'&lt;/br&gt;','&#10;')}" />
+                            	<c:set var="c_allergy" value="${fn:replace(sessionScope.child[index].c_allergy,'&lt;br&gt;','&#10;')}" />
                                 <textarea name="allergy" rows="3" cols="40" maxlength="150" 
                                 oninput="maxLengthCheck(this)">${c_allergy }</textarea>
                             </label>

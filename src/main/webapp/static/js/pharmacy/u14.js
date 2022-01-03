@@ -17,3 +17,16 @@ function checkForm(form){
     if(isError) alert('必須項目を入力してください。');
     else form.submit();
 }
+
+var file = document.querySelector('#img_file');
+
+file.onchange = function () { 
+    var fileList = file.files ;
+    
+    var reader = new FileReader();
+    reader.readAsDataURL(fileList [0]);
+
+    reader.onload = function  () {
+        document.querySelector('#preview').src = reader.result ;
+    }; 
+}; 

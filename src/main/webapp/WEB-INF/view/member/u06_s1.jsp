@@ -60,7 +60,7 @@
                             <label class="itemTitle">今までにかかった病気</label>
                         </th>
                         <td>
-                            <c:set var="q_medical_history" value="${fn:replace(questionnaire.q_medical_history,'&lt;/br&gt;','&#10;')}" />
+                            <c:set var="q_medical_history" value="${fn:replace(questionnaire.q_medical_history,'&lt;br&gt;','&#10;')}" />
                             <textarea name="medical_history" rows="3" cols="40" maxlength="200"  oninput="maxLengthCheck(this)">${q_medical_history }</textarea><br>
                             <span>今までにかかったことがある病気をかいてください。</span>
                         </td>
@@ -127,7 +127,7 @@
                             <label class="itemTitle">アレルギー情報</label>
                         </th>
                         <td>
-                            <c:set var="q_allergy" value="${fn:replace(questionnaire.q_allergy,'&lt;/br&gt;','&#10;')}" />
+                            <c:set var="q_allergy" value="${fn:replace(questionnaire.q_allergy,'&lt;br&gt;','&#10;')}" />
                             <textarea name="allergy" rows="3" cols="40" maxlength="150" oninput="maxLengthCheck(this)">${q_allergy }</textarea>
                         </td>
                     </tr>

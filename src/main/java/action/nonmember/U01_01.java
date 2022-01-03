@@ -57,12 +57,12 @@ public class U01_01 implements Action {
 		/* 問診票 */
 		Map<String, String> q_map = new HashMap<String, String>();
 		q_map.put("blood_type", request.getParameter("blood_type"));
-		q_map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "</br>"));
-		q_map.put("medication", request.getParameter("medication").replaceAll("\r\n", "</br>"));
+		q_map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "<br>"));
+		q_map.put("medication", request.getParameter("medication").replaceAll("\r\n", "<br>"));
 		q_map.put("drink", request.getParameter("drink"));
 		q_map.put("smoke", request.getParameter("smoke"));
 		q_map.put("pregnancy", request.getParameter("pregnancy"));
-		q_map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "</br>"));
+		q_map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "<br>"));
 
 		String patternNum = "^[0-9]*$";
 		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";

@@ -21,8 +21,7 @@
                     <div class="subtitle">
                         <h2>子供登録確認</h2>
                     </div>
-                    <form action="MemberController" method="post">
-                    <input type="hidden" name="action" value="u07_03">
+                    <form action="MemberController?action=u07_03" method="post">
                         <div class="items">
                             <span class="items_title">名前</span>
                             <span class="items_text">
@@ -80,7 +79,7 @@
                         <div class="items">
                                 <span class="items_title">病歴</span>
                                 <span class="items_text">
-                            		<c:set var="c_medical_history" value="${fn:replace(sessionScope.childBean.c_medical_history,'&lt;/br&gt;','<br>')}" />
+                            		<c:set var="c_medical_history" value="${fn:replace(sessionScope.childBean.c_medical_history,'&lt;br&gt;','<br>')}" />
                        	    		<c:out value="${c_medical_history}" escapeXml="false"/>
                             	</span>
                         </div>
@@ -93,7 +92,7 @@
                         <div class="items">
                             <span class="items_title">アレルギー情報</span>
 	                        <span class="items_text">
-                           		<c:set var="c_allergy" value="${fn:replace(sessionScope.childBean.c_allergy,'&lt;/br&gt;','<br>')}" />
+                           		<c:set var="c_allergy" value="${fn:replace(sessionScope.childBean.c_allergy,'&lt;br&gt;','<br>')}" />
                        	    	<c:out value="${c_allergy}" escapeXml="false"/>
                             </span>
                     </div>

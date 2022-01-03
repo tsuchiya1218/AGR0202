@@ -22,8 +22,7 @@
                 必須項目には<strong>空白スペースを使用しないでください。</strong><br>
                 入力後「確認」ボタンを押してください。
             </p>
-            <form class="form" action="NonMemberController" method="POST">
-	            <input type="hidden" name="action" value="u01_01">
+            <form class="form" action="NonMemberController?action=u01_01" method="POST">
 	            <h3 class="registTitle">新規会員登録</h3>
 	            	<table class="registTable" border="1">
 	                <tr>
