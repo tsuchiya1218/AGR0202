@@ -87,7 +87,7 @@
                     <span>子供情報の登録・変更・削除ができます。</span>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href="MemberController?view=u08_01">薬歴</a><br>
+                    <a class="item_title" href="MemberController?action=u08_01">薬歴</a><br>
                        <span>過去の薬歴が表示されます。</span>
                 </div>
             </div>

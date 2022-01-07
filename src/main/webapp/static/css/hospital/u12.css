@@ -56,9 +56,11 @@ table th{
     border: 1px solid #3c485e;
     color: white;
     font-weight: 100;
+    text-align: center;
 }
 
 table td{
+	margin: 0 10px;
     box-sizing: border-box;
     padding: 5px 10px;
     border-bottom: 1px solid #3c485e;
@@ -73,10 +75,6 @@ table td:last-child{
     outline: none;
 }
 
-footer{
-    position: absolute;
-    bottom: 0;
-}
 @media(max-width: 1030px){
     .item_con{
         display:flex;

@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/hospital/u12.css">
+    <title>承認リスト画面</title>
 </head>
-<body>
-	<main>
+<body id="body">
+	<jsp:include page="../common/hospital/header.jsp"/>
+    <main>
         <div class="main_box">
             <section class="item_con">
                 <div class="item_box">
@@ -17,22 +24,36 @@
                     <div class="table_items">
                         <table>
                             <thead>
-                                <th id="0">日付</th>
-                                <th id="1">患者名</th>
-                                <th id="2">生年月日</th>
-                                <th id="3">性別</th>
-                                <th id="6"></th>
+                            	<tr>
+                            		<th>番号</th>
+	                                <th>日付</th>
+	                                <th>患者名</th>
+	                                <th>ふりがな</th>
+	                                <th>生年月日</th>
+	                                <th>性別</th>
+	                                <th></th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <td>2021-12-03 15:30</td>
-                                <td>キムソンホン</td>
-                                <td>1995-06-24</td>
-                                <td>男性</td>
-                                <td>
-                                <form action="" method="POST">
-                                    <button type="button" onclick="isAvailable(this.form);">有効</button>
-                                </form>
-                                </td>
+                            	<c:set var="member" value="${requestScope.memberList }" />
+                            	<c:forEach var="ep" items="${requestScope.epList }" varStatus="st">
+	                            <tr>
+	                            	<td>${st.count }</td>
+	                                <td>${ep.ep_reg_date }</td>
+	                                <td>${member[st.index].m_name }</td>
+	                                <td>${member[st.index].m_kana }</td>
+	                                <td>${member[st.index].m_birth }</td>
+	                                <td>${member[st.index].m_gender }</td>
+	                                <td>
+	                                	<c:if test="${ep.ep_auth ne true }">
+		                                    <form action="HospitalController?action=u12_02" method="POST">
+		                                    	<input type="hidden" name="ep_num" value="${ep.ep_num }">
+		                                        <button type="button" onclick="isAvailable(this.form);">有効</button>
+		                                    </form>
+	                                	</c:if>
+	                                </td>
+	                            </tr>
+                            	</c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -40,5 +61,10 @@
             </section>
         </div>
     </main>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/hospital/u12.js"></script>
+
 </html>

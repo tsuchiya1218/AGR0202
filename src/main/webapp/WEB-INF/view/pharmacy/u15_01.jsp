@@ -25,26 +25,26 @@
                     <form action="PharmacyController?action=u15_01" method="POST" id="form">
                         <div class="search_con">
                             <select name="keyword_type" class="search_keyword">
-                                <option value="名前" selected>名前</option>
-                                <option value="効果">効果</option>
+                                <option value="名前" ${(param.keyword_type eq "名前") ? 'selected' : ''}>名前</option>
+                                <option value="効果" ${(param.keyword_type eq "効果") ? 'selected' : ''}>効果</option>
                             </select>
                             <select name="medicine_type" class="search_keyword_option">
-                            	<option value="全部" selected>全部</option>
-                                <option value="錠剤">錠剤</option>
-                                <option value="カプセル剤" >カプセル剤</option>
-                                <option value="散剤(粉薬)" >散剤(粉薬)</option>
-                                <option value="液剤" >液剤</option>
-                                <option value="顆粒剤" >顆粒剤</option>
-                                <option value="坐剤・膣剤" >坐剤・膣剤</option>
-                                <option value="貼り薬" >貼り薬</option>
-                                <option value="塗り薬" >塗り薬</option>
-                                <option value="点眼薬" >点眼薬</option>
-                                <option value="吸入剤" >吸入剤</option>
-                                <option value="噴霧剤 エアゾール剤" >噴霧剤 エアゾール剤</option>
-                                <option value="注射剤" >注射剤</option>
-                                <option value="その他" >その他</option>
+                            	<option value="全部" ${(param.medicine_type eq "全部") ? 'selected' : ''}>全部</option>
+                                <option value="錠剤" ${(param.medicine_type eq "錠剤") ? 'selected' : ''} >錠剤</option>
+                                <option value="カプセル剤" ${(param.medicine_type eq "カプセル剤") ? 'selected' : ''}>カプセル剤</option>
+                                <option value="散剤(粉薬)" ${(param.medicine_type eq "散剤(粉薬)") ? 'selected' : ''}>散剤(粉薬)</option>
+                                <option value="液剤" ${(param.medicine_type eq "液剤") ? 'selected' : ''}>液剤</option>
+                                <option value="顆粒剤" ${(param.medicine_type eq "顆粒剤") ? 'selected' : ''}>顆粒剤</option>
+                                <option value="坐剤・膣剤" ${(param.medicine_type eq "坐剤・膣剤") ? 'selected' : ''}>坐剤・膣剤</option>
+                                <option value="貼り薬" ${(param.medicine_type eq "貼り薬") ? 'selected' : ''}>貼り薬</option>
+                                <option value="塗り薬" ${(param.medicine_type eq "塗り薬") ? 'selected' : ''}>塗り薬</option>
+                                <option value="点眼薬" ${(param.medicine_type eq "点眼薬") ? 'selected' : ''} >点眼薬</option>
+                                <option value="吸入剤" ${(param.medicine_type eq "吸入剤") ? 'selected' : ''} >吸入剤</option>
+                                <option value="噴霧剤 エアゾール剤" ${(param.medicine_type eq "噴霧剤 エアゾール剤") ? 'selected' : ''} >噴霧剤 エアゾール剤</option>
+                                <option value="注射剤" ${(param.medicine_type eq "注射剤") ? 'selected' : ''} >注射剤</option>
+                                <option value="その他" ${(param.medicine_type eq "その他") ? 'selected' : ''} >その他</option>
                             </select>
-                            <input type="text" name="keyword" autocomplete="off">
+                            <input type="text" name="keyword" value="${param.keyword }" autocomplete="off">
                             <button class="search_btn">検索</button><br>
                             <p>
                                 名前・効果・種類を選択し検索<br>
@@ -70,7 +70,7 @@
 	           		</c:if>
 	           		<c:if test="${fn:length(drugList) ne 0}">
 	           			<c:if test="${!empty search_result}">
-		           			検索情報：<c:out value="${param.keyword_type } ${param.medicine_type}  検索名: ${keyword}  検索結果数 : ${search_result }" />
+		           			<c:out value="検索結果数 : ${search_result }" />
 	           			</c:if>
 	           		</c:if>
                 </div>
@@ -93,7 +93,7 @@
 		                            <td>${drug.drug_guide }</td>
 		                            <td><fmt:formatNumber value="${drug.drug_price}" pattern="###,###,###"/>円</td>
 		                            <td class="btn_in_table">
-		                                <form action="PharmacyController?action=u16_s2" method="POST">
+		                                <form action="PharmacyController?action=u15_s1" method="POST">
 		                                	<input type="hidden" name="drug_num" value="${drug.drug_num }">
 		                                    <button class="delete_btn" type="button" onclick="isDelete(form);">削除</button>
 		                                </form>
@@ -118,21 +118,21 @@
 									<c:forEach var="i" begin="0" end="4">
 	                        		<c:if test="${(startNum+i) <= endPage}">
 										<li>
-											<c:if test="${!empty search_result }">
+											<c:if test="${search_result ne 0}">
 												<a class="${(page==(startNum+i))?'page_active':'' }" 
 													href="PharmacyController?action=u15_01&p=${startNum+i}&
 													keyword_type=${param.keyword_type}&
 													medicine_type=${param.medicine_type}&
 													keyword=${param.keyword}">${startNum+i}</a>
 											</c:if>
-											<c:if test="${empty search_result }">
+											<c:if test="${search_result eq 0}">
 												<a class="${(page==(startNum+i))?'page_active':'' }" 
 													href="PharmacyController?action=u15_01&p=${startNum+i}">${startNum+i}</a>
 											</c:if>
 										</li>
 									</c:if>
 									</c:forEach>
-		                    <c:if test="${startNum+5 <= endPage }">
+		                    <c:if test="${startNum+5 < endPage }">
 		                        <li><a href="PharmacyController?action=u15_01&p=${startNum+5}">&gt;</a></li>
 		                    </c:if>
 	                    </ul>

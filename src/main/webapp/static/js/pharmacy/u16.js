@@ -6,6 +6,14 @@ function isUpdate(form){
     }
 }
 
+function isDeleteImg(drug_num){
+	if(confirm('薬の写真を削除しますか？')){
+		location.href='PharmacyController?action=u16_s2&drug_num='+drug_num;
+	} else{
+		return;
+	}
+}
+
 var file = document.querySelector('#img_file');
 
 file.onchange = function () { 

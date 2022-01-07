@@ -139,15 +139,15 @@ public class DrugDAO {
 		}
 	}
 	
-	public List<DrugBean> searchByName(String drug_name,int lastNum) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_num <= ?  ORDER BY drug_num DESC LIMIT 10";
+	public List<DrugBean> searchByName(String drug_name) throws SQLException {
+		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
-			pstmt.setInt(2, lastNum);
+			
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -208,9 +208,9 @@ public class DrugDAO {
 		}
 	}
 	
-	public List<DrugBean> searchByNameAndType(String drug_name, String drug_type, int lastNum)
+	public List<DrugBean> searchByNameAndType(String drug_name, String drug_type)
 			throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_type = ? AND drug_num <= ? ORDER BY drug_num DESC LIMIT 10";
+		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_type = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
@@ -218,7 +218,6 @@ public class DrugDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
 			pstmt.setString(2, drug_type);
-			pstmt.setInt(3, lastNum);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while (rs.next()) {
@@ -281,15 +280,14 @@ public class DrugDAO {
 		}
 	}
 	
-	public List<DrugBean> searchByEffect(String drug_effect,int lastNum) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? AND drug_num <= ? ORDER BY drug_num DESC LIMIT 10";
+	public List<DrugBean> searchByEffect(String drug_effect) throws SQLException {
+		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%"+drug_effect+"%");
-			pstmt.setInt(2, lastNum);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -351,8 +349,8 @@ public class DrugDAO {
 		}
 	}
 	
-	public List<DrugBean> searchByEffectAndType(String drug_effect,String drug_type,int lastNum) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? AND drug_type = ? AND drug_num <= ? ORDER BY drug_num DESC LIMIT 10";
+	public List<DrugBean> searchByEffectAndType(String drug_effect,String drug_type) throws SQLException {
+		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? AND drug_type = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
@@ -360,7 +358,6 @@ public class DrugDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%"+drug_effect+"%");
 			pstmt.setString(2, drug_type);
-			pstmt.setInt(3, lastNum);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -444,7 +441,7 @@ public class DrugDAO {
 			}
 		}
 	}
-	public int getDrug_num(String drug_name) {
+	public int findByDrug_numToDrug_name(String drug_name) {
 		String SQL = "SELECT drug_num FROM drug WHERE drug_name LIKE ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -483,6 +480,36 @@ public class DrugDAO {
 			pstmt.setInt(5, drug.getDrug_price());
 			pstmt.setString(6, drug.getDrug_img_name());
 			pstmt.setInt(7, drug.getDrug_num());
+
+			int result = pstmt.executeUpdate();
+			conn.commit();
+
+			if (result > 0) return true;
+			
+			return false;
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			conn.rollback();
+			throw new RuntimeException(nule.getMessage());
+		} finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public boolean updateDrugImgName(String drug_img_name,int drug_num) throws SQLException {
+		String SQL = "UPDATE drug SET drug_img_name = ? WHERE drug_num = ?";
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, drug_img_name);
+			pstmt.setInt(2, drug_num);
 
 			int result = pstmt.executeUpdate();
 			conn.commit();
@@ -562,7 +589,7 @@ public class DrugDAO {
 		}
 	}
 	
-	public DrugBean getDrugByDrug_num(int drug_num) throws SQLException {
+	public DrugBean findByDrug_numToDrug(int drug_num) throws SQLException {
 		String SQL = "SELECT * FROM drug WHERE drug_num = ?";
 		try {
 			conn = DBconnection.getConnection();
@@ -651,7 +678,7 @@ public class DrugDAO {
 		}
 	}
 	
-	public String findByDrug_numToDrug_img_name(int drug_num) throws SQLException {
+	public String findByDrug_img_nameToDrug_num(int drug_num) throws SQLException {
 		String SQL = "SELECT drug_img_name FROM drug WHERE drug_num = ?";
 		try {
 			conn = DBconnection.getConnection();
@@ -671,6 +698,44 @@ public class DrugDAO {
 			conn.rollback();
 			throw new RuntimeException(nule.getMessage());
 		} finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public DrugBean findByDrug_nameToDrug(String drug_name) throws SQLException {
+		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ?";
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, drug_name);
+			rs = pstmt.executeQuery();
+			conn.commit();
+			if(rs.next()) {
+				DrugBean drug = new DrugBean(
+						rs.getInt("drug_num"),
+						rs.getString("drug_name"),
+						rs.getString("drug_type"),
+						rs.getString("drug_effect"),
+						rs.getString("drug_guide"),
+						rs.getString("drug_note"),
+						rs.getInt("drug_price"),
+						rs.getString("drug_img_name")
+						);
+				return drug;
+			}
+			return null;
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			conn.rollback();
+			throw new RuntimeException(nule.getMessage());
+		}finally {
 			try {
 				Close.close(conn, pstmt, rs);
 			} catch (Exception e) {

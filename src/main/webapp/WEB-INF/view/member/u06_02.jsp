@@ -30,7 +30,7 @@
                     <tr>
                     <c:set var="m_name" value="${fn:split(member.m_name,' ')}" />
                         <th><label>名前</label></th>
-                        <td>姓　<input name="frist_name" id="frist_name" type="text" value="${m_name[0] }" required>
+                        <td>姓　<input name="frist_name" id="frist_name" type="text" value="${m_name[0] }" required><br>
                             名　<input name="last_name" id="last_name" type="text" value="${m_name[1] }" required>
                         </td>
                     </tr>
@@ -131,6 +131,7 @@
                     <input type="button" onclick="isUpdate(form)" value="確定">
                 </section>
             </form>
+    	</div>
     </main>
     <jsp:include page="../common/footer.jsp"/>
 </body>

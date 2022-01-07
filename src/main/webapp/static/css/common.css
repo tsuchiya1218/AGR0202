@@ -137,6 +137,7 @@ nav ul li .menu_a_active{
     font-weight: bold;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
     transition: all 0.5s;
+    justify-content: center;
 }
 .login_btn.active, .singup_btn.active{
 	background: #3c485e;
@@ -146,10 +147,11 @@ nav ul li .menu_a_active{
 	display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 0;
 }
 
 .member_name{
-	font-size: 0.6rem;
+	font-size: 1rem;
 	font-weight: bold;
 }
 .member_name.transform{
@@ -181,6 +183,7 @@ nav ul li .menu_a_active{
     padding-top: 1em;
     margin-top: 0;
     transition: all 0.5s;
+    justify-content: center;
 }
 
 .login_btn:hover, .singup_btn:hover, .logout_btn:hover{

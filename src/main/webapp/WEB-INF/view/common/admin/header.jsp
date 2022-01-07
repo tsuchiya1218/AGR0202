@@ -12,6 +12,8 @@
             <li><a href="./m1_01.jsp">医者一覧</a></li>
             <li><a href="./m2_01.jsp">薬局一覧</a></li>
             <li><a href="./m3_01.jsp">病院一覧</a></li>
+            <li><a href="#">お知らせ</a></li>
+            <li><a href="#">問い合わせ</a></li>
         </ul>
     </nav>
     <div class="account_box">
@@ -20,12 +22,14 @@
         <div class="account-content">
             <h2>ログインしてから利用できます。</h2>
             <ul>
-                <li><a href="../member/u04.jsp">ログアウト</a></li>
                 <li><a href="${pageContext.request.contextPath}/index.html" >ホーム</a></li>
 	            <li><a href="./m4_01.jsp">会員検索</a></li>
 	            <li><a href="./m1_01.jsp">医者一覧</a></li>
 	            <li><a href="./m2_01.jsp">薬局一覧</a></li>
 	            <li><a href="./m3_01.jsp">病院一覧</a></li>
+	            <li><a href="#">お知らせ</a></li>
+	            <li><a href="#">問い合わせ</a></li>
+                <li><a href="../member/u04.jsp">ログアウト</a></li>
             </ul>
         </div>
         <a href="../member/u04.jsp" class="logout_btn">ログアウト</a><br>

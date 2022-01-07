@@ -19,7 +19,7 @@
                     <h2>メールアドレス変更</h2>
                 </div>
                 <div class="items">
-                    <form action="MemberController?action=u06_s2_01" method="post">
+                    <form action="MemberController?action=u06_s2" method="post">
                         <div class="items_text">
                             <p>新しいメールアドレスを入力してください。</p>
                             <input type="email" name="email" placeholder="変更するメールアドレス">
@@ -28,7 +28,7 @@
                             <p>パスワードを入力してください。</p>
                             <input type="password" name="pw">
                         </div>
-                        <input type="button" onclick="location.href='MemberController?view=u06_01'" value="戻る">
+                        <input type="button" onclick="location.href='MemberController?action=u06_02'" value="戻る">
                         <button type="button" onclick="isSubmit(form)">変更</button>
                     </form>
                 </div>

@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.MemberBean;
 import util.Close;
@@ -52,6 +54,74 @@ public class MemberDAO {
 		}finally {
 			try {
 				Close.close(conn, pstmt, null);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public boolean findByEmail(String m_email) {
+		String SQL = "SELECT m_num FROM member WHERE m_email = ? AND m_leave = ?";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, m_email);
+			pstmt.setBoolean(2, false);
+			rs = pstmt.executeQuery();
+			return rs.next();
+			
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public int findByM_numToQr_num(int m_num) {
+		String SQL = "SELECT m_qr_num FROM member WHERE m_num = ? AND m_leave = ?";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
+			pstmt.setBoolean(2, false);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("m_qr_num");
+			}
+			return 0;
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public String findByEmailToName(String m_email) {
+		String SQL = "SELECT m_name FROM member WHERE m_email = ? AND m_leave = ?";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, m_email);
+			pstmt.setBoolean(2, false);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString("m_name");
+			}
+			return null;
+			
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage());
 			}
@@ -171,12 +241,13 @@ public class MemberDAO {
 		return false;
 	}
 	public boolean updateAuth(String m_email) throws SQLException{
-		String SQL = "UPDATE member SET m_auth = true WHERE m_email = ?";
+		String SQL = "UPDATE member SET m_auth = ? WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, m_email);
+			pstmt.setBoolean(1, true);
+			pstmt.setString(2, m_email);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			if(result != 1) {
@@ -247,12 +318,80 @@ public class MemberDAO {
 			}
 		}
 	}
-	public MemberBean getMemberBean(String m_email) {
+	public MemberBean getMemberBeanByEmail(String m_email) {
 		String SQL = "SELECT * FROM member WHERE m_email = ? AND m_leave = false";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				MemberBean member = new MemberBean(
+						rs.getInt("m_num"),
+						rs.getString("m_email"),
+						rs.getString("m_pw"),
+						rs.getString("m_name"),
+						rs.getString("m_kana"),
+						rs.getString("m_birth").toString(),
+						rs.getString("m_tel"),
+						rs.getString("m_gender"),
+						rs.getString("m_zip_code"),
+						rs.getString("m_address"),
+						rs.getInt("m_q_num"),
+						rs.getString("m_i_num"),
+						rs.getString("m_i_expiry_date"),
+						rs.getString("m_i_mark"),
+						rs.getString("m_qr_num"),
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
+						);
+				return member;
+			}
+			return null;
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public MemberBean getMemberListByM_numToUseHospital(int m_num) {
+		String SQL = "SELECT m_name,m_kana,m_birth,m_gender FROM member WHERE m_num = ? AND m_leave = false";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				MemberBean member = new MemberBean();
+				member.setM_name(rs.getString("m_name"));
+				member.setM_kana(rs.getString("m_kana"));
+				member.setM_birth(rs.getString("m_birth").toString());
+				member.setM_gender(rs.getString("m_gender"));
+				return member;
+			}
+			return null;
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public MemberBean getMemberBeanByM_num(int m_num) {
+		String SQL = "SELECT * FROM member WHERE m_num = ? AND m_leave = false";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				MemberBean member = new MemberBean(
@@ -307,12 +446,13 @@ public class MemberDAO {
 	}
 	
 	public boolean findPassword(String m_email,String m_name) {
-		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ? AND m_leave = false";
+		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ? AND m_leave = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
 			pstmt.setString(2, m_name);
+			pstmt.setBoolean(3, false);
 			rs = pstmt.executeQuery();
 			
 			return rs.next();
@@ -579,4 +719,45 @@ public class MemberDAO {
 			}
 		}
 	}
+	public MemberBean findByQr_numToMember(String m_qr_num) {
+		String SQL = "SELECT * FROM member WHERE m_qr_num = ? AND m_leave = false";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, m_qr_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				MemberBean member = new MemberBean(
+						rs.getInt("m_num"),
+						rs.getString("m_email"),
+						rs.getString("m_pw"),
+						rs.getString("m_name"),
+						rs.getString("m_kana"),
+						rs.getString("m_birth"),
+						rs.getString("m_tel"),
+						rs.getString("m_gender"),
+						rs.getString("m_zip_code"),
+						rs.getString("m_address"),
+						rs.getInt("m_q_num"),
+						rs.getString("m_i_num"),
+						rs.getString("m_i_expiry_date"),
+						rs.getString("m_i_mark"),
+						rs.getString("m_qr_num"),
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
+						);
+				return member;
+			}
+			return null;
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
 }

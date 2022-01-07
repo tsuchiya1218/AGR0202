@@ -20,12 +20,16 @@ import action.common.U04;
 import action.member.U05;
 import action.member.U06;
 import action.member.U06_s1;
-import action.member.U06_s2_01;
+import action.member.U06_s2;
 import action.member.U07_02;
 import action.member.U07_03;
 import action.member.U07_s1_01;
 import action.member.U07_s1_02;
 import action.member.U07_s2;
+import action.member.U08_01;
+import action.member.U08_s1;
+import action.member.U08_s2;
+import action.member.U08_s3;
 import action.member.U09;
 
 @WebServlet("/MemberController")
@@ -44,12 +48,16 @@ public class MemberController extends HttpServlet {
 		contList.put("u05",  new U05());
 		contList.put("u06",  new U06());
 		contList.put("u06_s1",  new U06_s1());
-		contList.put("u06_s2_01",  new U06_s2_01());
+		contList.put("u06_s2",  new U06_s2());
 		contList.put("u07_02",  new U07_02());
 		contList.put("u07_03",  new U07_03());
 		contList.put("u07_s1_01",  new U07_s1_01());
 		contList.put("u07_s1_02",  new U07_s1_02());
 		contList.put("u07_s2",  new U07_s2());
+		contList.put("u08_01",  new U08_01());
+		contList.put("u08_s1",  new U08_s1());
+		contList.put("u08_s2",  new U08_s2());
+		contList.put("u08_s3",  new U08_s3());
 		contList.put("u09",  new U09());
 	}
 	
@@ -81,25 +89,32 @@ public class MemberController extends HttpServlet {
 			try {
 				if (action != null) {
 					forward = contList.get(action).execute(request, response);
-					if(forward.getErrorMsg() == null) {
-						request.setAttribute("nav", forward.getPath().substring(0, 3));
-						if(forward.getMsg() != null) {
-							writer.println("<script type='text/javascript'>");
-							writer.println("alert('"+forward.getMsg()+"');");
-							writer.println("location='MemberController?view="+forward.getPath()+"';");
-							writer.println("</script>");
-						}else {
-							if("index".equals(forward.getPath())) {
-								dispatcher = request.getRequestDispatcher(forward.getPath() + ".jsp");
+					if(!forward.isRedirectToAction()) {
+						if(forward.getErrorMsg() == null) {
+							request.setAttribute("nav", forward.getPath().substring(0, 3));
+							if(forward.getMsg() != null) {
+								writer.println("<script type='text/javascript'>");
+								writer.println("alert('"+forward.getMsg()+"');");
+								writer.println("location='MemberController?view="+forward.getPath()+"';");
+								writer.println("</script>");
 							}else {
-								dispatcher = request.getRequestDispatcher(path + forward.getPath() + ".jsp");
+								if("index".equals(forward.getPath())) {
+									dispatcher = request.getRequestDispatcher(forward.getPath() + ".jsp");
+								}else {
+									dispatcher = request.getRequestDispatcher(path + forward.getPath() + ".jsp");
+								}
+								dispatcher.forward(request, response);
 							}
-							dispatcher.forward(request, response);
+						}else {
+							writer.println("<script type='text/javascript'>");
+							writer.println("alert('"+forward.getErrorMsg()+"');");
+							writer.println("history.back();");
+							writer.println("</script>");
 						}
 					}else {
 						writer.println("<script type='text/javascript'>");
-						writer.println("alert('"+forward.getErrorMsg()+"');");
-						writer.println("history.back();");
+						writer.println("alert('"+forward.getMsg()+"');");
+						writer.println("location='MemberController?action="+forward.getPath()+"';");
 						writer.println("</script>");
 					}
 				} else {
@@ -112,20 +127,13 @@ public class MemberController extends HttpServlet {
 						dispatcher.forward(request, response);
 					}
 				}
-			}catch(NullPointerException e) {
+			}catch(Exception e) {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('正しくないリクエストです。');");
 				writer.println("history.back();");
 				writer.println("</script>");
 				writer.close();
 				e.printStackTrace();
-			}catch (Exception e) {
-				e.printStackTrace();
-				writer.println("<script type='text/javascript'>");
-				writer.println("alert('エラーが発生しました。');");
-				writer.println("history.back();");
-				writer.println("</script>");
-				writer.close();
 			}
 		}else {	
 			writer.println("<script type='text/javascript'>");

@@ -15,6 +15,29 @@
      padding-bottom: 10px;
      background-color: white;
  }
+ .medicine_con{
+ 	border: 1px solid gray;
+ 	box-sizing: border-box;
+ 	margin: 20px 0;
+ 	border-radius: 20px;
+ 	padding: 1px;
+ }
+ .medicine_box{
+ 	display: flex;
+ 	flex-direction:row;
+ 	justify-content: center;
+ 	align-items: center;
+ 	text-align: center;
+ }
+ .medicine_img img{
+ 	width: 100%;
+ }
+ .items_info{
+ 	margin-bottom: 10px;
+ 	padding-bottom: 10px;
+ 	word-break: break-all;
+ }
+ 
  .member_name{
     text-align: center;
     margin-bottom: 10px;
@@ -28,7 +51,6 @@
  .items{
      margin-bottom: 10px;
      box-sizing: border-box;
-     text-align: left;
      padding: 0 30px;
  }
 .items_img{
@@ -43,14 +65,8 @@
 .items_img .items_title{
     text-align: center;
 }
-.items_img img{
-    width: 50%;
-    background-size: cover;
-    background-position: center;
-}
  .items_title{
      display: inline-block;
-     width: 200px;
      margin-right: 10px;
      font-size: 20px;
      font-weight: bold;
@@ -68,7 +84,7 @@
      padding: 10px 0;
      border: 1px solid gray;
      border-radius: 25px;
-     box-sizing: border-box;
+     box-sizing: content-box;
  }
 .item_box p{
     display: inline-block;
@@ -76,7 +92,6 @@
     word-break: break-all;
     color:black;
 }
-
 
  .btn_box{
      padding-top: 10px;
@@ -95,22 +110,9 @@
 }
  .goodsDetail{
     display: flex;
+    flex-direction: column;
 }
 
-.medPicture{
-    width: 100px;
-    height: 100px;
-}
-
-.medcinetableDetail td{
-    text-align: left;
-}
-
-.medcinetableDetail th{
-    text-align: right;
-    vertical-align: top;
-    width: 20%;
-}
 
  @media(max-width: 1030px ){
      form{
@@ -128,6 +130,9 @@
         flex-direction: column;
         align-items: center;
      }
+      .medicine_box{
+	 	flex-direction:column;
+	 }
      
      .info_text{
          font-size: 12px;

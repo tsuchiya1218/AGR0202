@@ -1,5 +1,6 @@
 package action.pharmacy;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -27,32 +28,31 @@ public class U15_01 implements Action {
 			p = Integer.parseInt(p_);
 		}
 		
-		int lastNum = drugDAO.totalPageCount()-(p-1)*10;
-		int fristNum = (lastNum-10 <= 1) ? 0 : lastNum-10;
+		int startNum = (p-1)*10; // 0 -> 10 -> 20-> 30
+		int endNum = p*10; // 9 -> 19 -> 29 -> 39
 		
-		List<DrugBean> drugList = drugDAO.getDrugListByPageNum(lastNum, fristNum);
+		List<DrugBean> drugPage = drugDAO.getDrugList();
 		
 		String keyword_type = request.getParameter("keyword_type");
 		String medicine_type = request.getParameter("medicine_type");
 		String keyword = request.getParameter("keyword");
 		int count = drugDAO.totalPageCount();
 		
-		if ((keyword_type != null && !"".equals(keyword_type)) && (!"".equals(medicine_type) && medicine_type != null)
-				&& (keyword != null && !"".equals(keyword))) {
+		if ((keyword_type != null && !"".equals(keyword_type)) && (!"".equals(medicine_type) && medicine_type != null)) {
 			if ("名前".equals(keyword_type)) {
 				if ("全部".equals(medicine_type)) {
-					drugList = drugDAO.searchByName(keyword, lastNum);
+					drugPage = drugDAO.searchByName(keyword);
 					count = drugDAO.countSearchByName(keyword);
 				} else {
-					drugList = drugDAO.searchByNameAndType(keyword, medicine_type, lastNum);
+					drugPage = drugDAO.searchByNameAndType(keyword, medicine_type);
 					count = drugDAO.countSearchByNameAndType(keyword, medicine_type);
 				}
 			} else {
 				if ("全部".equals(medicine_type)) {
-					drugList = drugDAO.searchByEffect(keyword, lastNum);
+					drugPage = drugDAO.searchByEffect(keyword);
 					count = drugDAO.countSearchByEffect(keyword);
 				} else {
-					drugList = drugDAO.searchByEffectAndType(keyword, medicine_type, lastNum);
+					drugPage = drugDAO.searchByEffectAndType(keyword, medicine_type);
 					count = drugDAO.countSearchByEffectAndType(keyword, medicine_type);
 				}
 			}
@@ -61,14 +61,10 @@ public class U15_01 implements Action {
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("search_result", count);
 		}
-		int startNum = (p-1)*10; // 0 -> 10 -> 20-> 30
-		int endPage = count/10+1; // 表示するPageの番号 リストが3番目までしたい場合は1-2-3まで表示する。
-		int endNum = p*10-1; // 9 -> 19 -> 29 -> 39
-		
-//		Math.ceil();
+		int endPage = (count%10 != 0) ? count/10+1 : count/10; // 表示するPageの番号 リストが3番目までしたい場合は1-2-3まで表示する。
 		
 		//降順
-		Collections.sort(drugList, new Comparator<DrugBean>() {
+		Collections.sort(drugPage, new Comparator<DrugBean>() {
             @Override
             public int compare(DrugBean s1, DrugBean s2) {
                 if (s1.getDrug_num() < s2.getDrug_num()) {
@@ -79,7 +75,15 @@ public class U15_01 implements Action {
                 return 0;
             }
         });
-
+		
+		List<DrugBean> drugList = new ArrayList<>();
+		if(drugPage.size() < endNum) {
+			endNum = drugPage.size();
+		}
+		for(int i= startNum; i < endNum; i++ ) {
+			drugList.add(drugPage.get(i));
+		}
+		
 		request.setAttribute("startNum", startNum);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("drugList", drugList);

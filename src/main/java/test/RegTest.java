@@ -7,6 +7,7 @@ class RegTest {
 	String patternNum = "^[0-9]*$";
 	String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
 	String patternString = "^[A-Za-z0-9]{0,64}$";
+	String regPm = "^[0-9]+(.)?[0-9]*$";
 	@AfterEach
 	void tearDown() throws Exception {
 	}
@@ -14,14 +15,12 @@ class RegTest {
 	@Test
 	void test() {
 		String str = "adsadsad sa321";
-		System.out.println("111".matches(patternNum)); //true
+		String num = "1";
+		System.out.println("12".matches(patternNum) + "\t"+"patternNumber"); //true
 		System.out.println("asd@asd".matches(patternEmail)); //false .com => true
 		System.out.println(str.matches(patternString)); // false
 		System.out.println(str.replaceAll("\\s", ""));
-		int year = 32;
-		if(year < 1 || year > 31) {
-			System.out.println("brith error");
-		}
+		System.out.println(num.matches(regPm));
 	}
 
 }

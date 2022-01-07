@@ -13,7 +13,7 @@ public class XssFilter {
 	
 	
 	public String stripTagAll(String str) {
-		if(!"".equals(str) || str != null) {
+		if(!"".equals(str) && str != null) {
 			str = str.replaceAll("<", "&lt;");
 			str = str.replaceAll(">", "&gt;");
 		}

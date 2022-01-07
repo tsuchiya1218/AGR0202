@@ -23,8 +23,13 @@
                         <h2>写真</h2>
                     </div>
                     <div class="items">
-                        <div class="items_img">
-                            <img src="${pageContext.request.contextPath}/static/img/medicine/${requestScope.drug.drug_img_name}" alt="薬写真">
+                        <div class="items_img" style="text-align: center;">
+	                        <c:if test="${drug.drug_img_name eq '' || drug.drug_img_name eq null }">
+	                            	<img src="${pageContext.request.contextPath}/static/img/medicine/${requestScope.drug.drug_img_name}" alt="写真が登録されていません。">
+                            </c:if>
+                            <c:if test="${drug.drug_img_name ne '' && drug.drug_img_name ne null }">
+	                            <img src="${pageContext.request.contextPath}/static/img/medicine/${requestScope.drug.drug_img_name}" alt="${drug.drug_name }">
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -49,7 +54,7 @@
                                 <p>${drug_effect }</p>
                             </div>
                             <div class="items_text">
-                                <span>備考</span>
+                                <span>注意事項</span>
                                 <c:set var="drug_note" value="${fn:replace(requestScope.drug.drug_note,'&lt;br&gt;','<br>')}" />
                                 <p>${drug_note }</p>
                             </div>

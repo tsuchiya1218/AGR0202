@@ -23,8 +23,9 @@
                     </div>
                     <p class="select_msg">以下の選択ボックスで子どもを選択することができます。<br>選択した上で「表示」ボタンを押してください</p>
                     <form action="PharmacyController?action=u10_s1" method="post">
+	                    <input type="hidden" name="m_num" value="${requestScope.member.m_num }">
 	                    <c:set var="select_index" value="${requestScope.selected }"/>
-	                    <c:set var="children" value="${sessionScope.child }"/>
+	                    <c:set var="children" value="${requestScope.child }"/>
 	                    <c:set var="index" value="${requestScope.selected-1 }"/>
                         <div class="member_name">
                             <span>${child[index].c_name }</span>
@@ -88,7 +89,7 @@
                                 生年月日
                             </span>
                             <span class="items_text">
-                                <c:out value="${children[index].c_birth}"/>
+                                <c:out value="${children[index].c_birth}"/> (${children[index].age }歳)
                             </span>
                         </div>
                         <div class="items_row" style="visibility: hidden;"></div>
@@ -134,47 +135,51 @@
                             </span>
                         </div>
                     </div>
-                    <div class="prescription_btn">
-                    	<form action="PharmacyController?action=u11_01" method="post">
-                    		<input type="hidden" name="selected" value="${index }">
-	                        <button type="submit">電子処方箋登録</button>
-                    	</form>
-                    </div>
                 </div>
                 <div class="item_box">
                     <div class="subtitle">
                         <h2>電子処方箋履歴</h2>
                     </div>
                     <div class="table_items">
-                        <table>
+	                    <table>
                             <thead>
-                                <th id="0">日付</th>
-                                <th id="1">病院名</th>
-                                <th id="2">薬局名</th>
-                                <th id="3">病名</th>
-                                <th id="4">薬剤情報提供書</th>
-                                <th id="5">電子処方箋</th>
-                                <th id="6"></th>
+                            	<tr>
+	                                <th>日付</th>
+	                                <th>病名</th>
+	                                <th>有効時間</th>
+	                                <th>薬剤情報提供書</th>
+	                                <th>電子処方箋</th>
+	                                <th></th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <td>2021/12/03</td>
-                                <td>xx病院</td>
-                                <td>COCO薬局</td>
-                                <td>風邪</td>
-                                <td>
-                                    <!-- 登録されている場合詳細ボタン -->
-                                    <form action="./u18_01.html" method="post">
-                                        <button>薬剤情報詳細</button>
-                                    </form>
-                                    <form action="./u17_01.html" method="post">
-                                        <button>薬剤情報提供書登録</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="./u13_01_pharmacy.html" method="POST">
-                                        <button>処方箋詳細</button>
-                                    </form>
-                                </td>
+                            	<c:forEach var="ep" items="${requestScope.epList }">
+                            	<tr>
+	                                <td>${ep.ep_reg_date }</td>
+	                                <td>${ep.ep_disease }</td>
+	                                <td>${ep.ep_expiry_date}</td>
+	                                <td>
+	                                	<c:if test="${ep.ep_di_num ne 0}">
+		                                    <form action="PharmacyController?action=u18" method="post">
+		                                    	<input type="hidden" name="ep_di_num" value="${ep.ep_di_num }">
+		                                        <button>薬剤情報詳細</button>
+		                                    </form>
+	                                	</c:if>
+	                                	<c:if test="${ep.ep_auth eq true && ep.ep_di_num eq 0 }">
+		                                    <form action="PharmacyController?action=u17_01" method="post">
+		                                    	<input type="hidden" name="ep_num" value="${ep.ep_num }">
+		                                        <button>薬剤情報提供書登録</button>
+		                                    </form>
+	                                	</c:if>
+	                                </td>
+	                                <td>
+	                                    <form action="PharmacyController?action=u13_01" method="POST">
+	                                    	<input type="hidden" name="ep_num" value="${ep.ep_num }">
+	                                        <button type="submit">処方箋詳細</button>
+	                                    </form>
+	                                </td>
+                            	</tr>
+                            	</c:forEach>
                             </tbody>
                         </table>
                     </div>

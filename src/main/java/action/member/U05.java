@@ -21,8 +21,14 @@ public class U05 implements Action {
 		HttpSession session = request.getSession(true);
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
-		String pw = xssFilter.stripTagAll(request.getParameter("pw"));
+		String pw = request.getParameter("pw");
 		MemberBean member =  (MemberBean) session.getAttribute("member");
+		
+		if("".equals(pw) || pw == null) {
+			forward.setErrorMsg("パスワードを入力してください。");
+			return forward;
+		}
+		pw = xssFilter.stripTagAll(pw);
 		
 		if(!member.getM_pw().equals(SHA256.getEncrypt(pw))) {
 			forward.setErrorMsg("パスワードが一致しません。");
@@ -36,10 +42,11 @@ public class U05 implements Action {
 			Gmail gmail = Gmail.getInstance();
 			String beforeHashEmail = (String) session.getAttribute("beforeHashEmail");
 			if(!gmail.sendLeaveMail(beforeHashEmail,member.getM_name())) {
-				forward.setErrorMsg("メール送信は失敗しましたが、\\n退会は完了しましたので、ご安心してください。");
+				forward.setMsg("メール送信は失敗しましたが、\\n退会は完了しましたので、ご安心してください。");
+				forward.setPath("u05_02");
+				session.invalidate();
 				return forward;
 			}
-			memberDAO.sortM_num();
 			forward.setPath("u05_02");
 			session.invalidate();
 			return forward;

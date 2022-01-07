@@ -8,7 +8,7 @@ public class Electronic_prescriptionBean implements Serializable {
 	
 	private int ep_num;
 	private int ep_d_num;
-	private int m_num;
+	private int ep_m_num;
 	private int ep_di_num;
 	private String ep_expiry_date;
 	private String ep_reg_date;
@@ -18,15 +18,16 @@ public class Electronic_prescriptionBean implements Serializable {
 	private String ep_disease;
 	private String ep_note;
 	private boolean ep_auth;
+	private int ep_c_num;
 	
 	public Electronic_prescriptionBean() {}
 
-	public Electronic_prescriptionBean(int ep_num, int ep_d_num, int m_num, int ep_di_num, String ep_expiry_date,
+	public Electronic_prescriptionBean(int ep_num, int ep_d_num, int ep_m_num, int ep_di_num, String ep_expiry_date,
 			String ep_reg_date, String ep_patient_type, String ep_burden_num, String ep_burden_person,
-			String ep_disease, String ep_note, boolean ep_auth) {
+			String ep_disease, String ep_note, boolean ep_auth, int ep_c_num) {
 		this.ep_num = ep_num;
 		this.ep_d_num = ep_d_num;
-		this.m_num = m_num;
+		this.ep_m_num = ep_m_num;
 		this.ep_di_num = ep_di_num;
 		this.ep_expiry_date = ep_expiry_date;
 		this.ep_reg_date = ep_reg_date;
@@ -36,6 +37,7 @@ public class Electronic_prescriptionBean implements Serializable {
 		this.ep_disease = ep_disease;
 		this.ep_note = ep_note;
 		this.ep_auth = ep_auth;
+		this.ep_c_num = ep_c_num;
 	}
 
 	public int getEp_num() {
@@ -54,12 +56,12 @@ public class Electronic_prescriptionBean implements Serializable {
 		this.ep_d_num = ep_d_num;
 	}
 
-	public int getM_num() {
-		return m_num;
+	public int getEp_m_num() {
+		return ep_m_num;
 	}
 
-	public void setM_num(int m_num) {
-		this.m_num = m_num;
+	public void setEp_m_num(int ep_m_num) {
+		this.ep_m_num = ep_m_num;
 	}
 
 	public int getEp_di_num() {
@@ -134,13 +136,22 @@ public class Electronic_prescriptionBean implements Serializable {
 		this.ep_auth = ep_auth;
 	}
 
+	public int getEp_c_num() {
+		return ep_c_num;
+	}
+
+	public void setEp_c_num(int ep_c_num) {
+		this.ep_c_num = ep_c_num;
+	}
+
 	@Override
 	public String toString() {
-		return "Electronic_prescriptionBean [ep_num=" + ep_num + ", ep_d_num=" + ep_d_num + ", m_num=" + m_num
+		return "Electronic_prescriptionBean [ep_num=" + ep_num + ", ep_d_num=" + ep_d_num + ", ep_m_num=" + ep_m_num
 				+ ", ep_di_num=" + ep_di_num + ", ep_expiry_date=" + ep_expiry_date + ", ep_reg_date=" + ep_reg_date
 				+ ", ep_patient_type=" + ep_patient_type + ", ep_burden_num=" + ep_burden_num + ", ep_burden_person="
 				+ ep_burden_person + ", ep_disease=" + ep_disease + ", ep_note=" + ep_note + ", ep_auth=" + ep_auth
-				+ "]";
+				+ ", ep_c_num=" + ep_c_num + "]";
 	}
+
 	
 }

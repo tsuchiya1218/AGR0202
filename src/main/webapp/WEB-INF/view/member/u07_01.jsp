@@ -37,7 +37,7 @@
                 <c:if test="${sessionScope.child ne null }">
                 	<p>
                 		登録されている子供:  
-                		<strong><c:out value="${sessionScope.member.m_children }"/>名</strong>
+                		<strong><c:out value="${sessionScope.member.children_count }"/>名</strong>
                 		
                 	</p>
                 	<c:forEach var="childList" items="${sessionScope.child }" varStatus="status">

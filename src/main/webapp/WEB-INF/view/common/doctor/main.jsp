@@ -43,12 +43,12 @@
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="u10_01_doctor">会員検索</a><br>
+                    <a class="item_title" href="DoctorController?view=u10_01_doctor">会員検索</a><br>
                     <span>診察のために会員のQRコードで検索する必要があります。</span>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href="u06_01_doctor">マイページ</a><br>
-                    <a href="u06_02_doctor">個人情報変更</a><br>
+                    <a class="item_title" href="DoctorController?action=u06_01">マイページ</a><br>
+                    <span>個人情報を変更することができます。</span>
                 </div>
             </div>
             <div class="menu_items">

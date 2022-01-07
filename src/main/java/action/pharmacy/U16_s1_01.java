@@ -16,12 +16,16 @@ public class U16_s1_01 implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		ActionForward forward = new ActionForward();
 		String drug_num_ = request.getParameter("drug_num");
+		if(drug_num_ == null || "".equals(drug_num_)) {
+			forward.setErrorMsg("薬番号がみつかりませんでした。");
+			return forward;
+		}
 		int drug_num = Integer.parseInt(drug_num_);
 		
 		DrugDAO drugDAO = DrugDAO.getInstance();
-		DrugBean drug = drugDAO.getDrugByDrug_num(drug_num);
+		DrugBean drug = drugDAO.findByDrug_numToDrug(drug_num);
 		if(drug == null) {
-			forward.setErrorMsg("薬情報をみつかりませんでした。");
+			forward.setErrorMsg("薬情報がみつかりませんでした。");
 			return forward;
 		}
 		request.setAttribute("drug", drug);

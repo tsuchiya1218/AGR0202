@@ -12,9 +12,21 @@
      text-align: center;
      padding-bottom: 10px;
  }
- .items{
-     margin-bottom: 10px;
+ .items, .items_req{
+ 	 display:flex;
+     margin-bottom: 20px;
+     padding-bottom: 10px;
      box-sizing: border-box;
+     border-bottom: 1px solid gray;
+ }
+ .medicine_items{
+	 display:flex;
+	 margin-bottom: 10px;
+     padding-bottom: 10px;
+     box-sizing: border-box;
+     justify-content: center;
+     align-items: center;
+     border-bottom: 2px solid #FFC898;
  }
 
  .items_title{

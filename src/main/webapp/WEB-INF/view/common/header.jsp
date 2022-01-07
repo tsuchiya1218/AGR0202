@@ -15,6 +15,8 @@
 		            <li><a href="NonMemberController?view=u02">My QRコード</a></li>
 		            <li><a href="NonMemberController?view=u02">子供情報</a></li>
 		            <li><a href="NonMemberController?view=u02">マイページ</a></li>
+		            <li><a href="#">お知らせ</a></li>
+		            <li><a href="#">問い合わせ</a></li>
             </c:if>
             <c:if test="${requestScope.nav ne null}">
 	        		<li><a href="NonMemberController?view=index">ホーム</a></li>
@@ -22,6 +24,8 @@
 		            <li><a href="NonMemberController?view=u02">My QRコード</a></li>
 		            <li><a href="NonMemberController?view=u02">子供情報</a></li>
 		            <li><a href="NonMemberController?view=u02">マイページ</a></li>
+		            <li><a href="#">お知らせ</a></li>
+		            <li><a href="#">問い合わせ</a></li>
             </c:if>
         </ul>
     </nav>
@@ -37,6 +41,8 @@
                 <li>
                     <a href="NonMemberController?view=u01_01">会員登録</a>
                 </li>
+           		<li><a href="#">お知らせ</a></li>
+	            <li><a href="#">問い合わせ</a></li>
             </ul>
         </div>
         <c:choose>

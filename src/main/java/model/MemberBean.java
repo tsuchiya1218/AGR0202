@@ -25,10 +25,8 @@ public class MemberBean implements Serializable {
 	private boolean m_leave;
 	
 	private String age;
-	private String m_children;
-
+	private int children_count;
 	public MemberBean() {}
-
 
 
 	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_birth,
@@ -210,13 +208,14 @@ public class MemberBean implements Serializable {
 		this.age = age;
 	}
 
-
-	public String getM_children() {
-		return m_children;
+	
+	public int getChildren_count() {
+		return children_count;
 	}
 
-	public void setM_children(String m_children) {
-		this.m_children = m_children;
+
+	public void setChildren_count(int children_count) {
+		this.children_count = children_count;
 	}
 
 	@Override

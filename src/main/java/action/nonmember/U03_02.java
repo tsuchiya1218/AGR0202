@@ -14,10 +14,10 @@ public class U03_02 implements Action{
 		response.setContentType("text/html; charset=UTF-8");
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
-		String m_email = xssFilter.stripTagAll(request.getParameter("email").replaceAll("\\s", ""));
+		String email = xssFilter.stripTagAll(request.getParameter("email").replaceAll("\\s", ""));
 		
 		forward.setPath("u03_03");
-		request.setAttribute("email", m_email);
+		request.setAttribute("email", email);
 		return forward;
 	}
 }

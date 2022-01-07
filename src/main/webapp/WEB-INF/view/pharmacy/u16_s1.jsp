@@ -24,8 +24,17 @@
                         <form action="PharmacyController?action=u16_s1_02" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="drug_num" value="${requestScope.drug.drug_num }">
                         <div class="img_box">
-                            <span class="before_img_title">写真</span><br>
-                            <span><img id="preview" src="${pageContext.request.contextPath}/static/img/medicine/${requestScope.drug.drug_img_name}" width="200" alt=""></span>
+                            <span class="before_img_title">写真</span>
+                            <c:if test="${drug.drug_img_name ne '' && drug.drug_img_name ne null }">
+                            	<button style="display:inline-block; float: right;" type="button" onclick="isDeleteImg(${drug.drug_num});">写真削除</button>
+                            </c:if>
+                            <br>
+                            <c:if test="${drug.drug_img_name eq '' || drug.drug_img_name eq null }">
+	                            <img src="${pageContext.request.contextPath}/static/img/medicine/${requestScope.drug.drug_img_name}" alt="写真が登録されていません。">
+                            </c:if>
+                            <c:if test="${drug.drug_img_name ne '' && drug.drug_img_name ne null }">
+	                            <img src="${pageContext.request.contextPath}/static/img/medicine/${requestScope.drug.drug_img_name}" alt="${drug.drug_name }">
+                            </c:if>
                             <hr>
                             <input type="file" id="img_file" name="drug_img">
                         </div>
@@ -242,7 +251,8 @@
                         <div class="items">
                             <label>
                                 <span class="items_title">効果</span>
-                                <textarea name="drug_effect" placeholder="血液の流れを良くする薬です。" maxlength="500">${requestScope.drug.drug_effect }</textarea>
+                                <c:set var="drug_effect" value="${fn:replace(requestScope.drug.drug_effect,'&lt;br&gt;','&#10;')}" />
+                                <textarea name="drug_effect" placeholder="血液の流れを良くする薬です。" maxlength="500">${drug_effect}</textarea>
                             </label>
                         </div>
                         <div class="items">
@@ -291,8 +301,9 @@
                         </div>
                         <div class="items">
                             <label>
-                                <span class="items_title">備考</span>
-                                <textarea name="drug_note" placeholder="この薬品にジェネリック医薬品は存在しません。" maxlength="500">${requestScope.drug.drug_note }</textarea>
+                                <span class="items_title">注意事項</span>
+                                <c:set var="drug_note" value="${fn:replace(requestScope.drug.drug_note,'&lt;br&gt;','&#10;')}" />
+                                <textarea name="drug_note" placeholder="この薬品にジェネリック医薬品は存在しません。" maxlength="500">${drug_note }</textarea>
                             </label>
                         </div>
                         <div class="items">
@@ -304,7 +315,7 @@
                         </div>
                         <div class="items_btn">
                             <button type="button" onclick="history.back()">戻る</button>
-                            <button type="button" class="submit_btn" onclick="checkForm(form)">確認</button>
+                            <button type="button" class="submit_btn" onclick="isUpdate(form)">確認</button>
                         </div>
                     </form>
                 </div>

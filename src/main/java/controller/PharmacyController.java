@@ -17,15 +17,21 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.ActionForward;
 import action.common.U04;
-import action.pharmacy.U10;
-import action.pharmacy.U10_s1;
-import action.pharmacy.U11_01;
+import action.doctor.U11_01;
+import action.doctor_pharmacy.U10;
+import action.doctor_pharmacy.U10_s1;
+import action.doctor_pharmacy.U11_s3;
+import action.doctor_pharmacy.U13_01;
 import action.pharmacy.U14;
 import action.pharmacy.U15_01;
+import action.pharmacy.U15_s1;
 import action.pharmacy.U16_01;
 import action.pharmacy.U16_s1_01;
 import action.pharmacy.U16_s1_02;
 import action.pharmacy.U16_s2;
+import action.pharmacy.U17_01;
+import action.pharmacy.U17_02;
+import action.pharmacy.U18;
 
 /**
  * Servlet implementation class PharmacyController
@@ -42,12 +48,18 @@ public class PharmacyController extends HttpServlet {
 		contList.put("u10",  new U10());
 		contList.put("u10_s1",  new U10_s1());
 		contList.put("u11_01",  new U11_01());
+		contList.put("u11_s3",  new U11_s3());
+		contList.put("u13_01",  new U13_01());
 		contList.put("u14",  new U14());
 		contList.put("u15_01",  new U15_01());
+		contList.put("u15_s1",  new U15_s1());
 		contList.put("u16_01",  new U16_01());
 		contList.put("u16_s1_01",  new U16_s1_01());
 		contList.put("u16_s1_02",  new U16_s1_02());
 		contList.put("u16_s2",  new U16_s2());
+		contList.put("u17_01",  new U17_01());
+		contList.put("u17_02",  new U17_02());
+		contList.put("u18",  new U18());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -78,9 +90,9 @@ public class PharmacyController extends HttpServlet {
 			try {
 				if (action != null) {
 					forward = contList.get(action).execute(request, response);
-					if(forward.getErrorMsg() == null) {
-						request.setAttribute("nav", forward.getPath().substring(0, 3));
-						if(!forward.isRedirectToAction()) {
+					if(!forward.isRedirectToAction()) {
+						if(forward.getErrorMsg() == null) {
+							request.setAttribute("nav", forward.getPath().substring(0, 3));
 							if(forward.getMsg() != null) {
 								writer.println("<script type='text/javascript'>");
 								writer.println("alert('"+forward.getMsg()+"');");
@@ -96,14 +108,14 @@ public class PharmacyController extends HttpServlet {
 							}
 						}else {
 							writer.println("<script type='text/javascript'>");
-							writer.println("alert('"+forward.getMsg()+"');");
-							writer.println("location='PharmacyController?action="+forward.getPath()+"';");
+							writer.println("alert('"+forward.getErrorMsg()+"');");
+							writer.println("history.back();");
 							writer.println("</script>");
 						}
 					}else {
 						writer.println("<script type='text/javascript'>");
-						writer.println("alert('"+forward.getErrorMsg()+"');");
-						writer.println("history.back();");
+						writer.println("alert('"+forward.getMsg()+"');");
+						writer.println("location='PharmacyController?action="+forward.getPath()+"';");
 						writer.println("</script>");
 					}
 				} else {
@@ -116,21 +128,13 @@ public class PharmacyController extends HttpServlet {
 						dispatcher.forward(request, response);
 					}
 				}
-			}catch(NullPointerException e) {
+			}catch(Exception e) {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('正しくないリクエストです。');");
 				writer.println("history.back();");
 				writer.println("</script>");
 				writer.close();
 				e.printStackTrace();
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				writer.println("<script type='text/javascript'>");
-				writer.println("alert('エラーが発生しました。');");
-				writer.println("history.back();");
-				writer.println("</script>");
-				writer.close();
 			}
 		}else {	
 			writer.println("<script type='text/javascript'>");

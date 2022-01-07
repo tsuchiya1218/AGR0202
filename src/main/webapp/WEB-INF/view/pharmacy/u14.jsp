@@ -73,7 +73,7 @@
                         </div>
                         <div class="items">
                             <label>
-                                <span class="items_title">備考</span>
+                                <span class="items_title">注意事項</span>
                                 <textarea name="drug_note" placeholder="この薬品にジェネリック医薬品は存在しません。" maxlength="500"></textarea>
                             </label>
                         </div>

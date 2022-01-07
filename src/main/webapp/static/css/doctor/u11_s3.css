@@ -1,0 +1,36 @@
+body{
+	padding: 20px 0;	
+}
+
+.main_box{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+ }
+ .item_box{
+     padding-bottom: 10px;
+ }
+ .items{
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+ }
+ 
+  .items_title{
+     display: inline-block;
+     width: 100%;
+     margin-bottom: 10px;
+     font-size: 20px;
+     text-align: center;
+     font-weight: bold;
+}
+ 
+ .items_text{
+    display: inline-block;
+    width: 100%;
+    font-size: 18px;
+    word-break: break-all;
+    
+}

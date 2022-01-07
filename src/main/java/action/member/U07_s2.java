@@ -39,7 +39,7 @@ public class U07_s2 implements Action {
 			}
 			session.setAttribute("child", child);
 		}
-		member.setM_children(String.valueOf(countChild));
+		member.setChildren_count(countChild);
 		session.setAttribute("member", member);
 		forward.setMsg("子供の情報が削除されました。");
 		forward.setPath("u07_01");

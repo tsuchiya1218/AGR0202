@@ -8,11 +8,17 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+import dao.AdminDAO;
 import dao.ChildDAO;
+import dao.DoctorDAO;
+import dao.HospitalDAO;
 import dao.MemberDAO;
 import dao.PharmacyDAO;
 import dao.QuestionnaireDAO;
+import model.AdminBean;
 import model.ChildBean;
+import model.DoctorBean;
+import model.HospitalBean;
 import model.MemberBean;
 import model.PharmacyBean;
 import model.QuestionnaireBean;
@@ -64,21 +70,21 @@ public class U02 implements Action {
 			//controllerで認証のために使う
 			session.setAttribute("who", who);
 			
-			MemberBean member = memberDAO.getMemberBean(email);
+			MemberBean member = memberDAO.getMemberBeanByEmail(email);
 			member.setAge(memberDAO.countBirth(member.getM_birth()));
 			
 			ChildDAO childDAO = ChildDAO.getInstance();
-			List<ChildBean> child = childDAO.getChildList(member.getM_num());
+			List<ChildBean> children = childDAO.getChildList(member.getM_num());
 			int countChild = 0;
-			if(!child.isEmpty()) {
-				for(ChildBean c : child) {
+			if(!children.isEmpty()) {
+				for(ChildBean c : children) {
 					c.setAge(childDAO.countBirth(c.getC_birth()));
 					countChild++;
 				}
-				session.setAttribute("child", child);
+				session.setAttribute("child", children);
 			}
 			
-			member.setM_children(String.valueOf(countChild));
+			member.setChildren_count(countChild);
 			
 			//メール内のURLで使ったTokenを万が一ある場合を考え、あれば消す。
 			if(session.getAttribute("authToken") != null) session.removeAttribute("authToken");
@@ -98,6 +104,49 @@ public class U02 implements Action {
 			PharmacyBean pharmacy = pharmacyDAO.getPharmacyBean(email);
 			session.setAttribute("who", who);
 			session.setAttribute("pharmacy", pharmacy);
+			forward.setPath("index");
+			return forward;
+		}
+		
+		DoctorDAO doctorDAO = DoctorDAO.getInstance();
+		who = doctorDAO.login(email, pw);
+		if("doctor".equals(who)) {
+			if(!doctorDAO.isAuth(email)) {
+				if(email != null && !"".equals(email) && pw != null && !"".equals(pw)) {
+					Gmail gmail = Gmail.getInstance();
+					if(!gmail.sendAuthMail(email)) {
+						forward.setErrorMsg("認証メール送信が失敗しました。問い合わせしてください。");
+						return forward;
+					}
+					session.setAttribute("authToken",SHA256.getEncrypt(email));
+					forward.setErrorMsg("該当するメールアドレスは認証されていません。\\n認証メールを送信しました。メールアドレス認証を行ってください。");
+					return forward;
+				}
+			}
+			DoctorBean doctor = doctorDAO.getDoctorBean(email);
+			session.setAttribute("beforeHashEmail", email);
+			session.setAttribute("who", who);
+			session.setAttribute("doctor", doctor);
+			forward.setPath("index");
+			return forward;
+		}
+		
+		HospitalDAO hospitalDAO = HospitalDAO.getInstance();
+		who = hospitalDAO.login(email, pw);
+		if("hospital".equals(who)) {
+			HospitalBean hospital = hospitalDAO.getHospitalBean(email);
+			session.setAttribute("who", who);
+			session.setAttribute("hospital", hospital);
+			forward.setPath("index");
+			return forward;
+		}
+		
+		AdminDAO adminDAO = AdminDAO.getInstance();
+		who = adminDAO.login(email, pw);
+		if("hospital".equals(who)) {
+			AdminBean admin = adminDAO.getAdminBean(email);
+			session.setAttribute("who", who);
+			session.setAttribute("admin", admin);
 			forward.setPath("index");
 			return forward;
 		}

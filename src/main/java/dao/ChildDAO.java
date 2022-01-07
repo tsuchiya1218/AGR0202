@@ -212,6 +212,50 @@ public class ChildDAO {
 			}
 		}
 	}
+	public ChildBean getChildBeanByC_num(int c_num) throws SQLException {
+		String SQL = "SELECT * FROM child WHERE c_num = ?";
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, c_num);
+			rs = pstmt.executeQuery();
+			conn.commit();
+			if(rs.next()) {
+				ChildBean child = new ChildBean(
+							rs.getInt("c_num"),
+							rs.getInt("c_m_num"),
+							rs.getString("c_medical_num"),
+							rs.getString("c_i_num"),
+							rs.getString("c_i_expiry_date"),
+							rs.getString("c_i_mark"),
+							rs.getString("c_name"),
+							rs.getString("c_kana"),
+							rs.getString("c_birth"),
+							rs.getString("c_gender"),
+							rs.getString("c_blood_type"),
+							rs.getString("c_medical_history"),
+							rs.getString("c_medication"),
+							rs.getString("c_allergy")
+						);
+				return child;
+			}
+			
+			return null;
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			conn.rollback();
+			throw new RuntimeException(nule.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
 	
 	public boolean isDuplicateMedical_num(String c_medical_num) {
 		String SQL = "SELECT c_medical_num FROM child WHERE c_medical_num = ?";

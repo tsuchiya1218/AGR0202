@@ -16,25 +16,21 @@
 	<jsp:include page="../common/member/header.jsp"/>
     <main>
         <div class="contents">
-            <h3 class="account_manage_title">マイページ</h3>
+            <h3 class="account_manage_title">個人情報</h3>
             <table class="account_manage_table" border="1">
                 <tr>
-                    <!-- 　名前　 -->
                     <th><label>名前</label></th>
                     <td><c:out value="${sessionScope.member.m_name }"/></td>
                 </tr>
                 <tr>
-                    <!-- 　名前(フリガナ)　 -->
                     <th><label>名前(ふりがな)</label></th>
                     <td><c:out value="${sessionScope.member.m_kana }"/></td>
                 </tr>
                 <tr>
-                    <!-- 　性別　 -->
                     <th><label>性別</label></th>
                     <td><c:out value="${sessionScope.member.m_gender }"/></td>
                 </tr>
                 <tr>
-                    <!-- 　生年月日　 -->
                     <th><label>生年月日</label></th>
                     <td>
                     	<c:out value="${sessionScope.member.m_birth }"/>
@@ -42,17 +38,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <!-- 　電話番号　 -->
                     <th><label>電話番号</label></th>
                     <td><c:out value="${sessionScope.member.m_tel }"/></td>
                 </tr>
                 <tr>
-                    <!--   郵便番号　 -->
                     <th><label>郵便番号</label></th>
                     <td><c:out value="${sessionScope.member.m_zip_code }"/></td>
                 </tr>
                 <tr>
-                    <!--   都道府県　 -->
                     <th><label>住所</label></th>
                     <td><c:out value="${sessionScope.member.m_address }"/></td>
                 </tr>

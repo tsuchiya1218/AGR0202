@@ -2,7 +2,6 @@ package action.pharmacy;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
@@ -18,10 +17,13 @@ public class U16_01 implements Action {
 		ActionForward forward = new ActionForward();
 		DrugDAO drugDAO = DrugDAO.getInstance();
 		String drug_num_ = request.getParameter("drug_num");
-		System.out.println(drug_num_);
+		if(drug_num_ == null || "".equals(drug_num_)) {
+			forward.setErrorMsg("薬番号がみつかりませんでした。");
+			return forward;
+		}
 		int drug_num = Integer.parseInt(drug_num_);
 		
-		DrugBean drug = drugDAO.getDrugByDrug_num(drug_num);
+		DrugBean drug = drugDAO.findByDrug_numToDrug(drug_num);
 		if(drug == null) {
 			forward.setErrorMsg("ERROR:薬情報をみつかりませんでした。");
 			return forward;

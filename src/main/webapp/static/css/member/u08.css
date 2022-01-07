@@ -22,8 +22,7 @@
     border-bottom: 1px solid gray;
 }
 .searchTag input{
-    width: 5em;
-    text-align:right;
+    text-align:center;
 } 
 footer{
     position: absolute;

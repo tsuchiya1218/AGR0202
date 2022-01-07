@@ -75,25 +75,32 @@ public class NonMemberController extends HttpServlet {
 			try {
 				if (action != null) {
 					forward = contList.get(action).execute(request, response);
-					if(forward.getErrorMsg() == null) {
-						request.setAttribute("nav", forward.getPath().substring(0, 3));
-						if(forward.getMsg() != null) {
-							writer.println("<script type='text/javascript'>");
-							writer.println("alert('"+forward.getMsg()+"');");
-							writer.println("location='MemberController?view="+forward.getPath()+"';");
-							writer.println("</script>");
-						}else {
-							if("index".equals(forward.getPath())) {
-								dispatcher = request.getRequestDispatcher(forward.getPath() + ".jsp");
+					if(!forward.isRedirectToAction()) {
+						if(forward.getErrorMsg() == null) {
+							request.setAttribute("nav", forward.getPath().substring(0, 3));
+							if(forward.getMsg() != null) {
+								writer.println("<script type='text/javascript'>");
+								writer.println("alert('"+forward.getMsg()+"');");
+								writer.println("location='NonMemberController?view="+forward.getPath()+"';");
+								writer.println("</script>");
 							}else {
-								dispatcher = request.getRequestDispatcher(path + forward.getPath() + ".jsp");
+								if("index".equals(forward.getPath())) {
+									dispatcher = request.getRequestDispatcher(forward.getPath() + ".jsp");
+								}else {
+									dispatcher = request.getRequestDispatcher(path + forward.getPath() + ".jsp");
+								}
+								dispatcher.forward(request, response);
 							}
-							dispatcher.forward(request, response);
+						}else {
+							writer.println("<script type='text/javascript'>");
+							writer.println("alert('"+forward.getErrorMsg()+"');");
+							writer.println("history.back();");
+							writer.println("</script>");
 						}
 					}else {
 						writer.println("<script type='text/javascript'>");
-						writer.println("alert('"+forward.getErrorMsg()+"');");
-						writer.println("history.back();");
+						writer.println("alert('"+forward.getMsg()+"');");
+						writer.println("location='NonMemberController?action="+forward.getPath()+"';");
 						writer.println("</script>");
 					}
 				} else {

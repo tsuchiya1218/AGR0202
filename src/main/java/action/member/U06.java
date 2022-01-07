@@ -132,8 +132,7 @@ public class U06 implements Action {
 				forward.setErrorMsg("確認パスワードと一致してください。");
 				return forward;
 			} 
-			if (!pw[0].matches(patternPw) || !pw[1].matches(patternPw) || pw[0].length() < 8
-					|| pw[1].length() < 8) {
+			if (!pw[0].matches(patternPw) || !pw[1].matches(patternPw)) {
 				forward.setErrorMsg("パスワードは英数字のみ・8桁以上を入力してください。");
 				return forward;
 			} 

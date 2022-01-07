@@ -1,12 +1,9 @@
 package action.pharmacy;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -40,20 +37,21 @@ public class U14 implements Action {
 
 			MultipartRequest multi = new MultipartRequest(request, root, size, "UTF-8", new DefaultFileRenamePolicy());
 			
-			String drug_name = xssFilter.stripTagAll(multi.getParameter("drug_name"));
-			String drug_type = xssFilter.stripTagAll(multi.getParameter("drug_type"));
-			String drug_effect = xssFilter.stripTagAll(multi.getParameter("drug_effect").replaceAll("\r\n", "<br>"));
-			String drug_guide = xssFilter.stripTagAll(multi.getParameter("drug_guide"));
-			String drug_note = xssFilter.stripTagAll(multi.getParameter("drug_note").replaceAll("\r\n", "<br>"));
-			String drug_img_name = xssFilter.stripTagAll(multi.getFilesystemName("drug_img"));
+			String drug_name = multi.getParameter("drug_name");
+			String drug_type = multi.getParameter("drug_type");
+			String drug_effect = multi.getParameter("drug_effect");
+			String drug_guide = multi.getParameter("drug_guide");
+			String drug_note = multi.getParameter("drug_note");
+			String drug_img_name = multi.getFilesystemName("drug_img");
 			String drug_price_ = multi.getParameter("drug_price");
 			int drug_price = 0;
-			String fileName = root+drug_img_name;
-			File deleteImg = new File (fileName);
+			
+			
 			if(drug_price_ != null && !"".equals(drug_price_)) {
 				drug_price = Integer.parseInt(drug_price_);
 			}
-			
+			String fileName = root+drug_img_name;
+			File deleteImg = new File (fileName);
 			DrugDAO drugDAO = DrugDAO.getInstance();
 			if (drugDAO.isDuplicateMDrug_name(drug_name)) {
 	    	    deleteImg.delete();
@@ -91,7 +89,7 @@ public class U14 implements Action {
 				return forward;
 			}
 			if(drug_name.length() > 50) {
-				forward.setErrorMsg("薬名は500文字以下までです。");
+				forward.setErrorMsg("薬名は50文字以下までです。");
 				deleteImg.delete();
 				return forward;
 			}
@@ -113,13 +111,13 @@ public class U14 implements Action {
 			
 
 			DrugBean drug = new DrugBean();
-			drug.setDrug_name(drug_name);
-			drug.setDrug_type(drug_type);
-			drug.setDrug_effect(drug_effect);
-			drug.setDrug_guide(drug_guide);
-			drug.setDrug_note(drug_note);
+			drug.setDrug_name(xssFilter.stripTagAll(drug_name));
+			drug.setDrug_type(xssFilter.stripTagAll(drug_type));
+			drug.setDrug_effect(xssFilter.stripTagAll(drug_effect.replaceAll("\r\n", "<br>")));
+			drug.setDrug_guide(xssFilter.stripTagAll(drug_guide));
+			drug.setDrug_note(xssFilter.stripTagAll(drug_note.replaceAll("\r\n", "<br>")));
 			drug.setDrug_price(drug_price);
-			drug.setDrug_img_name(drug_img_name);
+			drug.setDrug_img_name((drug_img_name != null ) ?xssFilter.stripTagAll(drug_img_name) : null);
 			
 			if(!drugDAO.createDrug(drug)) {
 				deleteImg.delete();

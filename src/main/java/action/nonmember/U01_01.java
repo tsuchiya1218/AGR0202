@@ -9,7 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+import dao.AdminDAO;
+import dao.DoctorDAO;
+import dao.HospitalDAO;
 import dao.MemberDAO;
+import dao.PharmacyDAO;
 import model.MemberBean;
 import model.QuestionnaireBean;
 import util.XssFilter;
@@ -67,10 +71,7 @@ public class U01_01 implements Action {
 		String patternNum = "^[0-9]*$";
 		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
 		String patternPw = "^[A-Za-z0-9]{8,64}$";
-		XssFilter xssFilter = XssFilter.getInstance();
-		String[] pw = xssFilter.stripTagAll(request.getParameterValues("pw"));
-		map = xssFilter.stripTagAll(map);
-		q_map = xssFilter.stripTagAll(q_map);
+		String[] pw = request.getParameterValues("pw");
 
 		// email
 		if (!map.get("email").matches(patternEmail)) {
@@ -78,8 +79,14 @@ public class U01_01 implements Action {
 			return forward;
 		}
 		MemberDAO memberDAO = MemberDAO.getInstance();
+		DoctorDAO doctorDAO = DoctorDAO.getInstance();
+		PharmacyDAO pharmacyDAO = PharmacyDAO.getInstance();
+		HospitalDAO hospitalDAO = HospitalDAO.getInstance();
+		AdminDAO adminDAO = AdminDAO.getInstance();
+		
 
-		if (memberDAO.isDuplicateEmail(map.get("email"))) {
+		if (doctorDAO.isDuplicateEmail(map.get("email")) || memberDAO.isDuplicateEmail(map.get("email")) || pharmacyDAO.isDuplicateEmail(map.get("email"))
+				|| hospitalDAO.isDuplicateEmail(map.get("email")) || adminDAO.isDuplicateEmail(map.get("email"))) {
 			forward.setErrorMsg("既に存在しているメールアドレスです。\\n別のメールアドレスを入力してください。'");
 			return forward;
 		}
@@ -149,6 +156,11 @@ public class U01_01 implements Action {
 				return forward;
 			}
 		}
+		
+		XssFilter xssFilter = XssFilter.getInstance();
+		pw = xssFilter.stripTagAll(pw);
+		map = xssFilter.stripTagAll(map);
+		q_map = xssFilter.stripTagAll(q_map);
 
 		/* 会員情報 */
 		MemberBean member = new MemberBean();
