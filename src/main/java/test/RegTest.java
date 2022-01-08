@@ -16,8 +16,8 @@ class RegTest {
 	void test() {
 		String str = "adsadsad sa321";
 		String num = "1";
-		System.out.println("12".matches(patternNum) + "\t"+"patternNumber"); //true
-		System.out.println("asd@asd".matches(patternEmail)); //false .com => true
+		System.out.println("12".matches(patternNum) + "\t"+"patternNumber"); //数字のみの場合 true
+		System.out.println("asd@asd".matches(patternEmail)); //<= false  asd@asd.com => true
 		System.out.println(str.matches(patternString)); // false
 		System.out.println(str.replaceAll("\\s", ""));
 		System.out.println(num.matches(regPm));

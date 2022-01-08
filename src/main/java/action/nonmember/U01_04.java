@@ -8,7 +8,6 @@ import action.Action;
 import action.ActionForward;
 import dao.DoctorDAO;
 import dao.MemberDAO;
-import util.SHA256;
 import util.XssFilter;
 
 public class U01_04 implements Action {
@@ -52,13 +51,13 @@ public class U01_04 implements Action {
 				return forward;
 			}
 		}
+		
 		if(doctorDAO.findByEmail(email)) {
 			if(doctorDAO.isAuth(email)) {
 				forward.setErrorMsg("既にメールアドレスの認証がされています。");
 				return forward;
 			}
 			if(!doctorDAO.updateAuth(email)) {
-				System.out.println("fail updated");
 				forward.setErrorMsg("メール認証のエラーが発生しました。\\nもう一度、認証URLにアクセスしてください。");
 				return forward;
 			}

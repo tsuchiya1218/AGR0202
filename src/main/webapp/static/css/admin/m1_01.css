@@ -70,7 +70,8 @@ button{
     float: right;
 }
 footer{
-    position: unset;
+    position: absolute;
+    bottom: 0;
 }
 @media(max-width: 1030px) {
     table th{

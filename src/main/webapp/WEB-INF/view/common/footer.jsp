@@ -3,7 +3,7 @@
 <div class="top_btn_con" id="top_btn_con">
 	<button class="top_btn_text">⇧</button>
 </div>
-<footer>
+<footer id="footer">
     <div class="footer_link">
         <span><a href="${pageContext.request.contextPath}/index.jsp">ホーム</a></span>
         <span><a href="">個人情報の取り扱いについて</a></span>

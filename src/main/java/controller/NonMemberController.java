@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+import action.nonmember.AllowToAuthToDoctor;
 import action.nonmember.U01_01;
 import action.nonmember.U01_02;
 import action.nonmember.U01_04;
@@ -45,6 +45,7 @@ public class NonMemberController extends HttpServlet {
 		contList.put("u03_01", new U03_01());
 		contList.put("u03_02", new U03_02());
 		contList.put("u03_03", new U03_03());
+		contList.put("AllowToAuthToDoctor", new AllowToAuthToDoctor());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

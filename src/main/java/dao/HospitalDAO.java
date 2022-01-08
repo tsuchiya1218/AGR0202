@@ -169,9 +169,14 @@ public class HospitalDAO {
 			pstmt.setString(1, SHA256.getEncrypt(h_email));
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				HospitalBean hospital = new HospitalBean(rs.getInt("h_num"), rs.getString("h_name"),
-						rs.getString("h_email"), rs.getString("h_pw"), rs.getString("h_tel"),
-						rs.getString("h_address"));
+				HospitalBean hospital = new HospitalBean(
+						rs.getInt("h_num"), 
+						rs.getString("h_name"),
+						rs.getString("h_email"), 
+						rs.getString("h_pw"), 
+						rs.getString("h_tel"),
+						rs.getString("h_address")
+						);
 				return hospital;
 			}
 			return null;
@@ -187,7 +192,9 @@ public class HospitalDAO {
 	}
 
 	public String findByD_h_numToH_name(int d_h_num) throws SQLException {
-		String SQL = "SELECT h_name FROM hospital WHERE h_num = (SELECT d_h_num FROM doctor WHERE d_num = (SELECT ep_d_num FROM electronic_prescription WHERE ep_num = ?))";
+		String SQL = "SELECT h_name FROM hospital WHERE h_num = "
+				+ "(SELECT d_h_num FROM doctor WHERE d_num = "
+				+ "(SELECT ep_d_num FROM electronic_prescription WHERE ep_num = ?))";
 
 		try {
 			conn = DBconnection.getConnection();

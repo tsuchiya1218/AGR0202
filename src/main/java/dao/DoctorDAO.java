@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.DoctorBean;
-import model.DrugBean;
-import model.PharmacyBean;
 import util.Close;
 import util.DBconnection;
 import util.SHA256;
@@ -308,12 +306,11 @@ public class DoctorDAO {
 	}
 	
 	public boolean isDuplicateEmail(String d_email) {
-		String SQL = "SELECT d_email FROM doctor WHERE d_email = ? AND d_leave = ?";
+		String SQL = "SELECT d_email FROM doctor WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(d_email));
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			return rs.next();
 		}catch (Exception e) {

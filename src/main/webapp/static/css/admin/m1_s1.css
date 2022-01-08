@@ -29,7 +29,8 @@
 }
 
 .items input[type="text"],
-.items input[type="email"]{
+.items input[type="email"],
+.items input[type="password"]{
     width: 50%;
     padding: 10px;
     border: 1px solid gray;
@@ -47,7 +48,8 @@
 .items input[type="text"]:focus,
 .items input[type="email"]:focus,
 .items input[type="number"]:focus,
-.brith input[type="number"]:focus{
+.brith input[type="number"]:focus,
+.items input[type="password"]:focus{
     border: 1px solid #55b1df;
     border-radius: 10px;
     transition: all .2s ease;
@@ -76,7 +78,8 @@ footer{
         text-align: center;
     }
     .items input[type="text"],
-    .items input[type="email"]{
+    .items input[type="email"],
+    .items input[type="password"]{
         width: 50%;
         height: 10px;
         margin-bottom: 10px;

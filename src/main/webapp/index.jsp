@@ -29,6 +29,10 @@
 			<jsp:include page="./WEB-INF/view/common/hospital/header.jsp"/>
 			<jsp:include page="./WEB-INF/view/common/hospital/main.jsp"/>
 		</c:when>
+		<c:when test="${sessionScope.admin ne null }">
+			<jsp:include page="./WEB-INF/view/common/admin/header.jsp"/>
+			<jsp:include page="./WEB-INF/view/common/admin/main.jsp"/>
+		</c:when>
 		 <c:otherwise>
 		 	<jsp:include page="./WEB-INF/view/common/header.jsp"/>
 			<jsp:include page="./WEB-INF/view/common/main.jsp"/>

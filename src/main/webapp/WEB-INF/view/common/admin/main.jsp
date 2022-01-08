@@ -8,45 +8,27 @@
         <a href="">コロナウィルス感染対策</a>
     </div>
     <div class="main_box">
-        <article class="wrap_info_con">
-            <div class="info_con">
-                <div class="item_box">
-                    <div class="subtitle">
-                        <h2>管理者の利用方法</h2>
-                    </div>
-                    <div class="manual_box">
-                    	<div class="manual_title">
-                            <span>各機能について</span>
-                        </div>
-                        <div class="manual_text">
-                            <span>会員検索</span><br>
-                            <span>医者・病院・薬局の管理</span><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
         <section class="menu_con">
             <div class="subtitle">
                 <h2>MENU一覧</h2>
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="m4_01">会員検索</a><br>
+                    <a class="item_title" href="AdminController?view=m04_01">会員検索</a><br>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href="m1_01">医者一覧</a><br>
-                    <a href="m1_02">医者登録</a>
+                    <a class="item_title" href="AdminController?view=m01_01">医者一覧</a><br>
+                    <a href="AdminController?view=m01_02">医者登録</a>
                 </div>
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="m2_01">薬局一覧</a><br>
-                    <a href="m2_02">薬局登録</a>
+                    <a class="item_title" href="AdminController?view=m02_01">薬局一覧</a><br>
+                    <a href="AdminController?view=m02_02">薬局登録</a>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href="m3_01">病院一覧</a><br>
-                    <a href="m3_02">病院登録</a>
+                    <a class="item_title" href="AdminController?view=m03_01">病院一覧</a><br>
+                    <a href="AdminController?view=m03_02">病院登録</a>
                 </div>
             </div>
             <div class="menu_items">

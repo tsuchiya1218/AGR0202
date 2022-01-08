@@ -114,7 +114,7 @@ public class U02 implements Action {
 			if(!doctorDAO.isAuth(email)) {
 				if(email != null && !"".equals(email) && pw != null && !"".equals(pw)) {
 					Gmail gmail = Gmail.getInstance();
-					if(!gmail.sendAuthMail(email)) {
+					if(!gmail.sendAuthMailToDoctor(email)) {
 						forward.setErrorMsg("認証メール送信が失敗しました。問い合わせしてください。");
 						return forward;
 					}
@@ -143,7 +143,7 @@ public class U02 implements Action {
 		
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		who = adminDAO.login(email, pw);
-		if("hospital".equals(who)) {
+		if("admin".equals(who)) {
 			AdminBean admin = adminDAO.getAdminBean(email);
 			session.setAttribute("who", who);
 			session.setAttribute("admin", admin);

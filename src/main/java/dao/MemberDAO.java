@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.MemberBean;
 import util.Close;
@@ -427,7 +425,7 @@ public class MemberDAO {
 		}
 	}
 	public boolean isDuplicateEmail(String m_email) {
-		String SQL = "SELECT m_email FROM member WHERE m_email = ? AND m_leave = false";
+		String SQL = "SELECT m_email FROM member WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
