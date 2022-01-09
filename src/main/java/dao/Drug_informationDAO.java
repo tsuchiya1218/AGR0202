@@ -123,5 +123,72 @@ public class Drug_informationDAO {
 			}
 		}
 	}
+	public Drug_informationBean findByDi_numAndStartDateToDrug_informationBean(int di_num,String startDate_) throws SQLException {
+		String SQL = "SELECT * FROM drug_information WHERE di_num = ? AND di_reg_date >= ?";
+		Date startDate = Date.valueOf(startDate_);
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  di_num);
+			pstmt.setDate(2,  startDate);
+			rs = pstmt.executeQuery();
+			conn.commit();
+			if(rs.next()) {
+				Drug_informationBean di = new Drug_informationBean(
+						rs.getInt("di_num"),
+						rs.getString("di_reg_date"),
+						rs.getBoolean("di_auth"),
+						rs.getInt("di_p_num")
+						);
+				return di;
+			}
+			return null;
+		}catch (Exception e) {
+			conn.rollback();
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				conn.rollback();
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public Drug_informationBean findByDi_numAndEndDateToDrug_informationBean(int di_num,String endDate_) throws SQLException {
+		String SQL = "SELECT * FROM drug_information WHERE di_num = ? AND di_reg_date <= ?";
+		Date endDate = Date.valueOf(endDate_);
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  di_num);
+			pstmt.setDate(2,  endDate);
+			rs = pstmt.executeQuery();
+			conn.commit();
+			if(rs.next()) {
+				Drug_informationBean di = new Drug_informationBean(
+						rs.getInt("di_num"),
+						rs.getString("di_reg_date"),
+						rs.getBoolean("di_auth"),
+						rs.getInt("di_p_num")
+						);
+				return di;
+			}
+			return null;
+		}catch (Exception e) {
+			conn.rollback();
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				conn.rollback();
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
 	
 }

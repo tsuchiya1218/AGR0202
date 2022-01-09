@@ -52,9 +52,9 @@ public class U07_02 implements Action {
 		map.put("birth", birth);
 		map.put("gender", request.getParameter("gender"));
 		map.put("blood_type", request.getParameter("blood_type"));
-		map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "</br>"));
-		map.put("medication", request.getParameter("medication").replaceAll("\r\n", "</br>"));
-		map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "</br>"));
+		map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "<br>"));
+		map.put("medication", request.getParameter("medication").replaceAll("\r\n", "<br>"));
+		map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "<br>"));
 
 		String patternNum = "^[0-9]*$";
 		map = xssFilter.stripTagAll(map);

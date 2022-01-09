@@ -19,29 +19,30 @@
         <div class="main_box">
             <h2>薬歴一覧</h2>
             <div class="searchTag">
-            	<form action="MemberController?action=u08_s1" method="post">
-            		<input type="hidden" name=selected value="${requestScope.selected }">
+            	<form action="MemberController?action=u08_01" method="post">
 	                <input type="date" id="startDate" value="${(startDate != null) ? startDate : '' }" name="startDate" onchange="limitEndDate();" >から
 	                <input type="date" id="endDate" value="${(endDate != null) ? endDate : '' }" name="endDate" onchange="limitEndDate();">まで
-	                <button type="submit">検索</button>
-            	</form>
-            	<form action="MemberController?action=u08_s3" method="post">
-            		<input type="hidden" name=startDate value="${requestScope.startDate }">
-            		<input type="hidden" name=endDate value="${requestScope.endDate }">
+            		
             		<select name="selected" style="text-align: center;">
-	                    <option value="0" selected>本人</option>
-	                    <c:set var="children" value="${sessionScope.child }"/>
-	                    <c:if test="${children ne null }">
+	                    <option value="0">本人</option>
+	                    <c:set var="children" value="${requestScope.children }"/>
+	                    <c:if test="${!empty children}">
 	                    	<c:forEach var="child" items="${children }" varStatus="index">
-	                    		<option value="${index.count}" ${(index.count eq selected) ? 'selected' : ''}>${child.c_name }</option>
+	                    		<option value="${child.c_num}" ${(child.c_num eq selected) ? 'selected' : ''}>${child.c_name }</option>
 	                    	</c:forEach>
 	                    </c:if>
                    	</select>
-                   	<button type="submit">表示</button>
+	                <button type="submit">検索</button>
             	</form>
             </div>
             <c:if test="${startDate ne null  && endDate ne null && startDate ne '' && endDate ne ''}">
 	            <p><strong>${startDate }</strong>から<strong>${endDate }</strong>までの検索結果</p>
+            </c:if>
+            <c:if test="${startDate ne null && startDate ne ''  && (endDate eq null || endDate eq '')}">
+	            <p><strong>${startDate }</strong>からの検索結果</p>
+            </c:if>
+            <c:if test="${(startDate eq null || startDate eq '') && endDate ne null && endDate ne ''}">
+	            <p><strong>${endDate }</strong>までの検索結果</p>
             </c:if>
             <div class="medcineTable">
                 <table>

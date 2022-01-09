@@ -21,15 +21,14 @@ import action.member.U05;
 import action.member.U06;
 import action.member.U06_s1;
 import action.member.U06_s2;
+import action.member.U07_01;
 import action.member.U07_02;
 import action.member.U07_03;
 import action.member.U07_s1_01;
 import action.member.U07_s1_02;
 import action.member.U07_s2;
 import action.member.U08_01;
-import action.member.U08_s1;
 import action.member.U08_s2;
-import action.member.U08_s3;
 import action.member.U09;
 
 @WebServlet("/MemberController")
@@ -49,15 +48,14 @@ public class MemberController extends HttpServlet {
 		contList.put("u06",  new U06());
 		contList.put("u06_s1",  new U06_s1());
 		contList.put("u06_s2",  new U06_s2());
+		contList.put("u07_01",  new U07_01());
 		contList.put("u07_02",  new U07_02());
 		contList.put("u07_03",  new U07_03());
 		contList.put("u07_s1_01",  new U07_s1_01());
 		contList.put("u07_s1_02",  new U07_s1_02());
 		contList.put("u07_s2",  new U07_s2());
 		contList.put("u08_01",  new U08_01());
-		contList.put("u08_s1",  new U08_s1());
 		contList.put("u08_s2",  new U08_s2());
-		contList.put("u08_s3",  new U08_s3());
 		contList.put("u09",  new U09());
 	}
 	

@@ -25,7 +25,7 @@
                         <button>子供情報登録</button>
                     </a>
                 </div>
-                <c:if test="${sessionScope.child eq null }">
+                <c:if test="${empty children eq null }">
                 	<p>登録されている子供情報はありません。</p>
                 	<style type="text/css">
 						footer {
@@ -34,20 +34,20 @@
 						}
 					</style>
                 </c:if>
-                <c:if test="${sessionScope.child ne null }">
+                <c:if test="${!empty children }">
                 	<p>
                 		登録されている子供:  
                 		<strong><c:out value="${sessionScope.member.children_count }"/>名</strong>
                 		
                 	</p>
-                	<c:forEach var="childList" items="${sessionScope.child }" varStatus="status">
+                	<c:forEach var="child" items="${requestScope.children }" varStatus="status">
 	                	<div class="items_box">
                             <div class="items">
                                 <div class="items_title">
                                     <span>名前</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_name }"/>
+                                    <c:out value="${child.c_name }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -55,7 +55,7 @@
                                     <span>ふりがな</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_kana }"/>
+                                    <c:out value="${child.c_kana }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -63,8 +63,8 @@
                                     <span>生年月日</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_birth }"/>
-                                    <c:out value="(${childList.age }歳)"/>
+                                    <c:out value="${child.c_birth }"/>
+                                    <c:out value="(${child.age }歳)"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -72,7 +72,7 @@
                                     <span>性別</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_gender }"/>
+                                    <c:out value="${child.c_gender }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -80,7 +80,7 @@
                                     <span>こども医療証</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_medical_num }"/>
+                                    <c:out value="${child.c_medical_num }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -88,7 +88,7 @@
                                     <span>保険証番号</span>
                                 </div>
                                 <div class="items_text">
-                                	<c:set var="c_i_num" value="${fn:split(childList.c_i_num,'-')}" />
+                                	<c:set var="c_i_num" value="${fn:split(child.c_i_num,'-')}" />
                                 	番号:<c:out value="${c_i_num[0] }"/>
                                 	枝番:<c:out value="${c_i_num[1] }"/>
                                 </div>
@@ -98,7 +98,7 @@
                                     <span>保険証記号</span>
                                 </div>
                                 <div class="items_text">
-                                	<c:out value="${childList.c_i_mark }"/>
+                                	<c:out value="${child.c_i_mark }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -106,7 +106,7 @@
                                     <span>保険証 有効期限</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_i_expiry_date }"/>
+                                    <c:out value="${child.c_i_expiry_date }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -114,7 +114,7 @@
                                     <span>血液型</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_blood_type }"/>
+                                    <c:out value="${child.c_blood_type }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -122,7 +122,7 @@
                                     <span>病歴</span>
                                 </div>
                                 <div class="items_text">
-                                	<c:set var="c_medical_history" value="${fn:replace(childList.c_medical_history,'&lt;br&gt;','<br>')}" />
+                                	<c:set var="c_medical_history" value="${fn:replace(child.c_medical_history,'&lt;br&gt;','<br>')}" />
                                     <c:out escapeXml="false" value="${c_medical_history }"/>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
                                     <span>服用中の薬</span>
                                 </div>
                                 <div class="items_text">
-                                    <c:out value="${childList.c_medication }"/>
+                                    <c:out value="${child.c_medication }"/>
                                 </div>
                             </div>
                             <div class="items">
@@ -139,17 +139,17 @@
                                     <span>アレルギー情報</span>
                                 </div>
                                 <div class="items_text">
-                                	<c:set var="c_allergy" value="${fn:replace(childList.c_allergy,'&lt;br&gt;','<br>')}" />
+                                	<c:set var="c_allergy" value="${fn:replace(child.c_allergy,'&lt;br&gt;','<br>')}" />
                                    	<c:out escapeXml="false" value="${c_allergy }"/>
                                 </div>
                             </div>
                             <div class="btn_box">
                             <form action="MemberController?action=u07_s2" method="POST">
-				                <input type="hidden" name="c_num" value="${childList.c_num }">
+				                <input type="hidden" name="c_num" value="${child.c_num }">
                                 <button type="button" class="delete_btn" onclick="isDelete(form);">削除</button>
                 			</form>
                 			<form action="MemberController?action=u07_s1_01" method="POST">
-                				<input type="hidden" name="c_num" value="${childList.c_num }">
+                				<input type="hidden" name="c_num" value="${child.c_num }">
                                 <button type="submit" class="update_btn">変更</button>
                             </form>
                             </div>

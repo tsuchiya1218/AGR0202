@@ -16,8 +16,7 @@
 	<jsp:include page="../common/member/header.jsp"/>
     <main>
         <div class="contents">
-            <form class="form" action="MemberController" method="POST">
-            <input type="hidden" name="action" value="u06">
+            <form class="form" action="MemberController?action=u06" method="POST">
                 <h2 class="account_manage_title">個人情報の変更</h2>
                 <p>変更する項目の内容を再入力してください。入力後「保存して戻る」ボタンを押してください。</p>
                 <table class="account_manage_table" border="1">

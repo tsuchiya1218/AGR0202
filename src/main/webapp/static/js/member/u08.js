@@ -7,8 +7,9 @@ window.onload = function(){
 
 
 function limitEndDate(){
-	endDate.min = startDate.value;
-	if(startDate.value > endDate.value){
-		endDate.value = startDate.value;
+	if(endDate.value != null && endDate.value != ''){
+		if(startDate.value > endDate.value){
+			endDate.value = startDate.value;
+		}
 	}
 }

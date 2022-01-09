@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
@@ -33,7 +32,6 @@ public class U08_s2 implements Action {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		ActionForward forward = new ActionForward();
-		HttpSession session = request.getSession(true);
 		String di_num_ = request.getParameter("di_num");
 		if ("".equals(di_num_) || di_num_ == null) {
 			forward.setErrorMsg("薬剤情報提供書の番号がみつかりませんでした。");

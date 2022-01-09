@@ -121,6 +121,11 @@ button{
 .member_leave_btn_box a:hover{
     color: gray;
 }
+
+footer{
+	position: absolute;
+	bottom: 0;
+}
 @media(max-width: 1030px){
     main{
         padding-bottom: 20px;

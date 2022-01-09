@@ -1,7 +1,5 @@
 package action.nonmember;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,14 +7,12 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.ActionForward;
 import dao.AdminDAO;
-import dao.ChildDAO;
 import dao.DoctorDAO;
 import dao.HospitalDAO;
 import dao.MemberDAO;
 import dao.PharmacyDAO;
 import dao.QuestionnaireDAO;
 import model.AdminBean;
-import model.ChildBean;
 import model.DoctorBean;
 import model.HospitalBean;
 import model.MemberBean;
@@ -73,18 +69,6 @@ public class U02 implements Action {
 			MemberBean member = memberDAO.getMemberBeanByEmail(email);
 			member.setAge(memberDAO.countBirth(member.getM_birth()));
 			
-			ChildDAO childDAO = ChildDAO.getInstance();
-			List<ChildBean> children = childDAO.getChildList(member.getM_num());
-			int countChild = 0;
-			if(!children.isEmpty()) {
-				for(ChildBean c : children) {
-					c.setAge(childDAO.countBirth(c.getC_birth()));
-					countChild++;
-				}
-				session.setAttribute("child", children);
-			}
-			
-			member.setChildren_count(countChild);
 			
 			//メール内のURLで使ったTokenを万が一ある場合を考え、あれば消す。
 			if(session.getAttribute("authToken") != null) session.removeAttribute("authToken");

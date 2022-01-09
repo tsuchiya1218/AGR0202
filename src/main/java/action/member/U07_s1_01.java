@@ -19,19 +19,18 @@ public class U07_s1_01 implements Action {
 		response.setContentType("text/html; charset=UTF-8"); 
 		HttpSession session = request.getSession(true);
 		ActionForward forward = new ActionForward();
+		String c_num_ = request.getParameter("c_num");
 		
-		@SuppressWarnings("unchecked")
-		List<ChildBean> list = (List<ChildBean>) session.getAttribute("child");
-		
-		int index = 0;
-		for(ChildBean c : list) {
-			if(c.getC_num() == Integer.parseInt(request.getParameter("c_num"))) {
-				break;
-			}
-			index++;
+		if(c_num_ == null || "".equals(c_num_)) {
+			forward.setErrorMsg("子ども番号がみつかりませんでした。");
+			return forward;
 		}
 		
-		request.setAttribute("index", index);
+		int c_num = Integer.parseInt(c_num_);
+		ChildBean child = ChildDAO.getInstance().getChildBeanByC_num(c_num);
+		
+		
+		request.setAttribute("child", child);
 		forward.setPath("u07_s1");
 		return forward;
 	}

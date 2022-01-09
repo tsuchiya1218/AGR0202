@@ -37,12 +37,13 @@ public class U07_s2 implements Action {
 				c.setAge(childDAO.countBirth(c.getC_birth()));
 				countChild++;
 			}
-			session.setAttribute("child", child);
+			request.setAttribute("child", child);
 		}
 		member.setChildren_count(countChild);
 		session.setAttribute("member", member);
 		forward.setMsg("子供の情報が削除されました。");
 		forward.setPath("u07_01");
+		forward.setRedirectToAction(true);
 		return forward;
 	}
 

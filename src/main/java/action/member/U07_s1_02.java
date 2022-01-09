@@ -25,6 +25,14 @@ public class U07_s1_02 implements Action {
 		HttpSession session = request.getSession(true);
 		XssFilter xssFilter = XssFilter.getInstance();
 		
+		String c_num_ = request.getParameter("c_num");
+		if(c_num_ == null || "".equals(c_num_)) {
+			forward.setErrorMsg("子ども番号がみつかりませんでした。");
+			return forward;
+		}
+		
+		int c_num = Integer.parseInt(c_num_);
+		
 		String[] check_datetype_birth = xssFilter.stripTagAll(request.getParameterValues("birth"));
 		String[] check_null_insurance_expiry_date = xssFilter
 				.stripTagAll(request.getParameterValues("insurance_expiry_date"));
@@ -53,9 +61,9 @@ public class U07_s1_02 implements Action {
 		map.put("birth", birth);
 		map.put("gender", request.getParameter("gender"));
 		map.put("blood_type", request.getParameter("blood_type"));
-		map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "</br>"));
-		map.put("medication", request.getParameter("medication").replaceAll("\r\n", "</br>"));
-		map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "</br>"));
+		map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "<br>"));
+		map.put("medication", request.getParameter("medication").replaceAll("\r\n", "<br>"));
+		map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "<br>"));
 
 		String patternNum = "^[0-9]*$";
 		map = xssFilter.stripTagAll(map);
@@ -86,45 +94,44 @@ public class U07_s1_02 implements Action {
 		}
 
 		MemberBean member = (MemberBean) session.getAttribute("member");
-
 		ChildDAO childDAO = ChildDAO.getInstance();
-		List<ChildBean> child = childDAO.getChildList(member.getM_num());
-		int index = Integer.parseInt(request.getParameter("index"));
+		ChildBean child = childDAO.getChildBeanByC_num(c_num);
 		
-		if(!child.get(index).getC_medical_num().equals(map.get("medical_num"))) {
+		if(!child.getC_medical_num().equals(map.get("medical_num"))) {
 			if (childDAO.isDuplicateMedical_num(map.get("medical_num"))) {
 				forward.setErrorMsg("既に登録されている子ども医療費番号です。");
 				return forward;
 			}
 		}
-		if(!child.get(index).getC_i_num().equals(map.get("insurance_num"))) {
+		if(!child.getC_i_num().equals(map.get("insurance_num"))) {
 			if (childDAO.isDuplicateC_i_num(map.get("insurance_num"))) {
 				forward.setErrorMsg("既に登録されている保険証番号です。");
 				return forward;
 			}
 		}
 
-		child.get(index).setC_m_num(member.getM_num());
-		child.get(index).setC_medical_num(map.get("medical_num"));
-		child.get(index).setC_i_num(map.get("insurance_num"));
-		child.get(index).setC_i_expiry_date(map.get("insurance_expiry_date"));
-		child.get(index).setC_i_mark(map.get("insurance_mark"));
-		child.get(index).setC_name(map.get("name"));
-		child.get(index).setC_kana(map.get("kana"));
-		child.get(index).setC_birth(map.get("birth"));
-		child.get(index).setC_gender(map.get("gender"));
-		child.get(index).setC_blood_type(map.get("blood_type"));
-		child.get(index).setC_medical_history(map.get("medical_history"));
-		child.get(index).setC_medication(map.get("medication"));
-		child.get(index).setC_allergy(map.get("allergy"));
+		child.setC_m_num(member.getM_num());
+		child.setC_medical_num(map.get("medical_num"));
+		child.setC_i_num(map.get("insurance_num"));
+		child.setC_i_expiry_date(map.get("insurance_expiry_date"));
+		child.setC_i_mark(map.get("insurance_mark"));
+		child.setC_name(map.get("name"));
+		child.setC_kana(map.get("kana"));
+		child.setC_birth(map.get("birth"));
+		child.setC_gender(map.get("gender"));
+		child.setC_blood_type(map.get("blood_type"));
+		child.setC_medical_history(map.get("medical_history"));
+		child.setC_medication(map.get("medication"));
+		child.setC_allergy(map.get("allergy"));
 		
-		if(!childDAO.updateChild(child.get(index))) {
+		if(!childDAO.updateChild(child)) {
 			forward.setErrorMsg("子供情報の変更が失敗しました。");
 			return forward;
 		}
 		
-		session.setAttribute("child", child);
+		request.setAttribute("child", child);
 		forward.setMsg("子供の情報が変更されました。");
+		forward.setRedirectToAction(true);
 		forward.setPath("u07_01");
 		return forward;
 	}
