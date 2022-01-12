@@ -74,7 +74,7 @@ public class U06_s2 implements Action {
 			session.invalidate();
 			return forward;
 		}
-		if(!gmail.sendAuthMail(new_email)) {
+		if(!gmail.sendAuthModifyMail(new_email)) {
 			forward.setErrorMsg("認証メール送信が失敗しました。\\n変更したメールアドレスでログインしてください。");
 			session.invalidate();
 			return forward;
