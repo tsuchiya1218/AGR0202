@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/hospital/u12.css">
+    <c:if test="${requestScope.for_footer_css > 10 }"><style type="text/css">footer{ position: unset; }</style></c:if>
+	<c:if test="${requestScope.for_footer_css <= 10 }"><style type="text/css">footer{ position: absolute; }</style></c:if>
     <title>承認リスト画面</title>
 </head>
 <body id="body">

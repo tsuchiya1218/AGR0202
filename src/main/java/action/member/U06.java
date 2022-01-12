@@ -125,9 +125,10 @@ public class U06 implements Action {
 		updateMemberBean.setM_zip_code(map.get("zip_code"));
 		updateMemberBean.setM_i_num(map.get("insurance_num"));
 		updateMemberBean.setM_i_expiry_date(map.get("insurance_expiry_date"));
+		updateMemberBean.setAge(memberDAO.countBirth(map.get("birth")));
 		
 		// if update with password
-		if (pw[0] != null || pw[1] != null || !"".equals(pw[0]) || !"".equals(pw[1])) {
+		if (pw[0] != null && pw[1] != null && !"".equals(pw[0]) && !"".equals(pw[1])) {
 			if (!pw[0].equals(pw[1])) {
 				forward.setErrorMsg("確認パスワードと一致してください。");
 				return forward;
@@ -144,7 +145,6 @@ public class U06 implements Action {
 				forward.setErrorMsg("現在のパスワードを入力してください。");
 				return forward;
 			}
-			
 			if(!member.getM_pw().equals(SHA256.getEncrypt(pw_original))) {
 				forward.setErrorMsg("現在のパスワードが一致しません。");
 				return forward;
@@ -166,6 +166,7 @@ public class U06 implements Action {
 			return forward;
 		}
 		
+		updateMemberBean.setM_pw(SHA256.getEncrypt(pw[0]));
 		session.setAttribute("member", updateMemberBean);
 		forward.setPath("u06_01");
 		return forward;

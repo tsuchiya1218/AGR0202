@@ -28,7 +28,7 @@ public class U01_04 implements Action {
 		 authToken and email has been sha256 encrypt
 		*/
 		if(authToken == null || "".equals(authToken)) {
-			forward.setErrorMsg("正しくないリクエストです。");
+			forward.setErrorMsg("もう一度ログインし、新しい認証メールを取得してください。");
 			return forward;
 		}
 		

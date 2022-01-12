@@ -87,7 +87,7 @@ public class U01_01 implements Action {
 
 		if (doctorDAO.isDuplicateEmail(map.get("email")) || memberDAO.isDuplicateEmail(map.get("email")) || pharmacyDAO.isDuplicateEmail(map.get("email"))
 				|| hospitalDAO.isDuplicateEmail(map.get("email")) || adminDAO.isDuplicateEmail(map.get("email"))) {
-			forward.setErrorMsg("既に存在しているメールアドレスです。\\n別のメールアドレスを入力してください。'");
+			forward.setErrorMsg("既に存在しているメールアドレスです。\\n別のメールアドレスを入力してください。");
 			return forward;
 		}
 		if(map.get("name").length() > 50) {

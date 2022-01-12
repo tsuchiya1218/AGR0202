@@ -14,7 +14,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 public class GenerateQRcode {
 	public static String generateQRcode(int m_num,String m_brith) {
 		QRCodeWriter write = new QRCodeWriter();
-		String path = "C:\\Users\\ksmzz\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code";
+		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code";
 		try {
 			//Fileのパスがない場合作る
 			File file = new File(path); 

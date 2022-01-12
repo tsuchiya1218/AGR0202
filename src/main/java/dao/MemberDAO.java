@@ -59,12 +59,11 @@ public class MemberDAO {
 	}
 	
 	public boolean findByEmail(String m_email) {
-		String SQL = "SELECT m_num FROM member WHERE m_email = ? AND m_leave = ?";
+		String SQL = "SELECT m_num FROM member WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, m_email);
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			return rs.next();
 			
@@ -80,12 +79,11 @@ public class MemberDAO {
 	}
 	
 	public int findByM_numToQr_num(int m_num) {
-		String SQL = "SELECT m_qr_num FROM member WHERE m_num = ? AND m_leave = ?";
+		String SQL = "SELECT m_qr_num FROM member WHERE m_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, m_num);
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt("m_qr_num");
@@ -103,12 +101,11 @@ public class MemberDAO {
 	}
 	
 	public String findByEmailToName(String m_email) {
-		String SQL = "SELECT m_name FROM member WHERE m_email = ? AND m_leave = ?";
+		String SQL = "SELECT m_name FROM member WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, m_email);
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString("m_name");
@@ -187,14 +184,13 @@ public class MemberDAO {
 	}
 	
 	public String login(String m_email, String m_pw) throws SQLException {
-		String member = "SELECT m_pw FROM member WHERE m_email = ? AND  m_leave = ?";
+		String member = "SELECT m_pw FROM member WHERE m_email = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(member);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -317,7 +313,7 @@ public class MemberDAO {
 		}
 	}
 	public MemberBean getMemberBeanByEmail(String m_email) {
-		String SQL = "SELECT * FROM member WHERE m_email = ? AND m_leave = false";
+		String SQL = "SELECT * FROM member WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -340,8 +336,7 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				return member;
 			}
@@ -358,7 +353,7 @@ public class MemberDAO {
 	}
 	
 	public MemberBean getMemberListByM_numToUseHospital(int m_num) {
-		String SQL = "SELECT m_name,m_kana,m_birth,m_gender FROM member WHERE m_num = ? AND m_leave = false";
+		String SQL = "SELECT m_name,m_kana,m_birth,m_gender FROM member WHERE m_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -385,7 +380,7 @@ public class MemberDAO {
 	}
 	
 	public MemberBean getMemberBeanByM_num(int m_num) {
-		String SQL = "SELECT * FROM member WHERE m_num = ? AND m_leave = false";
+		String SQL = "SELECT * FROM member WHERE m_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -408,8 +403,7 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				return member;
 			}
@@ -444,13 +438,12 @@ public class MemberDAO {
 	}
 	
 	public boolean findPassword(String m_email,String m_name) {
-		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ? AND m_leave = ?";
+		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
 			pstmt.setString(2, m_name);
-			pstmt.setBoolean(3, false);
 			rs = pstmt.executeQuery();
 			
 			return rs.next();
@@ -495,13 +488,12 @@ public class MemberDAO {
 	}
 	
 	public boolean leave(String m_email) throws SQLException{
-		String SQL = "UPDATE member SET m_leave = ? WHERE m_email = ?";
+		String SQL = "DELETE FROM member WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setBoolean(1, true);
-			pstmt.setString(2, m_email);
+			pstmt.setString(1, m_email);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			if(result == 1) return true;
@@ -659,7 +651,7 @@ public class MemberDAO {
 		}
 	}
 	public boolean updateMemberEmail(String m_email, String new_email) throws SQLException{
-		String SQL = "UPDATE member SET m_email = ?, m_auth = ? WHERE m_email = ? AND m_auth = ? AND m_leave = ?";
+		String SQL = "UPDATE member SET m_email = ?, m_auth = ? WHERE m_email = ? AND m_auth = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
@@ -668,7 +660,6 @@ public class MemberDAO {
 			pstmt.setBoolean(2, false);
 			pstmt.setString(3, m_email);
 			pstmt.setBoolean(4, true);
-			pstmt.setBoolean(5, false);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			
@@ -718,7 +709,7 @@ public class MemberDAO {
 		}
 	}
 	public MemberBean findByQr_numToMember(String m_qr_num) {
-		String SQL = "SELECT * FROM member WHERE m_qr_num = ? AND m_leave = false";
+		String SQL = "SELECT * FROM member WHERE m_qr_num = ";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -741,8 +732,7 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				return member;
 			}

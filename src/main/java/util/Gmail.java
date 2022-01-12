@@ -22,8 +22,8 @@ public class Gmail {
 		return LazyHolder.INSTANCE;
 	}
 	
-	private String dbName = "gr202/";
-	private String host = "http://localhost:14276/";
+	private String dbName = "20gr22/";
+	private String host = "http://localhost:8080/";
 	private String from = "cocojycompany@gmail.com";
 
 	//if m_auth == 0場合これを送る

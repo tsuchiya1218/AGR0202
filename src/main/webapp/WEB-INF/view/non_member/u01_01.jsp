@@ -198,7 +198,7 @@
                 </div>
                 <section class="twobtns">
                     <input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" value="戻る">
-                    <input type="button" onclick="isSubmit(form);" value="確定">
+                    <input type="submit" value="確定">
                 </section>
             </form>
         </div>
@@ -207,5 +207,4 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/member/u01.js"></script>
 </html>

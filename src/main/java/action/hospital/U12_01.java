@@ -33,6 +33,7 @@ public class U12_01 implements Action {
 		}
 		request.setAttribute("epList", epList);
 		request.setAttribute("memberList", memberList);
+		request.setAttribute("for_footer_css", epList.size());
 		
 		forward.setPath("u12");
 		return forward;

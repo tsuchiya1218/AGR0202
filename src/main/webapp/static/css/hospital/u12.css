@@ -75,6 +75,11 @@ table td:last-child{
     outline: none;
 }
 
+footer{
+	position: absolute;
+	bottom: 0;
+}
+
 @media(max-width: 1030px){
     .item_con{
         display:flex;

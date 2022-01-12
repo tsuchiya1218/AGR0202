@@ -1,5 +1,7 @@
 package action.member;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,6 +41,11 @@ public class U05 implements Action {
 			forward.setErrorMsg("データベースエラーが発生しました。もう一度やり直してください。");
 			return forward;
 		}else {
+			String root = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code";
+			String qr_name = member.getM_qr_num()+".png";
+			File file = new File(root+qr_name);
+			file.delete();
+			
 			Gmail gmail = Gmail.getInstance();
 			String beforeHashEmail = (String) session.getAttribute("beforeHashEmail");
 			if(!gmail.sendLeaveMail(beforeHashEmail,member.getM_name())) {
@@ -47,6 +54,7 @@ public class U05 implements Action {
 				session.invalidate();
 				return forward;
 			}
+			
 			forward.setPath("u05_02");
 			session.invalidate();
 			return forward;
