@@ -52,14 +52,13 @@ public class DoctorDAO {
 	}
 	
 	public String login(String d_email, String d_pw) throws SQLException {
-		String SQL = "SELECt d_pw FROM doctor WHERE d_email = ? AND d_leave = ?";
+		String SQL = "SELECt d_pw FROM doctor WHERE d_email = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(d_email));
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -83,7 +82,7 @@ public class DoctorDAO {
 	}
 	
 	public DoctorBean getDoctorBean(String d_email) {
-		String SQL = "SELECT * FROM doctor WHERE d_email = ? AND d_leave = ?";
+		String SQL = "SELECT * FROM doctor WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -102,7 +101,6 @@ public class DoctorDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_leave"),
 						rs.getBoolean("d_auth")
 						);
 				return doctor;
@@ -181,13 +179,12 @@ public class DoctorDAO {
 	}
 	
 	public boolean leave(String d_email) throws SQLException{
-		String SQL = "UPDATE doctor SET d_leave = ? WHERE d_email = ?";
+		String SQL = "DELETE FROM doctor WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setBoolean(1, true);
-			pstmt.setString(2, d_email);
+			pstmt.setString(1, d_email);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			if(result == 1) return true;
@@ -209,12 +206,11 @@ public class DoctorDAO {
 	
 	
 	public boolean findByEmail(String d_email) {
-		String SQL = "SELECT d_num FROM doctor WHERE d_email = ? AND d_leave = ?";
+		String SQL = "SELECT d_num FROM doctor WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, d_email);
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			return rs.next();
 			
@@ -230,12 +226,11 @@ public class DoctorDAO {
 	}
 	
 	public String findByEmailToName(String d_email) {
-		String SQL = "SELECT d_name FROM doctor WHERE d_email = ? AND d_leave = ?";
+		String SQL = "SELECT d_name FROM doctor WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, d_email);
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString("d_name");
@@ -254,13 +249,12 @@ public class DoctorDAO {
 	}
 	
 	public boolean findPassword(String d_email,String d_name) {
-		String SQL = "SELECT d_email,d_name FROM doctor WHERE d_email = ? AND d_name = ? AND d_leave = ?";
+		String SQL = "SELECT d_email,d_name FROM doctor WHERE d_email = ? AND d_name = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(d_email));
 			pstmt.setString(2, d_name);
-			pstmt.setBoolean(3, false);
 			rs = pstmt.executeQuery();
 			
 			return rs.next();
@@ -380,7 +374,7 @@ public class DoctorDAO {
 	}
 	
 	public boolean updateDoctorEmail(String d_email, String new_email) throws SQLException{
-		String SQL = "UPDATE doctor SET d_email = ?, d_auth = ? WHERE d_email = ? AND d_leave = ? ";
+		String SQL = "UPDATE doctor SET d_email = ?, d_auth = ? WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
@@ -388,7 +382,6 @@ public class DoctorDAO {
 			pstmt.setString(1, SHA256.getEncrypt(new_email));
 			pstmt.setBoolean(2, false);
 			pstmt.setString(3, d_email);
-			pstmt.setBoolean(4, false);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			
@@ -412,7 +405,7 @@ public class DoctorDAO {
 
 	public boolean updateDoctor(DoctorBean doctor) throws SQLException {
 		String SQL = "UPDATE doctor SET d_name =?,d_kana = ?, d_birth = ?, d_tel = ?, d_gender = ?,"
-				+ " d_department = ? WHERE d_email = ? AND d_leave = ?";
+				+ " d_department = ? WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
@@ -424,7 +417,6 @@ public class DoctorDAO {
 			pstmt.setString(5, doctor.getD_gender());
 			pstmt.setString(6, doctor.getD_department());
 			pstmt.setString(7, doctor.getD_email());
-			pstmt.setBoolean(8, false);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 
@@ -449,7 +441,7 @@ public class DoctorDAO {
 	
 	public boolean updateDoctorWithPassword(DoctorBean doctor) throws SQLException {
 		String SQL = "UPDATE doctor SET d_pw = ?, d_name =?,d_kana = ?, d_birth = ?, d_tel = ?, d_gender = ?,"
-				+ " d_department = ? WHERE d_email = ? AND d_leave = ?";
+				+ " d_department = ? WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
@@ -462,7 +454,6 @@ public class DoctorDAO {
 			pstmt.setString(6, doctor.getD_gender());
 			pstmt.setString(7, doctor.getD_department());
 			pstmt.setString(8, doctor.getD_email());
-			pstmt.setBoolean(9, false);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 

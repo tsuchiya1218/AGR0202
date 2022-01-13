@@ -274,7 +274,6 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_leave"),
 						rs.getBoolean("d_auth")
 						);
 				return doctor;
@@ -310,7 +309,6 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_leave"),
 						rs.getBoolean("d_auth")
 						);
 				return doctor;
@@ -347,7 +345,6 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_leave"),
 						rs.getBoolean("d_auth")
 						);
 				doctorList.add(doctor);
@@ -385,7 +382,6 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_leave"),
 						rs.getBoolean("d_auth")
 						);
 				doctorList.add(doctor);
@@ -423,7 +419,6 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_leave"),
 						rs.getBoolean("d_auth")
 						);
 				doctorList.add(doctor);
