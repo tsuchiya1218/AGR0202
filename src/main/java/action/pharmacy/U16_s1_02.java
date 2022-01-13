@@ -23,19 +23,20 @@ public class U16_s1_02 implements Action {
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
 
-		String root = "C:\\Users\\ksmzz\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String path = root + "static\\img\\medicine";
 		int size = 1024 * 1024 * 10; // 20mb
 
 		// cos.jar라이브러리 클래스를 가지고 실제 파일을 업로드하는 과정
 		try {
 			// DefaultFileRenamePolicy 처리는 중복된 이름이 존재할 경우 처리할 때
 			// request, 파일저장경로, 용량, 인코딩타입, 중복파일명에 대한 정책
-			File file = new File(root);
+			File file = new File(path);
 			if (!file.exists()) {
 				file.mkdirs();
 			}
 
-			MultipartRequest multi = new MultipartRequest(request, root, size, "UTF-8", new DefaultFileRenamePolicy());
+			MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 			
 			String drug_name = multi.getParameter("drug_name");
 			String drug_type = multi.getParameter("drug_type");
@@ -50,13 +51,13 @@ public class U16_s1_02 implements Action {
 			if(drug_num_ != null && !"".equals(drug_num_)) {
 				drug_num = Integer.parseInt(drug_num_);
 			}
-			String fileName = root+drug_img_name;
+			String fileName = path+drug_img_name;
 			DrugDAO drugDAO = DrugDAO.getInstance();
 			DrugBean drug = drugDAO.findByDrug_numToDrug(drug_num);
 			
 			//もし写真を変更する場合。
 			if(drug.getDrug_img_name() != null && !"".equals(drug.getDrug_img_name()) && drug_img_name != null) {
-				String original_img_name = root+drug.getDrug_img_name();
+				String original_img_name = path+drug.getDrug_img_name();
 				File original_img = new File (original_img_name);
 				original_img.delete();
 			}

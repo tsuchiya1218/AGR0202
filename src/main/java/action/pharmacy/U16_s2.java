@@ -27,11 +27,12 @@ public class U16_s2 implements Action {
 		
 		int drug_num = 0;
 		drug_num = Integer.parseInt(drug_num_);
-		String root = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String path = root + "static\\img\\medicine";
 		DrugBean drug = drugDAO.findByDrug_numToDrug(drug_num);
 		String drug_img_name =  drug.getDrug_img_name();
 		
-		String img_name = root + drug_img_name;
+		String img_name = path + drug_img_name;
 		File imgFile = new File(img_name);
 		if(imgFile.isFile()) {
 			imgFile.delete();
