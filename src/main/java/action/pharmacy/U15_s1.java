@@ -23,11 +23,11 @@ public class U15_s1 implements Action {
 		if(drug_num_ != null && !"".equals(drug_num_)) {
 			drug_num = Integer.parseInt(drug_num_);
 		}
-		System.out.println(drug_num);
-		String root = "C:\\Users\\ksmzz\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String path = root + "static\\img\\medicine\\";
 		String drug_img_name =  drugDAO.findByDrug_img_nameToDrug_num(drug_num);
 		if(drug_img_name != null) {
-			String img_name = root + drug_img_name;
+			String img_name = path + drug_img_name;
 			File imgFile = new File(img_name);
 			if(imgFile.isFile()) {
 				imgFile.delete();

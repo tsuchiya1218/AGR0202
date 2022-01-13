@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,7 +179,7 @@ public class Electronic_prescriptionDAO {
 						rs.getInt("ep_m_num"),
 						rs.getInt("ep_di_num"),
 						rs.getString("ep_expiry_date"),
-						rs.getString("ep_reg_date").substring(0, 11),
+						rs.getString("ep_reg_date").substring(0, 10),
 						rs.getString("ep_patient_type"),
 						rs.getString("ep_burden_num"),
 						rs.getString("ep_burden_person"),
@@ -222,7 +221,7 @@ public class Electronic_prescriptionDAO {
 						rs.getInt("ep_m_num"),
 						rs.getInt("ep_di_num"),
 						rs.getString("ep_expiry_date"),
-						rs.getString("ep_reg_date").substring(0, 11),
+						rs.getString("ep_reg_date").substring(0, 10),
 						rs.getString("ep_patient_type"),
 						rs.getString("ep_burden_num"),
 						rs.getString("ep_burden_person"),
@@ -263,7 +262,7 @@ public class Electronic_prescriptionDAO {
 						rs.getInt("ep_m_num"),
 						rs.getInt("ep_di_num"),
 						rs.getString("ep_expiry_date"),
-						rs.getString("ep_reg_date").substring(0, 11),
+						rs.getString("ep_reg_date").substring(0, 10),
 						rs.getString("ep_patient_type"),
 						rs.getString("ep_burden_num"),
 						rs.getString("ep_burden_person"),
