@@ -25,6 +25,7 @@ public class U14 implements Action {
 
 		String root = request.getSession().getServletContext().getRealPath("/");
 		String path = root + "static\\img\\medicine";
+		System.out.println(path);
 		int size = 1024 * 1024 * 10; // 20mb
 
 		// cos.jar라이브러리 클래스를 가지고 실제 파일을 업로드하는 과정

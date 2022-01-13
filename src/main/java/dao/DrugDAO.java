@@ -467,8 +467,7 @@ public class DrugDAO {
 	}
 	
 	public boolean updateDrug(DrugBean drug) throws SQLException {
-		String SQL = "UPDATE drug SET drug_name = ?, drug_type = ?, drug_effect = ?,drug_note = ?, drug_price = ?, drug_img_name = ?"
-				+ "WHERE drug_num = ?";
+		String SQL = "UPDATE drug SET drug_name = ?, drug_type = ?, drug_effect = ?,drug_note = ?, drug_price = ?, drug_img_name = ? WHERE drug_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);

@@ -141,8 +141,8 @@ public class U16_s1_02 implements Action {
 			drug.setDrug_price(drug_price);
 			drug.setDrug_img_name(drug_img_name);
 			
+			
 			if(!drugDAO.updateDrug(drug)) {
-				img.delete();
 				forward.setErrorMsg("薬情報の変更が失敗しました。");
 				return forward;
 			}

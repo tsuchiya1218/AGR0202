@@ -709,7 +709,7 @@ public class MemberDAO {
 		}
 	}
 	public MemberBean findByQr_numToMember(String m_qr_num) {
-		String SQL = "SELECT * FROM member WHERE m_qr_num = ";
+		String SQL = "SELECT * FROM member WHERE m_qr_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);

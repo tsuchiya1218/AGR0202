@@ -80,7 +80,7 @@
                             <th id="1">薬名</th>
                             <th id="2">種類</th>
                             <th id="3">服用方法</th>
-                            <th id="4">値段</th>
+                            <th id="4" style="width:100px;">値段(円)</th>
                             <th id="5"></th>
                         </tr>
                     </thead>
@@ -91,7 +91,7 @@
 		                            <td>${drug.drug_name }</td>
 		                            <td>${drug.drug_type }</td>
 		                            <td>${drug.drug_guide }</td>
-		                            <td><fmt:formatNumber value="${drug.drug_price}" pattern="###,###,###"/>円</td>
+		                            <td><fmt:formatNumber value="${drug.drug_price}" pattern="###,###,###"/></td>
 		                            <td class="btn_in_table">
 		                                <form action="PharmacyController?action=u15_s1" method="POST">
 		                                	<input type="hidden" name="drug_num" value="${drug.drug_num }">
