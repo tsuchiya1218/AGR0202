@@ -87,7 +87,6 @@ public class DoctorDAO {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(d_email));
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				DoctorBean doctor = new DoctorBean(
