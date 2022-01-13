@@ -23,19 +23,20 @@ public class U14 implements Action {
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
 
-		String root = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine";
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String path = root + "static\\img\\medicine";
 		int size = 1024 * 1024 * 10; // 20mb
 
 		// cos.jar라이브러리 클래스를 가지고 실제 파일을 업로드하는 과정
 		try {
 			// DefaultFileRenamePolicy 처리는 중복된 이름이 존재할 경우 처리할 때
 			// request, 파일저장경로, 용량, 인코딩타입, 중복파일명에 대한 정책
-			File file = new File(root);
+			File file = new File(path);
 			if (!file.exists()) {
 				file.mkdirs();
 			}
 
-			MultipartRequest multi = new MultipartRequest(request, root, size, "UTF-8", new DefaultFileRenamePolicy());
+			MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 			
 			String drug_name = multi.getParameter("drug_name");
 			String drug_type = multi.getParameter("drug_type");
@@ -50,7 +51,7 @@ public class U14 implements Action {
 			if(drug_price_ != null && !"".equals(drug_price_)) {
 				drug_price = Integer.parseInt(drug_price_);
 			}
-			String fileName = root+drug_img_name;
+			String fileName = path+drug_img_name;
 			File deleteImg = new File (fileName);
 			DrugDAO drugDAO = DrugDAO.getInstance();
 			if (drugDAO.isDuplicateMDrug_name(drug_name)) {
