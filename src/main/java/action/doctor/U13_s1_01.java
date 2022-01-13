@@ -50,10 +50,12 @@ public class U13_s1_01 implements Action {
 		if(ep.getEp_c_num() == 0) {
 			MemberDAO memberDAO = MemberDAO.getInstance();
 			MemberBean member = memberDAO.getMemberBeanByM_num(ep.getEp_m_num());
+			member.setAge(memberDAO.countBirth(member.getM_birth()));
 			request.setAttribute("member", member);
 		}else {
 			ChildDAO childDAO = ChildDAO.getInstance();
 			ChildBean child = childDAO.getChildBeanByC_num(ep.getEp_c_num());
+			child.setAge(childDAO.countBirth(child.getC_birth()));
 			request.setAttribute("child", child);
 		}
 		DoctorBean doctorBean = DoctorDAO.getInstance().findByD_numToDoctor(ep.getEp_d_num());
