@@ -23,7 +23,7 @@ public class U15_s1 implements Action {
 		if(drug_num_ != null && !"".equals(drug_num_)) {
 			drug_num = Integer.parseInt(drug_num_);
 		}
-		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
+		String path = "C:\\Users\\20jy0209\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
 		String drug_img_name =  drugDAO.findByDrug_img_nameToDrug_num(drug_num);
 		if(drug_img_name != null) {
 			String img_name = path + drug_img_name;
