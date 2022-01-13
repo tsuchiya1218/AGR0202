@@ -68,13 +68,13 @@
                         <div class="items">
                             <label>
                                 <span class="items_title">公費負担番号</span>
-                                <input type="text" name="ep_burden_num" placeholder="公費負担番号" maxlength="20">
+                                <input type="text" name="ep_burden_num" placeholder="公費負担番号" maxlength="10">
                             </label>
                         </div>
                         <div class="items">
                             <label>
                                 <span class="items_title">公費負担医療の受験者</span>
-                                <input type="text" name="ep_burden_person" placeholder="公費負担医療の受験者" maxlength="50">
+                                <input type="text" name="ep_burden_person" placeholder="公費負担医療の受験者" maxlength="20">
                             </label>
                         </div>
                     </div>

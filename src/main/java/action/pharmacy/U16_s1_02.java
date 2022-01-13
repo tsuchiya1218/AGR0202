@@ -56,10 +56,12 @@ public class U16_s1_02 implements Action {
 			DrugBean drug = drugDAO.findByDrug_numToDrug(drug_num);
 			
 			//もし写真を変更する場合。
-			if(drug.getDrug_img_name() != null && !"".equals(drug.getDrug_img_name()) && drug_img_name != null) {
-				String original_img_name = path+drug.getDrug_img_name();
-				File original_img = new File (original_img_name);
+			if (drug.getDrug_img_name() != null && !"".equals(drug.getDrug_img_name()) && drug_img_name != null
+					&& !"".equals(drug_img_name)) {
+				String original_img_name = path + drug.getDrug_img_name();
+				File original_img = new File(original_img_name);
 				original_img.delete();
+				drug.setDrug_img_name(drug_img_name);
 			}
 			int drug_price = 0;
 			
@@ -139,7 +141,6 @@ public class U16_s1_02 implements Action {
 			drug.setDrug_guide(xssFilter.stripTagAll(drug_guide));
 			drug.setDrug_note(xssFilter.stripTagAll(drug_note.replaceAll("\r\n", "<br>")));
 			drug.setDrug_price(drug_price);
-			drug.setDrug_img_name(drug_img_name);
 			
 			
 			if(!drugDAO.updateDrug(drug)) {
