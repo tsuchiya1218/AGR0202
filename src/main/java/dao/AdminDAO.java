@@ -111,7 +111,7 @@ public class AdminDAO {
 	/* Doctor START */
 	
 	public boolean addDoctor(DoctorBean doctor) throws SQLException {
-		String SQL = "INSERT INTO doctor VALUES(null,?,?,?,?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO doctor VALUES(null,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			Date birth = Date.valueOf(doctor.getD_birth());
 			conn = DBconnection.getConnection();
@@ -127,7 +127,6 @@ public class AdminDAO {
 			pstmt.setString(8, doctor.getD_department());
 			pstmt.setInt(9, doctor.getD_h_num());
 			pstmt.setBoolean(10, false);
-			pstmt.setBoolean(11, false);
 			
 			int result = pstmt.executeUpdate();
 			conn.commit();

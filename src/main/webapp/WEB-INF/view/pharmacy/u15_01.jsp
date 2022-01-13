@@ -11,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/pharmacy/u15.css">
-    <c:if test="${fn:length(drugList) > 8 }"><style type="text/css">footer{ position: unset; }</style></c:if>
-	<c:if test="${fn:length(drugList) <= 8 }"><style type="text/css">footer{ position: absolute; }</style></c:if>
     <title>薬情報一覧画面</title>
 </head>
 <body id="body">

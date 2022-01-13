@@ -51,7 +51,7 @@ public class U17_01 implements Action {
 		}
 		
 		DoctorBean doctor = doctorDAO.findByD_numToDoctor(ep.getEp_d_num());
-		List<Prescribe_medicineBean> pmList = Prescribe_medicineDAO.getInstance().getPmList(ep.getEp_m_num());
+		List<Prescribe_medicineBean> pmList = Prescribe_medicineDAO.getInstance().getPmList(ep.getEp_num());
 		HospitalBean hospital = HospitalDAO.getInstance().findByH_numToDoctor_hospital_num(doctor.getD_h_num());
 		
 		List<DrugBean> drugList = new ArrayList<>();

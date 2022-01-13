@@ -53,14 +53,13 @@ public class U18 implements Action {
 		
 		DoctorDAO doctorDAO = DoctorDAO.getInstance();
 		DoctorBean doctor = doctorDAO.findByD_numToDoctor(ep.getEp_d_num());
-		List<Prescribe_medicineBean> pmList = Prescribe_medicineDAO.getInstance().getPmList(ep.getEp_m_num());
+		List<Prescribe_medicineBean> pmList = Prescribe_medicineDAO.getInstance().getPmList(ep.getEp_num());
 		HospitalBean hospital = HospitalDAO.getInstance().findByH_numToDoctor_hospital_num(doctor.getD_h_num());
 		Drug_informationBean di = Drug_informationDAO.getInstance().findByDi_numToDrug_informationBean(ep_di_num);
 		List<DrugBean> drugList = new ArrayList<>();
 		for(Prescribe_medicineBean pm : pmList) {
 			drugList.add(DrugDAO.getInstance().findByDrug_numToDrug(pm.getPm_drug_num()));
 		}
-		
 		request.setAttribute("ep", ep);
 		request.setAttribute("doctor", doctor);
 		request.setAttribute("pmList", pmList);

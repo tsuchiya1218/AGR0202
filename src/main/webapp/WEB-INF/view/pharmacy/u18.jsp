@@ -64,8 +64,8 @@
                         <span class="items_title">病名</span>
                         <span class="items_text">${ep.ep_disease }</span>
                     </div>
-                    <c:set var="drug" value="${drugList }"/>
-                    <c:forEach var="pm" items="${pmList }" varStatus="st">
+                    <c:set var="drug" value="${requestScope.drugList }"/>
+                    <c:forEach var="pm" items="${requestScope.pmList }" varStatus="st">
 	                    <div class="items_medicine">
 	                        <div class="items_img">
 	                            <span class="items_title">写真</span>

@@ -22,15 +22,8 @@
  	border-radius: 20px;
  	padding: 1px;
  }
- .medicine_box{
- 	display: flex;
- 	flex-direction:row;
- 	justify-content: center;
- 	align-items: center;
- 	text-align: center;
- }
  .medicine_img img{
- 	width: 100%;
+ 	width: 50%;
  }
  .items_info{
  	margin-bottom: 10px;

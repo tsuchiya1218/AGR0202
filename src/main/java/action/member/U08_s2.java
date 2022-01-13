@@ -51,7 +51,7 @@ public class U08_s2 implements Action {
 		PharmacyBean pharmacy = PharmacyDAO.getInstance().findByPharmacyBeanToP_num(drug_information.getDi_p_num());
 		List<Prescribe_medicineBean> Prescribe_medicine = Prescribe_medicineDAO.getInstance()
 				.getPmList(electronic_prescription.getEp_num());
-		String hospital_name = HospitalDAO.getInstance().findByD_h_numToH_name(electronic_prescription.getEp_num());
+		String hospital_name = HospitalDAO.getInstance().findByD_h_numToH_name(doctor_num);
 		totalPrice = Prescribe_medicineDAO.getInstance()
 				.findByEp_numToDrugTotalPrice(electronic_prescription.getEp_num());
 

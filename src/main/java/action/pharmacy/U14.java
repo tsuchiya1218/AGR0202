@@ -23,7 +23,7 @@ public class U14 implements Action {
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
 
-		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
+		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine";
 		int size = 1024 * 1024 * 10; // 20mb
 
 		// cos.jar라이브러리 클래스를 가지고 실제 파일을 업로드하는 과정
@@ -51,6 +51,7 @@ public class U14 implements Action {
 				drug_price = Integer.parseInt(drug_price_);
 			}
 			String fileName = path+drug_img_name;
+			System.out.println(fileName);
 			File deleteImg = new File (fileName);
 			DrugDAO drugDAO = DrugDAO.getInstance();
 			if (drugDAO.isDuplicateMDrug_name(drug_name)) {

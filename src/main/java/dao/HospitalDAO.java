@@ -77,9 +77,10 @@ public class HospitalDAO {
 	}
 
 	public List<Electronic_prescriptionBean> getEpList(int h_num) {
-		String SQL = "SELECT * FROM electronic_prescription WHERE ep_d_num = "
-				+ "(SELECT d_num FROM doctor WHERE d_h_num = (SELECT h_num FROM hospital WHERE h_num = ?)) AND "
-				+ "ep_reg_date LIKE ? ORDER BY ep_reg_date DESC";
+		String SQL = "SELECT * FROM electronic_prescription "
+				+ "INNER JOIN doctor ON doctor.d_num = electronic_prescription.ep_d_num "
+				+ "INNER JOIN hospital ON hospital.h_num = doctor.d_h_num "
+				+ "WHERE hospital.h_num = ? AND ep_reg_date LIKE ? ORDER BY ep_reg_date DESC";
 		List<Electronic_prescriptionBean> epList = new ArrayList<>();
 		try {
 			Date date = new Date();
@@ -192,9 +193,7 @@ public class HospitalDAO {
 	}
 
 	public String findByD_h_numToH_name(int d_h_num) throws SQLException {
-		String SQL = "SELECT h_name FROM hospital WHERE h_num = "
-				+ "(SELECT d_h_num FROM doctor WHERE d_num = "
-				+ "(SELECT ep_d_num FROM electronic_prescription WHERE ep_num = ?))";
+		String SQL = "SELECT h_name FROM hospital WHERE h_num = ?";
 
 		try {
 			conn = DBconnection.getConnection();
@@ -219,6 +218,7 @@ public class HospitalDAO {
 			}
 		}
 	}
+	
 
 	public String findByD_numToH_tel(int d_h_num) throws SQLException {
 		String SQL = "SELECt h_tel FROM hospital WHERE h_num = ?";
