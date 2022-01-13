@@ -23,8 +23,7 @@ public class U16_s1_02 implements Action {
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
 
-		String root = request.getSession().getServletContext().getRealPath("/");
-		String path = root + "static\\img\\medicine";
+		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine\\";
 		int size = 1024 * 1024 * 10; // 20mb
 
 		// cos.jar라이브러리 클래스를 가지고 실제 파일을 업로드하는 과정

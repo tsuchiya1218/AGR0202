@@ -51,6 +51,7 @@ public class U13_01 implements Action {
 		if(ep.getEp_c_num() == 0) {
 			MemberDAO memberDAO = MemberDAO.getInstance();
 			MemberBean member = memberDAO.getMemberBeanByM_num(ep.getEp_m_num());
+			member.setAge(memberDAO.countBirth(member.getM_birth()));
 			request.setAttribute("member", member);
 		}else {
 			ChildDAO childDAO = ChildDAO.getInstance();

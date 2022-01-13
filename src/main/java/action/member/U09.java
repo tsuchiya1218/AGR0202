@@ -25,8 +25,7 @@ public class U09 implements Action {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession(true);
 		MemberBean member = (MemberBean) session.getAttribute("member");
-		String root = request.getSession().getServletContext().getRealPath("/");
-		String path = root + "static\\img\\qr_code\\";
+		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code\\";
 		String fileName = member.getM_qr_num()+".png";
 		String savefileName = "My QRコード.png";
 		
