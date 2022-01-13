@@ -226,7 +226,8 @@
 		                                        <button>薬剤情報詳細</button>
 		                                    </form>
 	                                	</c:if>
-	                                	<c:if test="${ep.ep_auth eq true && ep.ep_di_num eq 0 }">
+	                                	<c:set var="ep_expiry_date" value="${fn:replace(ep.ep_expiry_date,'-','') }"/>
+	                                	<c:if test="${ep.ep_auth eq true && ep.ep_di_num eq 0 && requestScope.today <= ep_expiry_date}">
 		                                    <form action="PharmacyController?action=u17_01" method="post">
 		                                    	<input type="hidden" name="ep_num" value="${ep.ep_num }">
 		                                        <button>薬剤情報提供書登録</button>

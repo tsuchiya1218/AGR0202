@@ -1,5 +1,7 @@
 package action.doctor_pharmacy;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +66,10 @@ public class U10 implements Action {
 		List<Electronic_prescriptionBean> epList = epDAO.findByM_numAndC_numToEp_num(member.getM_num() , 0);
 		request.setAttribute("epList", epList);
 		
+		Calendar cl = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int today = Integer.parseInt(sdf.format(cl.getTime()).replaceAll("-", ""));
+		request.setAttribute("today", today);
 		if(session.getAttribute("doctor") != null) {
 			forward.setPath("u10_02_doctor");
 		}else {
