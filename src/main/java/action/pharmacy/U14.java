@@ -51,14 +51,8 @@ public class U14 implements Action {
 				drug_price = Integer.parseInt(drug_price_);
 			}
 			String fileName = path+drug_img_name;
-			System.out.println(fileName);
 			File deleteImg = new File (fileName);
 			DrugDAO drugDAO = DrugDAO.getInstance();
-			if (drugDAO.isDuplicateMDrug_name(drug_name)) {
-	    	    deleteImg.delete();
-				forward.setErrorMsg("既に登録されている薬名です。");
-				return forward;
-			}
 			if ("".equals(drug_name) || drug_name == null) {
 				forward.setErrorMsg("薬名を入力してください。");
 				deleteImg.delete();
@@ -120,7 +114,13 @@ public class U14 implements Action {
 			drug.setDrug_price(drug_price);
 			drug.setDrug_img_name((drug_img_name != null ) ?xssFilter.stripTagAll(drug_img_name) : null);
 			
-			if(!drugDAO.createDrug(drug)) {
+			if (drugDAO.isDuplicateMDrug_name(drug_name)) {
+				String d_img = drugDAO.getDrugImgName(drug.getDrug_name());
+				String duplicatePath = path + d_img;
+				File duplicateImg = new File(duplicatePath);
+				duplicateImg.delete();
+	    	    drugDAO.updateDrugDuplicate(drug);
+			}else if(!drugDAO.createDrug(drug)) {
 				deleteImg.delete();
 				forward.setErrorMsg("薬情報の登録が失敗しました。");
 				return forward;

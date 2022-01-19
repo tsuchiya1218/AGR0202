@@ -28,7 +28,8 @@ public class DrugDAO {
 	private ResultSet rs = null;
 
 	public boolean createDrug(DrugBean drug) throws SQLException {
-		String SQL = "INSERT INTO drug VALUES(null, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO drug VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
 
 		try {
 			conn = DBconnection.getConnection();
@@ -41,6 +42,7 @@ public class DrugDAO {
 			pstmt.setString(5, drug.getDrug_note());
 			pstmt.setInt(6, drug.getDrug_price());
 			pstmt.setString(7, drug.getDrug_img_name());
+			pstmt.setBoolean(8, true);
 			pstmt.executeUpdate();
 			conn.commit();
 			return true;
@@ -60,12 +62,13 @@ public class DrugDAO {
 	}
 	
 	public List<DrugBean> getDrugList() throws SQLException {
-		String SQL = "SELECT * FROM drug ORDER BY drug_num DESC ";
+		String SQL = "SELECT * FROM drug WHERE drug_isAvailable = ? ORDER BY drug_num DESC ";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
+			pstmt.setBoolean(1, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -99,7 +102,7 @@ public class DrugDAO {
 	}
 	
 	public List<DrugBean> getDrugListByPageNum(int lastNum,int fristNum) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_num <= ? AND drug_num > ? ORDER BY drug_num DESC";
+		String SQL = "SELECT * FROM drug WHERE drug_num <= ? AND drug_num > ? AND drug_isAvailable = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
@@ -107,6 +110,7 @@ public class DrugDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, lastNum);
 			pstmt.setInt(2, fristNum);
+			pstmt.setBoolean(3, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -140,14 +144,14 @@ public class DrugDAO {
 	}
 	
 	public List<DrugBean> searchByName(String drug_name) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? ORDER BY drug_num DESC";
+		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_isAvailable = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
-			
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -180,12 +184,13 @@ public class DrugDAO {
 		}
 	}
 	public int countSearchByName(String drug_name) throws SQLException {
-		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_name LIKE ?";
+		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_name LIKE ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -210,7 +215,7 @@ public class DrugDAO {
 	
 	public List<DrugBean> searchByNameAndType(String drug_name, String drug_type)
 			throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_type = ? ORDER BY drug_num DESC";
+		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_type = ? AND drug_isAvailable = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
@@ -218,6 +223,7 @@ public class DrugDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
 			pstmt.setString(2, drug_type);
+			pstmt.setBoolean(3, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while (rs.next()) {
@@ -251,13 +257,14 @@ public class DrugDAO {
 	}
 	
 	public int countSearchByNameAndType(String drug_name,String drug_type) throws SQLException {
-		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_name LIKE ? AND drug_type = ?";
+		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_name LIKE ? AND drug_type = ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
 			pstmt.setString(2, drug_type);
+			pstmt.setBoolean(3, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -281,13 +288,14 @@ public class DrugDAO {
 	}
 	
 	public List<DrugBean> searchByEffect(String drug_effect) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? ORDER BY drug_num DESC";
+		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? AND drug_isAvailable = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%"+drug_effect+"%");
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -321,12 +329,13 @@ public class DrugDAO {
 	}
 	
 	public int countSearchByEffect(String drug_name) throws SQLException {
-		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_effect LIKE ?";
+		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_effect LIKE ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_name + "%");
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -350,7 +359,7 @@ public class DrugDAO {
 	}
 	
 	public List<DrugBean> searchByEffectAndType(String drug_effect,String drug_type) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? AND drug_type = ? ORDER BY drug_num DESC";
+		String SQL = "SELECT * FROM drug WHERE drug_effect LIKE ? AND drug_type = ? AND drug_isAvailable = ? ORDER BY drug_num DESC";
 		List<DrugBean> drugList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
@@ -358,6 +367,7 @@ public class DrugDAO {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%"+drug_effect+"%");
 			pstmt.setString(2, drug_type);
+			pstmt.setBoolean(3, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
@@ -391,13 +401,14 @@ public class DrugDAO {
 	}
 	
 	public int countSearchByEffectAndType(String drug_effect,String drug_type) throws SQLException {
-		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_effect LIKE ? AND drug_type = ?";
+		String SQL = "SELECT count(drug_num) as count FROM drug WHERE drug_effect LIKE ? AND drug_type = ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, "%" + drug_effect + "%");
 			pstmt.setString(2, drug_type);
+			pstmt.setBoolean(3, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -442,7 +453,7 @@ public class DrugDAO {
 		}
 	}
 	public int findByDrug_numToDrug_name(String drug_name) {
-		String SQL = "SELECT drug_num FROM drug WHERE drug_name LIKE ?";
+		String SQL = "SELECT drug_num FROM drug WHERE drug_name LIKE ? AND drug_isAvailable = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -450,6 +461,7 @@ public class DrugDAO {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, drug_name);
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt("drug_num");
@@ -458,6 +470,41 @@ public class DrugDAO {
 		}catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public boolean updateDrugDuplicate(DrugBean drug) throws SQLException {
+		String SQL = "UPDATE drug SET drug_type = ?, drug_effect = ?,drug_note = ?, drug_price = ?, drug_img_name = ?, drug_isAvailable = ? WHERE drug_name = ?";
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, drug.getDrug_type());
+			pstmt.setString(2, drug.getDrug_effect());
+			pstmt.setString(3, drug.getDrug_note());
+			pstmt.setInt(4, drug.getDrug_price());
+			pstmt.setString(5, drug.getDrug_img_name());
+			pstmt.setBoolean(6, true);
+			pstmt.setString(7, drug.getDrug_name());
+
+			int result = pstmt.executeUpdate();
+			conn.commit();
+
+			if (result > 0) return true;
+			
+			return false;
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			conn.rollback();
+			throw new RuntimeException(nule.getMessage());
+		} finally {
 			try {
 				Close.close(conn, pstmt, rs);
 			} catch (Exception e) {
@@ -532,12 +579,13 @@ public class DrugDAO {
 	}
 	
 	public boolean deleteDrug(int drug_num) throws SQLException {
-		String SQL = "DELETE FROM drug WHERE drug_num = ?";
+		String SQL = "UPDATE drug SET drug_isAvailable = ? WHERE drug_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, drug_num);
+			pstmt.setBoolean(1, false);
+			pstmt.setInt(2, drug_num);
 			
 			int result = pstmt.executeUpdate();
 			conn.commit();
@@ -561,7 +609,7 @@ public class DrugDAO {
 	}
 	
 	public String getDrugImgName(String drug_name) throws SQLException {
-		String SQL = "SELECT drug_img_name FROM drug WHERE ddrug_namerug_num = ?";
+		String SQL = "SELECT drug_img_name FROM drug WHERE drug_name = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -589,12 +637,13 @@ public class DrugDAO {
 	}
 	
 	public DrugBean findByDrug_numToDrug(int drug_num) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_num = ?";
+		String SQL = "SELECT * FROM drug WHERE drug_num = ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, drug_num);
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -627,13 +676,14 @@ public class DrugDAO {
 	}
 	
 	public int totalPageCount() {
-		String SQL = "SELECT count(drug_num) as total FROM drug";
+		String SQL = "SELECT count(drug_num) as total FROM drug WHERE drug_isAvailable = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
+			pstmt.setBoolean(1, true);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -652,38 +702,14 @@ public class DrugDAO {
 		}
 	}
 	
-	public void sortDrugNum() throws SQLException {
-		try {
-			String SQL = "SET @COUNT=0;";
-			conn = DBconnection.getConnection();
-			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeQuery();
-			SQL = "UPDATE drug SET drug_num =@count:=@count+1;";
-			pstmt.executeUpdate(SQL);
-			conn.commit();
-		} catch (SQLException sqle) {
-			conn.rollback();
-			throw new RuntimeException(sqle.getMessage());
-		} catch (NullPointerException nule) {
-			conn.rollback();
-			throw new RuntimeException(nule.getMessage());
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-	}
-	
 	public String findByDrug_img_nameToDrug_num(int drug_num) throws SQLException {
-		String SQL = "SELECT drug_img_name FROM drug WHERE drug_num = ?";
+		String SQL = "SELECT drug_img_name FROM drug WHERE drug_num = ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, drug_num);
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -706,12 +732,13 @@ public class DrugDAO {
 	}
 	
 	public DrugBean findByDrug_nameToDrug(String drug_name) throws SQLException {
-		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ?";
+		String SQL = "SELECT * FROM drug WHERE drug_name LIKE ? AND drug_isAvailable = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, drug_name);
+			pstmt.setBoolean(2, true);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {

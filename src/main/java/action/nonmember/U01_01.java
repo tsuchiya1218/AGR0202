@@ -26,37 +26,186 @@ public class U01_01 implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession(true);
+		MemberDAO memberDAO = MemberDAO.getInstance();
+		DoctorDAO doctorDAO = DoctorDAO.getInstance();
+		PharmacyDAO pharmacyDAO = PharmacyDAO.getInstance();
+		HospitalDAO hospitalDAO = HospitalDAO.getInstance();
+		AdminDAO adminDAO = AdminDAO.getInstance();
+		
+		String patternNum = "^[0-9]*$";
+		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
+		String patternPw = "^[A-Za-z0-9]{8,64}$";
+		
+		
+		String email = request.getParameter("email");
+		String[] pw = request.getParameterValues("pw");
+		String frist_name = request.getParameter("frist_name").replaceAll("\\t", "");
+		String last_name = request.getParameter("last_name").replaceAll("\\t", "");
+		String frist_kana = request.getParameter("frist_kana").replaceAll("\\t", "");
+		String last_kana = request.getParameter("last_kana").replaceAll("\\t", "");
+		String gender = request.getParameter("gender");
+		String address = request.getParameter("address");
+		String insurance_mark = request.getParameter("insurance_mark");
 		
 		String[] check_datetype_birth = request.getParameterValues("birth");
 		String[] check_datetype_insurance_expiry_date = request.getParameterValues("insurance_expiry_date");
-
-
+		
 		String birth = request.getParameterValues("birth")[0] + "-" + request.getParameterValues("birth")[1] + "-"
 				+ request.getParameterValues("birth")[2];
-		String tel = request.getParameterValues("tel")[0] + "-" + request.getParameterValues("tel")[1] + "-"
-				+ request.getParameterValues("tel")[2];
-		String zip_code = request.getParameterValues("zip_code")[0] + "-" + request.getParameterValues("zip_code")[1];
+		String[] tel_ = request.getParameterValues("tel");
+		String[] zip_code = request.getParameterValues("zip_code");
 		String insurance_num = request.getParameterValues("insurance_num")[0] + "-"
 				+ request.getParameterValues("insurance_num")[1];
 		String insurance_expiry_date = request.getParameterValues("insurance_expiry_date")[0] + "-"
 				+ request.getParameterValues("insurance_expiry_date")[1] + "-"
 				+ request.getParameterValues("insurance_expiry_date")[2];
-
+		
+		if("".equals(email) || email == null) {
+			forward.setErrorMsg("メールアドレスを入力してください。");
+			return forward;
+		}
+		if (!email.matches(patternEmail)) {
+			forward.setErrorMsg("正しいメールアドレスを入力してください。");
+			return forward;
+		}
+		
+		if (doctorDAO.isDuplicateEmail(email) || memberDAO.isDuplicateEmail(email) || pharmacyDAO.isDuplicateEmail(email)
+				|| hospitalDAO.isDuplicateEmail(email) || adminDAO.isDuplicateEmail(email)) {
+			forward.setErrorMsg("既に存在しているメールアドレスです。\\n別のメールアドレスを入力してください。");
+			return forward;
+		}
+		
+		if(frist_name == null || "".equals(frist_name)) {
+			forward.setErrorMsg("苗字を入力してください。");
+			return forward;
+		}
+		
+		if(last_name == null || "".equals(last_name)) {
+			forward.setErrorMsg("名前を入力してください。");
+			return forward;
+		}
+		String name = frist_name + " " + last_name;
+		if(name.length() > 50) {
+			forward.setErrorMsg("「名前」が50文字以上のため、登録できません。");
+			return forward;
+		}
+		
+		if(frist_kana == null || "".equals(frist_kana)) {
+			forward.setErrorMsg("苗字のふりがなを入力してください。");
+			return forward;
+		}
+		
+		if(last_kana == null || "".equals(last_kana)) {
+			forward.setErrorMsg("名前のふりがなを入力してください。");
+			return forward;
+		}
+		
+		String kana = frist_kana + " " + last_kana;
+		if(kana.length() > 50) {
+			forward.setErrorMsg("「ふりがな」が50文字以上のため、登録できません。");
+			return forward;
+		}
+		if(gender == null || "".equals(gender)) {
+			forward.setErrorMsg("性別を選択してください。");
+			return forward;
+		}
+		
+		if(tel_ != null) {
+			for(String tel1 : tel_) {
+				if(tel1 == null || "".equals(tel1)) {
+					forward.setErrorMsg("電話番号を入力してください。");
+					return forward;
+				}
+			}
+		}else {
+			forward.setErrorMsg("電話番号を入力してください。");
+			return forward;
+		}
+		String tel = tel_[0] + "-" + tel_[1] + "-"+ tel_[2];
+		
+		if(check_datetype_birth != null) {
+			for(String birth1 : check_datetype_birth) {
+				if(birth1 == null || "".equals(birth1)) {
+					forward.setErrorMsg("生年月日を入力してください。");
+					return forward;
+				}
+			}
+		}else {
+			forward.setErrorMsg("生年月日を入力してください。");
+			return forward;
+		}
+		
+		if(address == null || "".equals(address)) {
+			forward.setErrorMsg("住所を入力してください。");
+			return forward;
+		}
+		
+		
+		if(zip_code != null) {
+			for(String zipcode : zip_code) {
+				if(zipcode == null || "".equals(zipcode)) {
+					forward.setErrorMsg("郵便番号を入力してください。");
+					return forward;
+				}
+			}
+		}else {
+			forward.setErrorMsg("郵便番号を入力してください。");
+			return forward;
+		}
+		
+		if(check_datetype_insurance_expiry_date != null) {
+			for(String insurance_expiry_date1 : check_datetype_insurance_expiry_date) {
+				if(insurance_expiry_date1 == null || "".equals(insurance_expiry_date1)) {
+					forward.setErrorMsg("保険証有効期限を入力してください。");
+					return forward;
+				}
+				
+			}
+		}else {
+			forward.setErrorMsg("保険証有効期限を入力してください。");
+			return forward;
+		}
+		
 		/* 会員情報 */
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("email", request.getParameter("email"));
-		map.put("name", request.getParameter("frist_name").replaceAll("\\t", "") + " "
-				+ request.getParameter("last_name").replaceAll("\\t", ""));
-		map.put("kana", request.getParameter("frist_kana").replaceAll("\\t", "") + " "
-				+ request.getParameter("last_kana").replaceAll("\\t", ""));
+		map.put("email", email);
+		map.put("name", frist_name+ " "+ last_name);
+		map.put("kana", frist_kana + " "+ last_kana);
 		map.put("birth", birth);
 		map.put("tel", tel);
-		map.put("gender", request.getParameter("gender"));
-		map.put("zip_code", zip_code);
-		map.put("address", request.getParameter("address"));
+		map.put("gender", gender);
+		map.put("zip_code", zip_code[0] + "-"+zip_code[1]);
+		map.put("address", address);
 		map.put("insurance_num", insurance_num);
 		map.put("insurance_expiry_date", insurance_expiry_date);
-		map.put("insurance_mark", request.getParameter("insurance_mark"));
+		map.put("insurance_mark", insurance_mark);
+		
+		
+		if (map.get("birth").length() != 10 || Integer.parseInt(check_datetype_birth[1]) < 1 || Integer.parseInt(check_datetype_birth[1]) > 12) {
+			forward.setErrorMsg("正しい生年月日を入力してください。 \\n例)1998 01 05");
+			return forward;
+		}
+
+		if(!map.get("birth").replaceAll("-", "").matches(patternNum)) {
+			forward.setErrorMsg("生年月日は数字のみです。");
+			return forward;
+		}
+		
+		if(!map.get("insurance_num").replaceAll("-", "").matches(patternNum)) {
+			forward.setErrorMsg("保険証番号は数字のみです。");
+			return forward;
+		}
+		if (map.get("insurance_expiry_date").length() != 10 || Integer.parseInt(check_datetype_insurance_expiry_date[2]) < 1
+				|| Integer.parseInt(check_datetype_insurance_expiry_date[2]) > 31) {
+			forward.setErrorMsg("正しい保険証有効期限を入力してください。 \\n例)2024 04 01");
+			return forward;
+		}
+		
+		if(!map.get("insurance_expiry_date").replaceAll("-", "").matches(patternNum)) {
+			forward.setErrorMsg("保険証 有効期限は数字のみです。");
+			return forward;
+		}
+		
 
 		/* 問診票 */
 		Map<String, String> q_map = new HashMap<String, String>();
@@ -68,75 +217,7 @@ public class U01_01 implements Action {
 		q_map.put("pregnancy", request.getParameter("pregnancy"));
 		q_map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "<br>"));
 
-		String patternNum = "^[0-9]*$";
-		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
-		String patternPw = "^[A-Za-z0-9]{8,64}$";
-		String[] pw = request.getParameterValues("pw");
-
-		// email
-		if (!map.get("email").matches(patternEmail)) {
-			forward.setErrorMsg("正しいメールアドレスを入力してください。'");
-			return forward;
-		}
-		MemberDAO memberDAO = MemberDAO.getInstance();
-		DoctorDAO doctorDAO = DoctorDAO.getInstance();
-		PharmacyDAO pharmacyDAO = PharmacyDAO.getInstance();
-		HospitalDAO hospitalDAO = HospitalDAO.getInstance();
-		AdminDAO adminDAO = AdminDAO.getInstance();
 		
-
-		if (doctorDAO.isDuplicateEmail(map.get("email")) || memberDAO.isDuplicateEmail(map.get("email")) || pharmacyDAO.isDuplicateEmail(map.get("email"))
-				|| hospitalDAO.isDuplicateEmail(map.get("email")) || adminDAO.isDuplicateEmail(map.get("email"))) {
-			forward.setErrorMsg("既に存在しているメールアドレスです。\\n別のメールアドレスを入力してください。");
-			return forward;
-		}
-		if(map.get("name").length() > 50) {
-			forward.setErrorMsg("「名前」が50文字以上のため、登録できません。");
-			return forward;
-		}
-		if(map.get("kana").length() > 50) {
-			forward.setErrorMsg("「ふりがな」が50文字以上のため、登録できません。");
-			return forward;
-		}
-
-		// input text type
-		for (String ary : map.keySet()) {
-			if ("".equals(map.get(ary)) || map.get(ary) == null || "".equals(map.get(ary).replaceAll("\\t", ""))) {
-				forward.setErrorMsg("入力欄には空白・スペース禁止です。");
-				return forward;
-			}
-		}
-		
-		if(!map.get("birth").replaceAll("-", "").matches(patternNum)) {
-			forward.setErrorMsg("生年月日は数字のみです。");
-			return forward;
-		}
-		
-		if(!map.get("insurance_num").replaceAll("-", "").matches(patternNum)) {
-			forward.setErrorMsg("保険証番号は数字のみです。");
-			return forward;
-		}
-		
-		if(!map.get("insurance_expiry_date").replaceAll("-", "").matches(patternNum)) {
-			forward.setErrorMsg("保険証 有効期限は数字のみです。");
-			return forward;
-		}
-
-		try {
-			if (map.get("birth").length() != 10 || Integer.parseInt(check_datetype_birth[1]) < 1 || Integer.parseInt(check_datetype_birth[1]) > 12) {
-				forward.setErrorMsg("正しい生年月日を入力してください。 \\n例)1998 01 05");
-				return forward;
-			}
-			if (map.get("insurance_expiry_date").length() != 10 || Integer.parseInt(check_datetype_insurance_expiry_date[2]) < 1
-					|| Integer.parseInt(check_datetype_insurance_expiry_date[2]) > 31) {
-				forward.setErrorMsg("正しい保険証有効期限を入力してください。 \\n例)2024 04 01");
-				return forward;
-			}
-		}catch(NumberFormatException e) {
-			forward.setErrorMsg("生年月日・保険証有効期限に入力してください。");
-			return forward;
-		}
-
 		// password
 		if (pw[0] == null || pw[1] == null || "".equals(pw[0]) || "".equals(pw[1])) {
 			forward.setErrorMsg("パスワードは8文字以上を入力してください。");

@@ -131,11 +131,6 @@ table td:last-child{
 	background-color: orange;
 }
 
-footer{
-	position: absolute;
-	bottom: 0;
-}
-
 @media(max-width: 1030px){
     .main_box{
         flex-direction: column;

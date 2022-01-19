@@ -34,7 +34,6 @@ public class U15_s1 implements Action {
 		}
 		
 		drugDAO.deleteDrug(drug_num);
-		drugDAO.sortDrugNum();
 		
 		forward.setMsg("薬情報の削除が完了しました。");
 		forward.setRedirectToAction(true);

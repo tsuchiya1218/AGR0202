@@ -87,6 +87,7 @@ public class U15_01 implements Action {
 		request.setAttribute("startNum", startNum);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("drugList", drugList);
+		request.setAttribute("for_footer_css", drugList.size());
 		
 		forward.setPath("u15_01");
 		return forward;
