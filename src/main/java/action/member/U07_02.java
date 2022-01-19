@@ -24,32 +24,19 @@ public class U07_02 implements Action {
 		HttpSession session = request.getSession(true);
 		XssFilter xssFilter = XssFilter.getInstance();
 		
-		String[] check_datetype_birth = xssFilter.stripTagAll(request.getParameterValues("birth"));
-		String[] check_null_insurance_expiry_date = xssFilter
-				.stripTagAll(request.getParameterValues("insurance_expiry_date"));
-
-		String birth = request.getParameterValues("birth")[0] + "-" + request.getParameterValues("birth")[1] + "-"
-				+ request.getParameterValues("birth")[2];
+		String[] check_birth = xssFilter.stripTagAll(request.getParameterValues("birth"));
+		String[] check_insurance_expiry_date = xssFilter.stripTagAll(request.getParameterValues("insurance_expiry_date"));
 		String insurance_num = request.getParameterValues("insurance_num")[0] + "-"
 				+ request.getParameterValues("insurance_num")[1];
-		String insurance_expiry_date = "";
-		for (String i_expiry_date : check_null_insurance_expiry_date) {
-			if (i_expiry_date != null || "".equals(i_expiry_date)) {
-				insurance_expiry_date += i_expiry_date + "-";
-			}
-		}
-		insurance_expiry_date = insurance_expiry_date.replaceFirst(".$", "");
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("medical_num", request.getParameter("medical_num"));
 		map.put("insurance_num", insurance_num);
-		map.put("insurance_expiry_date", insurance_expiry_date);
 		map.put("insurance_mark", request.getParameter("insurance_mark"));
 		map.put("name", request.getParameter("frist_name").replaceAll("\\t", "") + " "
 				+ request.getParameter("last_name").replaceAll("\\t", ""));
 		map.put("kana", request.getParameter("frist_kana").replaceAll("\\t", "") + " "
 				+ request.getParameter("last_kana").replaceAll("\\t", ""));
-		map.put("birth", birth);
 		map.put("gender", request.getParameter("gender"));
 		map.put("blood_type", request.getParameter("blood_type"));
 		map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "<br>"));
@@ -73,17 +60,59 @@ public class U07_02 implements Action {
 			return forward;
 		}
 
-		try {
-			if (map.get("birth").length() != 10 || Integer.parseInt(check_datetype_birth[1]) < 1
-					|| Integer.parseInt(check_datetype_birth[1]) > 12) {
+		if(check_birth != null) {
+			for(String birth1 : check_birth) {
+				if(birth1 == null || "".equals(birth1)) {
+					forward.setErrorMsg("生年月日を入力してください。");
+					return forward;
+				}
+			}
+			if (check_birth[0].length() != 4
+					|| Integer.parseInt(check_birth[1]) < 1
+					|| Integer.parseInt(check_birth[1]) > 12 
+					|| Integer.parseInt(check_birth[2]) < 1
+					|| Integer.parseInt(check_birth[2]) > 31
+					|| check_birth[1].length() != 2
+					|| check_birth[2].length() != 2) {
 				forward.setErrorMsg("正しい生年月日を入力してください。 \\n例)1998 01 05");
 				return forward;
 			}
-		} catch (NumberFormatException e) {
+		}else {
 			forward.setErrorMsg("生年月日を入力してください。");
 			return forward;
 		}
-
+		
+		String birth = check_birth[0] + "-" + check_birth[1] + "-" + check_birth[2];
+		map.put("birth", birth);
+		
+		if(check_insurance_expiry_date != null) {
+			for(String insurance_expiry_date1 : check_insurance_expiry_date) {
+				if(insurance_expiry_date1 == null || "".equals(insurance_expiry_date1)) {
+					forward.setErrorMsg("保険証有効期限を入力してください。");
+					return forward;
+				}
+				
+			}
+			if (check_insurance_expiry_date[0].length() != 4
+					|| Integer.parseInt(check_insurance_expiry_date[1]) < 1
+					|| Integer.parseInt(check_insurance_expiry_date[1]) > 12
+					|| Integer.parseInt(check_insurance_expiry_date[2]) < 1
+					|| Integer.parseInt(check_insurance_expiry_date[2]) > 31
+					|| check_insurance_expiry_date[1].length() != 2
+					|| check_insurance_expiry_date[2].length() != 2) {
+				forward.setErrorMsg("正しい保険証有効期限を入力してください。 \\n例)2024 04 01");
+				return forward;
+			}
+		}else {
+			forward.setErrorMsg("保険証有効期限を入力してください。");
+			return forward;
+		}
+		
+		String insurance_expiry_date = check_insurance_expiry_date[0] + "-"
+				+ check_insurance_expiry_date[1] + "-"
+				+ check_insurance_expiry_date[2];
+		map.put("insurance_expiry_date", insurance_expiry_date);
+		
 		MemberBean member = (MemberBean) session.getAttribute("member");
 
 		ChildDAO childDAO = ChildDAO.getInstance();

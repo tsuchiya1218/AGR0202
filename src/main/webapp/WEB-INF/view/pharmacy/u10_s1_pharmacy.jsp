@@ -111,7 +111,7 @@
                                 今までにかかった病気
                             </span>
                             <span class="items_text">
-                                <c:set var="medical_history" value="${fn:replace(children[index].c_medical_history,'&lt;/br&gt;','<br>')}" />
+                                <c:set var="medical_history" value="${fn:replace(children[index].c_medical_history,'&lt;br&gt;','<br>')}" />
                                 <c:out escapeXml="false" value="${medical_history }"/>
                             </span>
                         </div>
@@ -130,7 +130,7 @@
                                 アレルギー情報
                             </span>
                             <span class="items_text">
-                                <c:set var="allergy" value="${fn:replace(children[index].c_allergy,'&lt;/br&gt;','<br>')}" />
+                                <c:set var="allergy" value="${fn:replace(children[index].c_allergy,'&lt;br&gt;','<br>')}" />
                                 <c:out escapeXml="false" value="${allergy }"/>
                             </span>
                         </div>
