@@ -33,10 +33,10 @@ public class U07_02 implements Action {
 		map.put("medical_num", request.getParameter("medical_num"));
 		map.put("insurance_num", insurance_num);
 		map.put("insurance_mark", request.getParameter("insurance_mark"));
-		map.put("name", request.getParameter("frist_name").replaceAll("\\t", "") + " "
-				+ request.getParameter("last_name").replaceAll("\\t", ""));
-		map.put("kana", request.getParameter("frist_kana").replaceAll("\\t", "") + " "
-				+ request.getParameter("last_kana").replaceAll("\\t", ""));
+		map.put("name", request.getParameter("frist_name").replaceAll("\\s", "") + " "
+				+ request.getParameter("last_name").replaceAll("\\s", ""));
+		map.put("kana", request.getParameter("frist_kana").replaceAll("\\s", "") + " "
+				+ request.getParameter("last_kana").replaceAll("\\s", ""));
 		map.put("gender", request.getParameter("gender"));
 		map.put("blood_type", request.getParameter("blood_type"));
 		map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "<br>"));

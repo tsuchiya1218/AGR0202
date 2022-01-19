@@ -1,7 +1,6 @@
 package action.member;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,10 +53,10 @@ public class U07_s1_02 implements Action {
 		map.put("insurance_num", insurance_num);
 		map.put("insurance_expiry_date", insurance_expiry_date);
 		map.put("insurance_mark", request.getParameter("insurance_mark"));
-		map.put("name", request.getParameter("frist_name").replaceAll("\\t", "") + " "
-				+ request.getParameter("last_name").replaceAll("\\t", ""));
-		map.put("kana", request.getParameter("frist_kana").replaceAll("\\t", "") + " "
-				+ request.getParameter("last_kana").replaceAll("\\t", ""));
+		map.put("name", request.getParameter("frist_name").replaceAll("\\s", "") + " "
+				+ request.getParameter("last_name").replaceAll("\\s", ""));
+		map.put("kana", request.getParameter("frist_kana").replaceAll("\\s", "") + " "
+				+ request.getParameter("last_kana").replaceAll("\\s", ""));
 		map.put("birth", birth);
 		map.put("gender", request.getParameter("gender"));
 		map.put("blood_type", request.getParameter("blood_type"));

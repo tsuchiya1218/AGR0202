@@ -48,7 +48,7 @@
                         <div class="items_req">
                             <label class="birth">
                                 <span class="items_title">生年月日</span>
-                                <input type="number" name="birth" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)">
+                                <input type="number" name="birth" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)" style="width: 15%;">
                                 <input type="number" name="birth" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
                                 <input type="number" name="birth" placeholder="12" maxlength="2" oninput="maxLengthCheck(this)">
                             </label>
@@ -88,7 +88,7 @@
                         <div class="items">
                             <label class="expiry_date">
                                 <span class="items_title">保険証 有効期限</span>
-                                <input type="number" name="insurance_expiry_date" placeholder="2024" maxlength="4" oninput="maxLengthCheck(this)">
+                                <input type="number" name="insurance_expiry_date" placeholder="2024" maxlength="4" oninput="maxLengthCheck(this)" style="width: 15%;">
                                 <input type="number" name="insurance_expiry_date" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
                                 <input type="number" name="insurance_expiry_date" placeholder="12" maxlength="2" oninput="maxLengthCheck(this)">
                             </label>

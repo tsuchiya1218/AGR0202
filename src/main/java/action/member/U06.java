@@ -31,10 +31,10 @@ public class U06 implements Action {
 		XssFilter xssFilter = XssFilter.getInstance();
 		
 		String[] pw = xssFilter.stripTagAll(request.getParameterValues("pw"));
-		String frist_name = xssFilter.stripTagAll(request.getParameter("frist_name").replaceAll("\\t", ""));
-		String last_name = xssFilter.stripTagAll(request.getParameter("last_name").replaceAll("\\t", ""));
-		String frist_kana = xssFilter.stripTagAll(request.getParameter("frist_kana").replaceAll("\\t", ""));
-		String last_kana = xssFilter.stripTagAll(request.getParameter("last_kana").replaceAll("\\t", ""));
+		String frist_name = xssFilter.stripTagAll(request.getParameter("frist_name"));
+		String last_name = xssFilter.stripTagAll(request.getParameter("last_name"));
+		String frist_kana = xssFilter.stripTagAll(request.getParameter("frist_kana"));
+		String last_kana = xssFilter.stripTagAll(request.getParameter("last_kana"));
 		String gender = xssFilter.stripTagAll(request.getParameter("gender"));
 		String address = xssFilter.stripTagAll(request.getParameter("address"));
 		String insurance_mark = xssFilter.stripTagAll(request.getParameter("insurance_mark"));
@@ -47,12 +47,12 @@ public class U06 implements Action {
 		String[] insurance_num = xssFilter.stripTagAll(request.getParameterValues("insurance_num"));
 		
 		
-		if(frist_name == null || "".equals(frist_name)) {
+		if(frist_name == null || "".equals(frist_name.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("苗字を入力してください。");
 			return forward;
 		}
 		
-		if(last_name == null || "".equals(last_name)) {
+		if(last_name == null || "".equals(last_name.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("名前を入力してください。");
 			return forward;
 		}
@@ -62,12 +62,12 @@ public class U06 implements Action {
 			return forward;
 		}
 		
-		if(frist_kana == null || "".equals(frist_kana)) {
+		if(frist_kana == null || "".equals(frist_kana.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("苗字のふりがなを入力してください。");
 			return forward;
 		}
 		
-		if(last_kana == null || "".equals(last_kana)) {
+		if(last_kana == null || "".equals(last_kana.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("名前のふりがなを入力してください。");
 			return forward;
 		}
@@ -277,6 +277,7 @@ public class U06 implements Action {
 		}
 		
 		updateMemberBean.setM_pw(SHA256.getEncrypt(pw[0]));
+		session.removeAttribute("member");
 		session.setAttribute("member", updateMemberBean);
 		forward.setPath("u06_01");
 		return forward;

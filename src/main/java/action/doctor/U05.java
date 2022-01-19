@@ -24,7 +24,7 @@ public class U05 implements Action {
 		String pw = request.getParameter("pw");
 		DoctorBean doctor =  (DoctorBean) session.getAttribute("doctor");
 		
-		if("".equals(pw) || pw == null) {
+		if("".equals(pw.replaceAll("\\s", "")) || pw == null) {
 			forward.setErrorMsg("パスワードを入力してください。");
 			return forward;
 		}

@@ -55,7 +55,7 @@
                             <label class="birth">
                                 <c:set var="c_birth" value="${fn:split(child.c_birth,'-')}"/>
                                 <span class="items_title">生年月日</span>
-                                <input type="number" name="birth" value="${c_birth[0] }" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)">
+                                <input type="number" name="birth" value="${c_birth[0] }" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)" style="width: 15%;">
                                 <input type="number" name="birth" value="${c_birth[1] }" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
                                 <input type="number" name="birth" value="${c_birth[2] }" placeholder="12" maxlength="2" oninput="maxLengthCheck(this)">
                             </label>
@@ -103,7 +103,7 @@
                             <label class="expiry_date">
                                 <c:set var="c_i_expiry_date" value="${fn:split(child.c_i_expiry_date,'-') }"/>
                                 <span class="items_title">保険証 有効期限</span>
-                                <input type="number" name="insurance_expiry_date" value="${c_i_expiry_date[0] }" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)">
+                                <input type="number" name="insurance_expiry_date" value="${c_i_expiry_date[0] }" placeholder="2010" maxlength="4" oninput="maxLengthCheck(this)" style="width: 15%;">
                                 <input type="number" name="insurance_expiry_date" value="${c_i_expiry_date[1] }" placeholder="01" maxlength="2" oninput="maxLengthCheck(this)">
                                 <input type="number" name="insurance_expiry_date" value="${c_i_expiry_date[2] }" placeholder="12" maxlength="2" oninput="maxLengthCheck(this)">
                             </label>

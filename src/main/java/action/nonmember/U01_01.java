@@ -40,10 +40,10 @@ public class U01_01 implements Action {
 		
 		String email = request.getParameter("email");
 		String[] pw = request.getParameterValues("pw");
-		String frist_name = request.getParameter("frist_name").replaceAll("\\t", "");
-		String last_name = request.getParameter("last_name").replaceAll("\\t", "");
-		String frist_kana = request.getParameter("frist_kana").replaceAll("\\t", "");
-		String last_kana = request.getParameter("last_kana").replaceAll("\\t", "");
+		String frist_name = request.getParameter("frist_name");
+		String last_name = request.getParameter("last_name");
+		String frist_kana = request.getParameter("frist_kana");
+		String last_kana = request.getParameter("last_kana");
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String insurance_mark = request.getParameter("insurance_mark");
@@ -70,12 +70,12 @@ public class U01_01 implements Action {
 			return forward;
 		}
 		
-		if(frist_name == null || "".equals(frist_name)) {
+		if(frist_name == null || "".equals(frist_name.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("苗字を入力してください。");
 			return forward;
 		}
 		
-		if(last_name == null || "".equals(last_name)) {
+		if(last_name == null || "".equals(last_name.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("名前を入力してください。");
 			return forward;
 		}
@@ -85,12 +85,12 @@ public class U01_01 implements Action {
 			return forward;
 		}
 		
-		if(frist_kana == null || "".equals(frist_kana)) {
+		if(frist_kana == null || "".equals(frist_kana.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("苗字のふりがなを入力してください。");
 			return forward;
 		}
 		
-		if(last_kana == null || "".equals(last_kana)) {
+		if(last_kana == null || "".equals(last_kana.replaceAll("\\s", ""))) {
 			forward.setErrorMsg("名前のふりがなを入力してください。");
 			return forward;
 		}

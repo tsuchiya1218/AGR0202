@@ -59,10 +59,10 @@ public class U06_03 implements Action {
 		XssFilter xssFilter = XssFilter.getInstance();
 
 		String[] check_datetype_birth = birth.split("-");
-		String name = xssFilter.stripTagAll(frist_name_.replaceAll("\\t", "")) + " "
-				+ xssFilter.stripTagAll(last_name_.replaceAll("\\t", ""));
-		String kana = xssFilter.stripTagAll(frist_kana_.replaceAll("\\t", "")) + " "
-				+ xssFilter.stripTagAll(last_kana_.replaceAll("\\t", ""));
+		String name = xssFilter.stripTagAll(frist_name_.replaceAll("\\ts", "")) + " "
+				+ xssFilter.stripTagAll(last_name_.replaceAll("\\s", ""));
+		String kana = xssFilter.stripTagAll(frist_kana_.replaceAll("\\s", "")) + " "
+				+ xssFilter.stripTagAll(last_kana_.replaceAll("\\s", ""));
 		String gender = xssFilter.stripTagAll(gender_);
 		String[] pw = xssFilter.stripTagAll(request.getParameterValues("pw"));
 		String pw_original = xssFilter.stripTagAll(request.getParameter("pw_original"));
@@ -76,9 +76,14 @@ public class U06_03 implements Action {
 		} else if (kana.length() > 50) {
 			forward.setErrorMsg("ふりがなは50文字までです。");
 			return forward;
-		} else if (!birth.replaceAll("-", "").matches(patternNum) || birth.length() != 10
-				|| Integer.parseInt(check_datetype_birth[1]) < 1 || Integer.parseInt(check_datetype_birth[1]) > 12
-				|| Integer.parseInt(check_datetype_birth[2]) < 1 || Integer.parseInt(check_datetype_birth[2]) > 31) {
+		} else if (!birth.replaceAll("-", "").matches(patternNum) 
+				|| check_datetype_birth[0].length() != 4
+				|| Integer.parseInt(check_datetype_birth[1]) < 1 
+				|| Integer.parseInt(check_datetype_birth[1]) > 12
+				|| Integer.parseInt(check_datetype_birth[2]) < 1 
+				|| Integer.parseInt(check_datetype_birth[2]) > 31
+				|| check_datetype_birth[1].length() != 2
+				|| check_datetype_birth[2].length() != 2) {
 			forward.setErrorMsg("正しい生年月日を入力してください。 \\n例)1998 01 05");
 			return forward;
 		}
