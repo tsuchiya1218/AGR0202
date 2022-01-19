@@ -70,7 +70,7 @@
                         <div class="items">
                             <label>
                                 <span class="items_title">公費負担番号</span>
-                                <input type="text" name="ep_burden_num" value="${ep.ep_burden_num }" placeholder="公費負担番号" maxlength="20">
+                                <input type="number" name="ep_burden_num" value="${ep.ep_burden_num }" placeholder="公費負担番号" min="0" maxlength="20">
                             </label>
                         </div>
                         <div class="items">
@@ -166,8 +166,8 @@
                                 </label>
                                 <label class="two_text">
                                     <span class="medicine_item">分量</span>
-                                    <input type="number" name="pm_dosage" class="pm_dosage" disabled required>回
-                                    <input type="number" name="pm_dosage" class="pm_dosage" disabled required>
+                                    <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>回
+                                    <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>
                                     <select name="dosage_type" id="dosage_type" disabled>
                                     	<option value="錠">錠</option>
                                     	<option value="g">g</option>
@@ -175,8 +175,8 @@
                                 </label>
                                 <label class="two_text">
                                     <span class="medicine_item">用量</span>
-                                    <input type="number" name="pm_dose" class="pm_dose" disabled required>日
-                                    <input type="number" name="pm_dose" class="pm_dose" disabled required>
+                                    <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>日
+                                    <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>
                                     <select name="dose_type" id="dose_type" disabled>
                                     	<option value="錠">錠</option>
                                     	<option value="g">g</option>
@@ -195,11 +195,11 @@
                                 </label>
                                 <label>
                                     <span class="medicine_item">日数</span>
-                                    <input type="number" name="pm_dose_day" class="pm_dose_day" disabled required>
+                                    <input type="number" name="pm_dose_day" min="0" class="pm_dose_day" disabled required>
                                 </label>
                                 <label>
                                     <span class="medicine_item">総投与日数</span>
-                                    <input type="number" name="pm_all_dose_day" class="pm_all_dose_day" disabled required>
+                                    <input type="number" name="pm_all_dose_day" min="0" class="pm_all_dose_day" disabled required>
                                 </label>
                             </div>
                         </div>

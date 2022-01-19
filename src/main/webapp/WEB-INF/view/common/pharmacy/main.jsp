@@ -40,11 +40,11 @@
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="PhamacyController?view=u10_01_pharmacy">会員検索</a><br>
+                    <a class="item_title" href="PharmacyController?view=u10_01_pharmacy">会員検索</a><br>
                     <span>診察のために会員のQRコードで検索する必要があります。</span>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href="PhamacyController?action=u15_01">薬情報一覧</a><br>
+                    <a class="item_title" href="PharmacyController?action=u15_01">薬情報一覧</a><br>
                     <a href="PhamacyController?view=u14_01">薬情報登録</a><br>
                     <span>薬情報を登録・変更・削除・確認ができます。</span>
                 </div>

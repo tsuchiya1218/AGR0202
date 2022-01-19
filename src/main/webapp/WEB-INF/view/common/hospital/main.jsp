@@ -15,7 +15,7 @@
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="HospitalController?action=u12">承認リスト</a><br>
+                    <a class="item_title" href="HospitalController?action=u12_01">承認リスト</a><br>
                     <span>
                         診察が終わった患者様の承認を行う必要があります。
                     </span>

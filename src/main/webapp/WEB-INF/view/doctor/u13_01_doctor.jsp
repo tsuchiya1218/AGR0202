@@ -79,7 +79,7 @@
                         </div>
                         <div class="items">
                             <span class="items_title">病名</span>
-                            <span class="items_text">風邪</span>
+                            <span class="items_text">${ep.ep_disease }</span>
                         </div>
                         <c:set var="pm" value="${requestScope.pmList }"/>
                         <c:forEach var="drug" items="${requestScope.drugList }" varStatus="st">

@@ -38,22 +38,21 @@ public class U01_01 implements Action {
 		String patternPw = "^[A-Za-z0-9]{8,64}$";
 		
 		
-		String email = xssFilter.stripTagAll(request.getParameter("email"));
-		String[] pw = xssFilter.stripTagAll(request.getParameterValues("pw"));
-		String frist_name = xssFilter.stripTagAll(request.getParameter("frist_name").replaceAll("\\t", ""));
-		String last_name = xssFilter.stripTagAll(request.getParameter("last_name").replaceAll("\\t", ""));
-		String frist_kana = xssFilter.stripTagAll(request.getParameter("frist_kana").replaceAll("\\t", ""));
-		String last_kana = xssFilter.stripTagAll(request.getParameter("last_kana").replaceAll("\\t", ""));
-		String gender = xssFilter.stripTagAll(request.getParameter("gender"));
-		String address = xssFilter.stripTagAll(request.getParameter("address"));
-		String insurance_mark = xssFilter.stripTagAll(request.getParameter("insurance_mark"));
+		String email = request.getParameter("email");
+		String[] pw = request.getParameterValues("pw");
+		String frist_name = request.getParameter("frist_name").replaceAll("\\t", "");
+		String last_name = request.getParameter("last_name").replaceAll("\\t", "");
+		String frist_kana = request.getParameter("frist_kana").replaceAll("\\t", "");
+		String last_kana = request.getParameter("last_kana").replaceAll("\\t", "");
+		String gender = request.getParameter("gender");
+		String address = request.getParameter("address");
+		String insurance_mark = request.getParameter("insurance_mark");
+		String[] check_birth = request.getParameterValues("birth");
+		String[] check_insurance_expiry_date = request.getParameterValues("insurance_expiry_date");
 		
-		String[] check_birth = xssFilter.stripTagAll(request.getParameterValues("birth"));
-		String[] check_insurance_expiry_date = xssFilter.stripTagAll(request.getParameterValues("insurance_expiry_date"));
-		
-		String[] tel_ = xssFilter.stripTagAll(request.getParameterValues("tel"));
-		String[] zip_code = xssFilter.stripTagAll(request.getParameterValues("zip_code"));
-		String[] insurance_num = xssFilter.stripTagAll(request.getParameterValues("insurance_num"));
+		String[] tel_ = request.getParameterValues("tel");
+		String[] zip_code = request.getParameterValues("zip_code");
+		String[] insurance_num = request.getParameterValues("insurance_num");
 		
 		
 		if("".equals(email) || email == null) {
@@ -273,7 +272,7 @@ public class U01_01 implements Action {
 		member.setM_kana(map.get("kana"));
 		member.setM_gender(map.get("gender"));
 		member.setM_address(map.get("address"));
-		member.setM_i_mark(map.get("insurance_mark"));
+		member.setM_i_mark(insurance_mark);
 		member.setM_birth(map.get("birth"));
 		member.setM_tel(map.get("tel"));
 		member.setM_zip_code(map.get("zip_code"));

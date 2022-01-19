@@ -55,7 +55,7 @@ public class U11_02 implements Action {
 				|| Integer.parseInt(ep_expiry_date[2]) < 1 || Integer.parseInt(ep_expiry_date[2]) > 31) {
 			forward.setErrorMsg("正しい有効時間を入力してください。");
 			return forward;
-		} else if ("".equals(ep_disease) || ep_disease == null) {
+		} else if ("".equals(ep_disease.replaceAll("\\s", "")) || ep_disease == null) {
 			forward.setErrorMsg("病名を入力してください。");
 			return forward;
 		}

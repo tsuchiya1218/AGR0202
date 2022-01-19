@@ -128,7 +128,7 @@
                             </label>
                         </div>
                         <div class="btn_box">
-                            <button type="button" onclick="location.href='MemberController?view=u07_01'">戻る</button>
+                            <button type="button" onclick="location.href='MemberController?action=u07_01'">戻る</button>
                             <button type="button" class="add_btn" onclick="addSubmit(this.form);" >確認</button>
                         </div>
                     </form>

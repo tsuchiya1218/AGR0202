@@ -81,7 +81,7 @@
 	                        <label>保険証記号</label>
 	                    </th>
 	                    <td>
-	                    	<c:out value="${requestScope.memberBean.m_i_mark }"/>
+	                    	<c:out value="${sessionScope.memberBean.m_i_mark }"/>
 	                    </td>
 	                </tr>
 	                <tr>
