@@ -17,8 +17,26 @@ public class DoctorBean  implements Serializable {
 	private String d_department;
 	private int d_h_num;
 	private boolean d_auth;
+	private boolean d_leave;
 	
 	public DoctorBean() {}
+
+	public DoctorBean(int d_num, String d_email, String d_pw, String d_name, String d_kana, String d_birth,
+			String d_tel, String d_gender, String d_department, int d_h_num, boolean d_auth, boolean d_leave) {
+		super();
+		this.d_num = d_num;
+		this.d_email = d_email;
+		this.d_pw = d_pw;
+		this.d_name = d_name;
+		this.d_kana = d_kana;
+		this.d_birth = d_birth;
+		this.d_tel = d_tel;
+		this.d_gender = d_gender;
+		this.d_department = d_department;
+		this.d_h_num = d_h_num;
+		this.d_auth = d_auth;
+		this.d_leave = d_leave;
+	}
 
 	public int getD_num() {
 		return d_num;
@@ -108,21 +126,12 @@ public class DoctorBean  implements Serializable {
 		this.d_auth = d_auth;
 	}
 
-	public DoctorBean(int d_num, String d_email, String d_pw, String d_name, String d_kana, String d_birth,
-			String d_tel, String d_gender, String d_department, int d_h_num, boolean d_auth) {
-		super();
-		this.d_num = d_num;
-		this.d_email = d_email;
-		this.d_pw = d_pw;
-		this.d_name = d_name;
-		this.d_kana = d_kana;
-		this.d_birth = d_birth;
-		this.d_tel = d_tel;
-		this.d_gender = d_gender;
-		this.d_department = d_department;
-		this.d_h_num = d_h_num;
-		this.d_auth = d_auth;
+	public boolean isD_leave() {
+		return d_leave;
 	}
 
+	public void setD_leave(boolean d_leave) {
+		this.d_leave = d_leave;
+	}
 
 }

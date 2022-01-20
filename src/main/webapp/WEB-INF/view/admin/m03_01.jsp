@@ -65,18 +65,23 @@
                                 <td>${hospital.h_name }</td>
                                 <td>${hospital.h_address}</td>
                                 <td>${hospital.h_tel }</td>
-                                <td>
-                                    <form action="AdminController?action=m03_s2" method="POST">
-                                    	<input type="hidden" name="h_num" value="${hospital.h_num }">
-                                        <button class="delete_btn" type="button" onclick="isDelete(this.form)" >削除</button>
-                                    </form>
-                                </td>
-                                <td class="btn_td">
-                                    <form action="AdminController?action=m03_s1_01" method="post">
-                                    	<input type="hidden" name="h_num" value="${hospital.h_num }">
-                                        <button class="update_btn" type="submit">変更</button>
-                                    </form>
-                                </td>
+                                <c:if test="${hospital.h_leave eq false }">
+	                                <td>
+	                                    <form action="AdminController?action=m03_s2" method="POST">
+	                                    	<input type="hidden" name="h_num" value="${hospital.h_num }">
+	                                        <button class="delete_btn" type="button" onclick="isDelete(this.form)" >削除</button>
+	                                    </form>
+	                                </td>
+	                                <td class="btn_td">
+	                                    <form action="AdminController?action=m03_s1_01" method="post">
+	                                    	<input type="hidden" name="h_num" value="${hospital.h_num }">
+	                                        <button class="update_btn" type="submit">変更</button>
+	                                    </form>
+	                                </td>
+                                </c:if>
+                                <c:if test="${hospital.h_leave eq true }">
+                                	<td></td><td></td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>

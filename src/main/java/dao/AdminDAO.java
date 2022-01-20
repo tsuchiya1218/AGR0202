@@ -111,7 +111,7 @@ public class AdminDAO {
 	/* Doctor START */
 	
 	public boolean addDoctor(DoctorBean doctor) throws SQLException {
-		String SQL = "INSERT INTO doctor VALUES(null,?,?,?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO doctor VALUES(null,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			Date birth = Date.valueOf(doctor.getD_birth());
 			conn = DBconnection.getConnection();
@@ -127,6 +127,7 @@ public class AdminDAO {
 			pstmt.setString(8, doctor.getD_department());
 			pstmt.setInt(9, doctor.getD_h_num());
 			pstmt.setBoolean(10, false);
+			pstmt.setBoolean(11, false);
 			
 			int result = pstmt.executeUpdate();
 			conn.commit();
@@ -147,14 +148,16 @@ public class AdminDAO {
 			}
 		}
 	}
-
+	
+	
 	public boolean deleteDoctor(int d_num) throws SQLException {
-		String SQL = "DELETE FROM doctor WHERE d_num = ?";
+		String SQL = "UPDATE doctor SET d_leave = ? WHERE d_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, d_num);
+			pstmt.setBoolean(1, true);
+			pstmt.setInt(2, d_num);
 
 			int result = pstmt.executeUpdate();
 			conn.commit();
@@ -176,7 +179,6 @@ public class AdminDAO {
 			}
 		}
 	}
-	
 
 	public boolean updateDoctorWithEmailAndPassword(DoctorBean doctor) throws SQLException {
 		String SQL = "UPDATE doctor SET d_email = ?,d_pw = ? , d_name =?,d_kana = ?, d_birth = ?, d_tel = ?, d_gender = ?,"
@@ -273,7 +275,8 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_auth")
+						rs.getBoolean("d_auth"),
+						rs.getBoolean("d_leave")
 						);
 				return doctor;
 			}
@@ -308,7 +311,8 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_auth")
+						rs.getBoolean("d_auth"),
+						rs.getBoolean("d_leave")
 						);
 				return doctor;
 			}
@@ -344,7 +348,8 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_auth")
+						rs.getBoolean("d_auth"),
+						rs.getBoolean("d_leave")
 						);
 				doctorList.add(doctor);
 			}
@@ -381,7 +386,8 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_auth")
+						rs.getBoolean("d_auth"),
+						rs.getBoolean("d_leave")
 						);
 				doctorList.add(doctor);
 			}
@@ -418,7 +424,8 @@ public class AdminDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_auth")
+						rs.getBoolean("d_auth"),
+						rs.getBoolean("d_leave")
 						);
 				doctorList.add(doctor);
 			}
@@ -487,34 +494,8 @@ public class AdminDAO {
 	
 	/* Pharmacy START */
 	
-	public void sortPharmacyNum() throws SQLException {
-		try {
-			String SQL = "SET @COUNT=0;";
-			conn = DBconnection.getConnection();
-			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeQuery();
-			SQL = "UPDATE pharmacy SET p_num =@count:=@count+1;";
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeUpdate(SQL);
-			conn.commit();
-		} catch (SQLException sqle) {
-			conn.rollback();
-			throw new RuntimeException(sqle.getMessage());
-		} catch (NullPointerException nule) {
-			conn.rollback();
-			throw new RuntimeException(nule.getMessage());
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-	}
-	
 	public boolean addPharmacy(PharmacyBean pharmacy) {
-		String SQL = "INSERT INTO pharmacy VALUES(null,?,?,?,?,?)";
+		String SQL = "INSERT INTO pharmacy VALUES(null,?,?,?,?,?,false)";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -540,12 +521,13 @@ public class AdminDAO {
 	}
 	
 	public boolean deletePharmacy(int p_num) throws SQLException {
-		String SQL = "DELETE FROM pharmacy WHERE p_num = ?";
+		String SQL = "UPDATE pharmacy SET p_leave = ? WHERE p_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, p_num);
+			pstmt.setBoolean(1, true);
+			pstmt.setInt(2, p_num);
 
 			int result = pstmt.executeUpdate();
 			conn.commit();
@@ -567,6 +549,7 @@ public class AdminDAO {
 			}
 		}
 	}
+	
 	
 	public boolean updatePharmacy(PharmacyBean pharmacy) throws SQLException {
 		String SQL = "UPDATE pharmacy SET p_name =?, p_tel = ?, p_address = ? WHERE p_num = ?";
@@ -649,8 +632,8 @@ public class AdminDAO {
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
-						);
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")						);
 				return pharmacy;
 			}
 			return null;
@@ -679,7 +662,8 @@ public class AdminDAO {
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				return pharmacy;
 			}
@@ -729,7 +713,8 @@ public class AdminDAO {
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				pharmacyList.add(pharmacy);
 			}
@@ -761,7 +746,8 @@ public class AdminDAO {
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				pharmacyList.add(pharmacy);
 			}
@@ -793,7 +779,8 @@ public class AdminDAO {
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				pharmacyList.add(pharmacy);
 			}
@@ -825,7 +812,8 @@ public class AdminDAO {
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				pharmacyList.add(pharmacy);
 			}
@@ -847,34 +835,9 @@ public class AdminDAO {
 	
 	/* Hospital START */
 	
-	public void sortHospitalNum() throws SQLException {
-		try {
-			String SQL = "SET @COUNT=0;";
-			conn = DBconnection.getConnection();
-			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeQuery();
-			SQL = "UPDATE hospital SET h_num =@count:=@count+1;";
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeUpdate(SQL);
-			conn.commit();
-		} catch (SQLException sqle) {
-			conn.rollback();
-			throw new RuntimeException(sqle.getMessage());
-		} catch (NullPointerException nule) {
-			conn.rollback();
-			throw new RuntimeException(nule.getMessage());
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-	}
 	
 	public boolean addHospital(HospitalBean hospital) {
-		String SQL = "INSERT INTO hospital VALUES(null,?,?,?,?,?)";
+		String SQL = "INSERT INTO hospital VALUES(null,?,?,?,?,?,false)";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -883,6 +846,7 @@ public class AdminDAO {
 			pstmt.setString(3, SHA256.getEncrypt(hospital.getH_pw()));
 			pstmt.setString(4, hospital.getH_tel());
 			pstmt.setString(5, hospital.getH_address());
+			
 			
 			int result = pstmt.executeUpdate();
 			
@@ -903,12 +867,13 @@ public class AdminDAO {
 	}
 	
 	public boolean deleteHospital(int h_num) throws SQLException {
-		String SQL = "DELETE FROM hospital WHERE h_num = ?";
+		String SQL = "UPDATE hospital SET h_leave = ? WHERE h_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, h_num);
+			pstmt.setBoolean(1, true);
+			pstmt.setInt(2, h_num);
 
 			int result = pstmt.executeUpdate();
 			conn.commit();
@@ -1012,7 +977,8 @@ public class AdminDAO {
 						rs.getString("h_email"),
 						rs.getString("h_pw"),
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				return hospital;
 			}
@@ -1042,7 +1008,8 @@ public class AdminDAO {
 						rs.getString("h_email"),
 						rs.getString("h_pw"),
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				return hospital;
 			}
@@ -1093,7 +1060,8 @@ public class AdminDAO {
 						rs.getString("h_email"),
 						rs.getString("h_pw"),
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				hospitalList.add(hospital);
 			}
@@ -1125,7 +1093,8 @@ public class AdminDAO {
 						rs.getString("h_email"),
 						rs.getString("h_pw"),
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				hospitalList.add(hospital);
 			}
@@ -1157,7 +1126,8 @@ public class AdminDAO {
 						rs.getString("h_email"),
 						rs.getString("h_pw"),
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				hospitalList.add(hospital);
 			}
@@ -1189,7 +1159,8 @@ public class AdminDAO {
 						rs.getString("h_email"),
 						rs.getString("h_pw"),
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				hospitalList.add(hospital);
 			}
@@ -1235,7 +1206,8 @@ public class AdminDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth")
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
 						);
 				memberList.add(member);
 			}
@@ -1277,7 +1249,8 @@ public class AdminDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth")
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
 						);
 				memberList.add(member);
 			}
@@ -1319,7 +1292,8 @@ public class AdminDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth")
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
 						);
 				memberList.add(member);
 			}

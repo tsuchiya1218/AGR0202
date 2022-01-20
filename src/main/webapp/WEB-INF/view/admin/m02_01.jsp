@@ -66,18 +66,23 @@
                                 <td>${pharmacy.p_name }</td>
                                 <td>${pharmacy.p_address}</td>
                                 <td>${pharmacy.p_tel }</td>
-                                <td>
-                                    <form action="AdminController?action=m02_s2" method="POST">
-                                    	<input type="hidden" name="p_num" value="${pharmacy.p_num }">
-                                        <button class="delete_btn" type="button" onclick="isDelete(this.form)" >削除</button>
-                                    </form>
-                                </td>
-                                <td class="btn_td">
-                                    <form action="AdminController?action=m02_s1_01" method="post">
-                                    	<input type="hidden" name="p_num" value="${pharmacy.p_num }">
-                                        <button class="update_btn" type="submit">変更</button>
-                                    </form>
-                                </td>
+                               	<c:if test="${pharmacy.p_leave eq false}">
+	                                <td>
+	                                    <form action="AdminController?action=m02_s2" method="POST">
+	                                    	<input type="hidden" name="p_num" value="${pharmacy.p_num }">
+	                                        <button class="delete_btn" type="button" onclick="isDelete(this.form)" >削除</button>
+	                                    </form>
+	                                </td>
+	                                <td class="btn_td">
+	                                    <form action="AdminController?action=m02_s1_01" method="post">
+	                                    	<input type="hidden" name="p_num" value="${pharmacy.p_num }">
+	                                        <button class="update_btn" type="submit">変更</button>
+	                                    </form>
+	                                </td>
+                               	</c:if>
+                               	<c:if test="${pharmacy.p_leave eq true }">
+                               		<td></td><td></td>
+                               	</c:if>
                             </tr>
                         </c:forEach>
                         </tbody>

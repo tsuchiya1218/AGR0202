@@ -76,10 +76,12 @@
 	                            <td><c:out value="${doctor.d_department }"/></td>
 	                            <td><c:out value="${h_name[st.index] }"/></td>
 	                            <td>
-		                            <form action="AdminController?action=m01_s1_01" method="post">
-		                            	<input type="hidden" name="d_num" value="${doctor.d_num }">
-		                            	<button type="submit">変更</button>
-	                        		</form>
+	                            	<c:if test="${doctor.d_leave eq false }">
+			                            <form action="AdminController?action=m01_s1_01" method="post">
+			                            	<input type="hidden" name="d_num" value="${doctor.d_num }">
+			                            	<button type="submit">変更</button>
+		                        		</form>
+	                            	</c:if>
                             	</td>
                             </tr>
                         	</c:forEach>

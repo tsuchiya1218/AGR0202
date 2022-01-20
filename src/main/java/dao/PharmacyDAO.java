@@ -44,13 +44,14 @@ private PharmacyDAO() {}
 	}
 	
 	public String login(String p_email, String p_pw) throws SQLException {
-		String SQL = "SELECt p_pw FROM pharmacy WHERE p_email = ?";
+		String SQL = "SELECt p_pw FROM pharmacy WHERE p_email = ? AND p_leave = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(p_email));
+			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -86,7 +87,8 @@ private PharmacyDAO() {}
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				return pharmacy;
 			}
@@ -116,7 +118,8 @@ private PharmacyDAO() {}
 						rs.getString("p_email"),
 						rs.getString("p_pw"),
 						rs.getString("p_tel"),
-						rs.getString("p_address")
+						rs.getString("p_address"),
+						rs.getBoolean("p_leave")
 						);
 				return pharmacy;
 			}

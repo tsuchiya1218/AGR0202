@@ -28,8 +28,8 @@ public class M03_01 implements Action {
 		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
 		String patternPw = "^[A-Za-z0-9]{8,64}$";
 		
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		String email = request.getParameter("email").replaceAll("\\s", "");
+		String password = request.getParameter("password").replaceAll("\\s", "");
 		String name = request.getParameter("name");
 		String[] tel_ = request.getParameterValues("tel");
 		String address = request.getParameter("address");

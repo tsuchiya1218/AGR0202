@@ -26,43 +26,18 @@ public class DoctorDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	public void sortD_num() throws SQLException {
-		try {
-			String SQL = "SET @COUNT=0;";
-			conn = DBconnection.getConnection();
-			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeQuery();
-			SQL = "UPDATE doctor SET d_num =@count:=@count+1;";
-			pstmt.executeUpdate(SQL);
-			conn.commit();
-		} catch (SQLException sqle) {
-			conn.rollback();
-			throw new RuntimeException(sqle.getMessage());
-		} catch (NullPointerException nule) {
-			conn.rollback();
-			throw new RuntimeException(nule.getMessage());
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-	}
-	
 	public String login(String d_email, String d_pw) throws SQLException {
-		String SQL = "SELECt d_pw FROM doctor WHERE d_email = ?";
+		String SQL = "SELECt d_pw FROM doctor WHERE d_email = ? AND d_leave = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(d_email));
+			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
-				//ユーザが書いたpwとDBのpwと同じだったらログイン成功
 				if(rs.getString("d_pw").equals(SHA256.getEncrypt(d_pw))) {
 					return "doctor";
 				}
@@ -100,7 +75,8 @@ public class DoctorDAO {
 						rs.getString("d_gender"),
 						rs.getString("d_department"),
 						rs.getInt("d_h_num"),
-						rs.getBoolean("d_auth")
+						rs.getBoolean("d_auth"),
+						rs.getBoolean("d_leave")
 						);
 				return doctor;
 			}
@@ -178,12 +154,13 @@ public class DoctorDAO {
 	}
 	
 	public boolean leave(String d_email) throws SQLException{
-		String SQL = "DELETE FROM doctor WHERE d_email = ?";
+		String SQL = "UPDATE doctor SET d_leave = ? WHERE d_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, d_email);
+			pstmt.setBoolean(1, true);
+			pstmt.setString(2, d_email);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			if(result == 1) return true;

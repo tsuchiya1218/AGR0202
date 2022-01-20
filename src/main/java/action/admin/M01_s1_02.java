@@ -30,16 +30,16 @@ public class M01_s1_02 implements Action {
 		String patternPw = "^[A-Za-z0-9]{8,64}$";
 
 		String d_num_ = request.getParameter("d_num");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String frist_name = request.getParameter("frist_name");
-		String last_name = request.getParameter("last_name");
-		String frist_kana = request.getParameter("frist_kana");
-		String last_kana = request.getParameter("last_kana");
+		String email = request.getParameter("email").replaceAll("\\s", "");
+		String password = request.getParameter("password").replaceAll("\\s", "");
+		String frist_name = request.getParameter("frist_name").replaceAll("\\s", "");
+		String last_name = request.getParameter("last_name").replaceAll("\\s", "");
+		String frist_kana = request.getParameter("frist_kana").replaceAll("\\s", "");
+		String last_kana = request.getParameter("last_kana").replaceAll("\\s", "");
 		String[] birth_ = request.getParameterValues("birth");
 		String[] tel_ = request.getParameterValues("tel");
-		String gender = request.getParameter("gender");
-		String department = request.getParameter("department");
+		String gender = request.getParameter("gender").replaceAll("\\s", "");
+		String department = request.getParameter("department").replaceAll("\\s", "");
 		String hospital_name = request.getParameter("hospital_name");
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		boolean isModifyEmail = false;

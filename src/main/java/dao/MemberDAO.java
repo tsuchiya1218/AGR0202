@@ -184,13 +184,14 @@ public class MemberDAO {
 	}
 	
 	public String login(String m_email, String m_pw) throws SQLException {
-		String member = "SELECT m_pw FROM member WHERE m_email = ?";
+		String member = "SELECT m_pw FROM member WHERE m_email = ? AND m_leave = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(member);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
+			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
@@ -336,7 +337,8 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth")
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
 						);
 				return member;
 			}
@@ -403,7 +405,8 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth")
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
 						);
 				return member;
 			}
@@ -438,12 +441,13 @@ public class MemberDAO {
 	}
 	
 	public boolean findPassword(String m_email,String m_name) {
-		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ?";
+		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ? AND m_leave = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
 			pstmt.setString(2, m_name);
+			pstmt.setBoolean(3, false);
 			rs = pstmt.executeQuery();
 			
 			return rs.next();
@@ -488,12 +492,13 @@ public class MemberDAO {
 	}
 	
 	public boolean leave(String m_email) throws SQLException{
-		String SQL = "DELETE FROM member WHERE m_email = ?";
+		String SQL = "UPDATE member SET m_leave = ? WHERE m_email = ?";
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, m_email);
+			pstmt.setBoolean(1, true);
+			pstmt.setString(2, m_email);
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			if(result == 1) return true;
@@ -732,7 +737,8 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth")
+						rs.getBoolean("m_auth"),
+						rs.getBoolean("m_leave")
 						);
 				return member;
 			}

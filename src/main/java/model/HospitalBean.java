@@ -12,17 +12,19 @@ public class HospitalBean implements Serializable {
 	private String h_pw;
 	private String h_tel;
 	private String h_address;
+	private boolean h_leave;
 	
 	public HospitalBean() {}
 
-	public HospitalBean(int h_num, String h_name, String h_email, String h_pw, String h_tel, String h_address) {
-		super();
+	public HospitalBean(int h_num, String h_name, String h_email, String h_pw, String h_tel, String h_address,
+			boolean h_leave) {
 		this.h_num = h_num;
 		this.h_name = h_name;
 		this.h_email = h_email;
 		this.h_pw = h_pw;
 		this.h_tel = h_tel;
 		this.h_address = h_address;
+		this.h_leave = h_leave;
 	}
 
 	public int getH_num() {
@@ -73,11 +75,18 @@ public class HospitalBean implements Serializable {
 		this.h_address = h_address;
 	}
 
+	public boolean isH_leave() {
+		return h_leave;
+	}
+
+	public void setH_leave(boolean h_leave) {
+		this.h_leave = h_leave;
+	}
+
 	@Override
 	public String toString() {
 		return "HospitalBean [h_num=" + h_num + ", h_name=" + h_name + ", h_email=" + h_email + ", h_pw=" + h_pw
-				+ ", h_tel=" + h_tel + ", h_address=" + h_address + "]";
+				+ ", h_tel=" + h_tel + ", h_address=" + h_address + ", h_leave=" + h_leave + "]";
 	}
-	
 	
 }

@@ -32,31 +32,6 @@ public class HospitalDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	public void sortD_num() throws SQLException {
-		try {
-			String SQL = "SET @COUNT=0;";
-			conn = DBconnection.getConnection();
-			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeQuery();
-			SQL = "UPDATE hospital SET h_num =@count:=@count+1;";
-			pstmt.executeUpdate(SQL);
-			conn.commit();
-		} catch (SQLException sqle) {
-			conn.rollback();
-			throw new RuntimeException(sqle.getMessage());
-		} catch (NullPointerException nule) {
-			conn.rollback();
-			throw new RuntimeException(nule.getMessage());
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-	}
-
 	public boolean isDuplicateEmail(String h_email) {
 		String SQL = "SELECT h_email FROM hospital WHERE h_email = ?";
 		try {
@@ -133,13 +108,14 @@ public class HospitalDAO {
 	}
 
 	public String login(String h_email, String h_pw) throws SQLException {
-		String SQL = "SELECT h_pw FROM hospital WHERE h_email = ?";
+		String SQL = "SELECT h_pw FROM hospital WHERE h_email = ? AND h_leave = ?";
 
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, SHA256.getEncrypt(h_email));
+			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if (rs.next()) {
@@ -176,7 +152,8 @@ public class HospitalDAO {
 						rs.getString("h_email"), 
 						rs.getString("h_pw"), 
 						rs.getString("h_tel"),
-						rs.getString("h_address")
+						rs.getString("h_address"),
+						rs.getBoolean("h_leave")
 						);
 				return hospital;
 			}

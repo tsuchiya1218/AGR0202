@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.ActionForward;
 import dao.AdminDAO;
-import model.PharmacyBean;
 
 public class M02_s2 implements Action {
 
@@ -30,7 +29,6 @@ public class M02_s2 implements Action {
 			forward.setErrorMsg("薬局削除が失敗しました。");
 			return forward;
 		}
-		adminDAO.sortPharmacyNum();
 		
 		forward.setMsg("薬局削除が完了しました。");
 		forward.setPath("m02_01");
