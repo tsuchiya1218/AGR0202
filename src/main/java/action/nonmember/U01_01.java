@@ -242,23 +242,23 @@ public class U01_01 implements Action {
 		
 		// password
 		if (pw[0] == null || pw[1] == null || "".equals(pw[0]) || "".equals(pw[1])) {
-			forward.setErrorMsg("パスワードは8文字以上を入力してください。");
+			forward.setErrorMsg("パスワードと確認パスワードを入力してください。");
 			return forward;
-		} else {
-			if (!pw[0].equals(pw[1])) {
-				forward.setErrorMsg("確認パスワードと一致してください。");
-				return forward;
-			}
-			if (!pw[0].matches(patternPw) || !pw[1].matches(patternPw) || pw[0].length() < 8
-					|| pw[1].length() < 8) {
-				forward.setErrorMsg("パスワードは英数字のみ入力してください。");
-				return forward;
-			}
-			if (pw[0].indexOf(" ") != -1 || pw[1].indexOf(" ") != -1) {
-				forward.setErrorMsg("パスワードにはスペース禁止です。");
-				return forward;
-			}
+		} 
+		if (!pw[0].equals(pw[1])) {
+			forward.setErrorMsg("確認パスワードと一致してください。");
+			return forward;
 		}
+		if (!pw[0].matches(patternPw) || !pw[1].matches(patternPw) || pw[0].length() < 8
+				|| pw[1].length() < 8) {
+			forward.setErrorMsg("パスワードは英数字のみ8文字以上を入力してください。");
+			return forward;
+		}
+		if (pw[0].indexOf(" ") != -1 || pw[1].indexOf(" ") != -1) {
+			forward.setErrorMsg("パスワードにはスペース禁止です。");
+			return forward;
+		}
+		
 		
 		pw = xssFilter.stripTagAll(pw);
 		map = xssFilter.stripTagAll(map);

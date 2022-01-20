@@ -223,18 +223,23 @@ public class U06 implements Action {
 		}
 
 		/* 会員情報 */
+		updateMemberBean.setM_num(member.getM_num());
 		updateMemberBean.setM_email(member.getM_email());
 		updateMemberBean.setM_pw(pw[0]);
 		updateMemberBean.setM_name(map.get("name"));
 		updateMemberBean.setM_kana(map.get("kana"));
-		updateMemberBean.setM_gender(map.get("gender"));
-		updateMemberBean.setM_address(map.get("address"));
-		updateMemberBean.setM_i_mark(map.get("insurance_mark"));
 		updateMemberBean.setM_birth(map.get("birth"));
 		updateMemberBean.setM_tel(map.get("tel"));
+		updateMemberBean.setM_gender(map.get("gender"));
 		updateMemberBean.setM_zip_code(map.get("zip_code"));
+		updateMemberBean.setM_address(map.get("address"));
+		updateMemberBean.setM_q_num(member.getM_q_num());
+		updateMemberBean.setM_i_mark(map.get("insurance_mark"));
 		updateMemberBean.setM_i_num(map.get("insurance_num"));
 		updateMemberBean.setM_i_expiry_date(map.get("insurance_expiry_date"));
+		updateMemberBean.setM_qr_num(member.getM_qr_num());
+		updateMemberBean.setM_auth(member.isM_auth());
+		updateMemberBean.setM_leave(member.isM_leave());
 		updateMemberBean.setAge(memberDAO.countBirth(map.get("birth")));
 		
 		// if update with password
@@ -277,7 +282,6 @@ public class U06 implements Action {
 		}
 		
 		updateMemberBean.setM_pw(SHA256.getEncrypt(pw[0]));
-		session.removeAttribute("member");
 		session.setAttribute("member", updateMemberBean);
 		forward.setPath("u06_01");
 		return forward;

@@ -34,25 +34,32 @@ public class U06_03 implements Action {
 		if (frist_name_ == null || "".equals(frist_name_)) {
 			forward.setErrorMsg("苗字を入力してください。");
 			return forward;
-		} else if (last_name_ == null || "".equals(last_name_)) {
+		}
+		if (last_name_ == null || "".equals(last_name_)) {
 			forward.setErrorMsg("名前を入力してください。");
 			return forward;
-		} else if (frist_kana_ == null || "".equals(frist_kana_)) {
+		} 
+		if (frist_kana_ == null || "".equals(frist_kana_)) {
 			forward.setErrorMsg("ふりがなを入力してください。");
 			return forward;
-		} else if (last_kana_ == null || "".equals(last_kana_)) {
+		} 
+		if (last_kana_ == null || "".equals(last_kana_)) {
 			forward.setErrorMsg("ふりがなを入力してください。");
 			return forward;
-		} else if (birth == null || "".equals(birth.replaceAll("-", ""))) {
+		}
+		if (birth == null || "".equals(birth.replaceAll("-", ""))) {
 			forward.setErrorMsg("生年月日を入力してください。");
 			return forward;
-		} else if (tel == null || "".equals(tel.replaceAll("-", ""))) {
+		}
+		if (tel == null || "".equals(tel.replaceAll("-", ""))) {
 			forward.setErrorMsg("電話番号を入力してください。");
 			return forward;
-		} else if (gender_ == null || "".equals(gender_)) {
+		}
+		if (gender_ == null || "".equals(gender_)) {
 			forward.setErrorMsg("性別を選択してください。");
 			return forward;
-		} else if (d_department_ == null || "".equals(d_department_)) {
+		}
+		if (d_department_ == null || "".equals(d_department_)) {
 			forward.setErrorMsg("診察科を入力してください。");
 			return forward;
 		}
@@ -73,10 +80,13 @@ public class U06_03 implements Action {
 		if (name.length() > 50) {
 			forward.setErrorMsg("名前が50文字超えています。");
 			return forward;
-		} else if (kana.length() > 50) {
+		}
+		if (kana.length() > 50) {
 			forward.setErrorMsg("ふりがなは50文字までです。");
 			return forward;
-		} else if (!birth.replaceAll("-", "").matches(patternNum) 
+			
+		}
+		if (!birth.replaceAll("-", "").matches(patternNum) 
 				|| check_datetype_birth[0].length() != 4
 				|| Integer.parseInt(check_datetype_birth[1]) < 1 
 				|| Integer.parseInt(check_datetype_birth[1]) > 12

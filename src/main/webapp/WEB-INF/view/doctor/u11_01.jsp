@@ -167,6 +167,8 @@
                                 <label>
                                     <span class="medicine_item">用法</span>
                                     <select name="pm_usage" id="pm_usage" disabled>
+                                        <option value="毎食前">毎食前</option>
+                                        <option value="毎食後">毎食後</option>
                                         <option value="朝食前">朝食前</option>
                                         <option value="朝食後" >朝食後</option>
                                         <option value="昼食前">昼食前</option>

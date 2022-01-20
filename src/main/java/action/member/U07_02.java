@@ -55,13 +55,13 @@ public class U07_02 implements Action {
 			return forward;
 		}
 		
-		if (!map.get("birth").replaceAll("-", "").matches(patternNum)) {
-			forward.setErrorMsg("生年月日は数字のみです。");
-			return forward;
-		}
 
 		if(check_birth != null) {
 			for(String birth1 : check_birth) {
+				if (!birth1.replaceAll("-", "").matches(patternNum)) {
+					forward.setErrorMsg("生年月日は数字のみです。");
+					return forward;
+				}
 				if(birth1 == null || "".equals(birth1)) {
 					forward.setErrorMsg("生年月日を入力してください。");
 					return forward;

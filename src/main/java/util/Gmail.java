@@ -69,7 +69,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -133,7 +132,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -197,7 +195,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -264,7 +261,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -328,7 +324,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -395,7 +390,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -461,7 +455,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -523,7 +516,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -585,7 +577,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -647,7 +638,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 
@@ -709,7 +699,6 @@ public class Gmail {
 		try{
 			Authenticator auth = new CompanyGmail(); 
 			Session ses = Session.getInstance(p, auth); 
-			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
 			Address fromAddr = new InternetAddress(from);
 			Address toAddr = new InternetAddress(to); 

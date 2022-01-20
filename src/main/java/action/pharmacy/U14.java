@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -20,6 +21,7 @@ public class U14 implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		HttpSession session = request.getSession(true);
 		ActionForward forward = new ActionForward();
 		XssFilter xssFilter = XssFilter.getInstance();
 
@@ -46,15 +48,19 @@ public class U14 implements Action {
 			String drug_price_ = multi.getParameter("drug_price");
 			int drug_price = 0;
 			
-			
 			if(drug_price_ != null && !"".equals(drug_price_)) {
 				drug_price = Integer.parseInt(drug_price_);
 			}
-			String fileName = path+drug_img_name;
+			String fileName = path+"\\"+drug_img_name;
 			File deleteImg = new File (fileName);
 			DrugDAO drugDAO = DrugDAO.getInstance();
 			if ("".equals(drug_name) || drug_name == null) {
 				forward.setErrorMsg("薬名を入力してください。");
+				deleteImg.delete();
+				return forward;
+			}
+			if(drugDAO.isDuplicateMDrug_name(drug_name)) {
+				forward.setErrorMsg("既に登録されているお薬です。");
 				deleteImg.delete();
 				return forward;
 			}
@@ -114,22 +120,11 @@ public class U14 implements Action {
 			drug.setDrug_price(drug_price);
 			drug.setDrug_img_name((drug_img_name != null ) ?xssFilter.stripTagAll(drug_img_name) : null);
 			
-			if (drugDAO.isDuplicateMDrug_name(drug_name)) {
-				String d_img = drugDAO.getDrugImgName(drug.getDrug_name());
-				String duplicatePath = path + d_img;
-				File duplicateImg = new File(duplicatePath);
-				duplicateImg.delete();
-	    	    drugDAO.updateDrugDuplicate(drug);
-			}else if(!drugDAO.createDrug(drug)) {
-				deleteImg.delete();
-				forward.setErrorMsg("薬情報の登録が失敗しました。");
-				return forward;
-			}
-			
-			forward.setRedirectToAction(true);
-			forward.setPath("u15_01");
-			forward.setMsg("薬情報の登録が完了しました。");
+			session.setAttribute("drugBean", drug);
+			forward.setPath("u14_01");
 			return forward;
+			
+			
 		} catch(NullPointerException e) {
 			e.printStackTrace();
 		}catch (Exception e) {

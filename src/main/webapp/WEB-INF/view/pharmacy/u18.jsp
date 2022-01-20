@@ -101,9 +101,9 @@
 	                            <span class="items_text">${pm.pm_all_dose_day }</span>
 	                        </div>
 	                        <div class="items">
-	                        	<c:set var="ep_note" value="${fn:replace(ep.ep_note,'&lt;br&gt;','<br>')}"/>
+	                        	<c:set var="drug_note" value="${fn:replace(drug[st.index].drug_note,'&lt;br&gt;','<br>')}"/>
 	                            <span class="items_title">注意事項</span>
-	                            <span class="items_text">${drug[st.index].drug_note }</span>
+	                            <span class="items_text">${drug_note }</span>
 	                        </div>
 	                    </div>
                     </c:forEach>

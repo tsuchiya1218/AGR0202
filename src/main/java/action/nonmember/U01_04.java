@@ -24,21 +24,14 @@ public class U01_04 implements Action {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		DoctorDAO doctorDAO = DoctorDAO.getInstance();
 		String authToken = (String) session.getAttribute("authToken");
-		/* 
-		 authToken and email has been sha256 encrypt
-		*/
-		if(authToken == null || "".equals(authToken)) {
-			forward.setErrorMsg("もう一度ログインし、新しい認証メールを取得してください。");
-			return forward;
-		}
 		
-		if(!email.equals(authToken)) {
-			forward.setErrorMsg("正しくないリクエストです。");
-			return forward;
-		}
 		if(memberDAO.findByEmail(email)) {
 			if(memberDAO.isAuth(email)) {
 				forward.setErrorMsg("既にメールアドレスの認証がされています。");
+				return forward;
+			}
+			if(!email.equals(authToken)) {
+				forward.setErrorMsg("正しくないリクエストです。");
 				return forward;
 			}
 			if(!memberDAO.updateAuth(email)) {

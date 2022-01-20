@@ -124,7 +124,7 @@ public class MemberDAO {
 	}
 	
 	public boolean singUp(MemberBean member) throws SQLException {
-		String SQL = "INSERT INTO member VALUES(null,?,?,?,?,?,?,?,?,?,null,?,?,?,null,false)";
+		String SQL = "INSERT INTO member VALUES(null,?,?,?,?,?,?,?,?,?,null,?,?,?,null,false,false)";
 		try {
 			Date birth = Date.valueOf(member.getM_birth());
 			conn = DBconnection.getConnection();

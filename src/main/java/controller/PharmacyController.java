@@ -23,6 +23,7 @@ import action.doctor_pharmacy.U10_s1;
 import action.doctor_pharmacy.U11_s3;
 import action.doctor_pharmacy.U13_01;
 import action.pharmacy.U14;
+import action.pharmacy.U14_01;
 import action.pharmacy.U15_01;
 import action.pharmacy.U15_s1;
 import action.pharmacy.U16_01;
@@ -51,6 +52,7 @@ public class PharmacyController extends HttpServlet {
 		contList.put("u11_s3",  new U11_s3());
 		contList.put("u13_01",  new U13_01());
 		contList.put("u14",  new U14());
+		contList.put("u14_01",  new U14_01());
 		contList.put("u15_01",  new U15_01());
 		contList.put("u15_s1",  new U15_s1());
 		contList.put("u16_01",  new U16_01());
