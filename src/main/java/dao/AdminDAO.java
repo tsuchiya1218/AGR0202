@@ -444,11 +444,12 @@ public class AdminDAO {
 	
 	
 	public int findByH_nameToH_num(String hospital_name) {
-		String SQL = "SELECT h_num FROM hospital WHERE h_name = ?";
+		String SQL = "SELECT h_num FROM hospital WHERE h_name = ? AND h_leave = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, hospital_name);
+			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
