@@ -11,7 +11,7 @@
     <title>退会完了画面</title>
 </head>
 <body>
-	<jsp:include page="../common/member/header.jsp"/>
+	<jsp:include page="../common/header.jsp"/>
     <main>
         <div class="main_con">
             <div class="subtitle">

@@ -193,7 +193,6 @@ public class MemberDAO {
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(member);
 			pstmt.setString(1, SHA256.getEncrypt(m_email));
-			pstmt.setBoolean(2, false);
 			rs = pstmt.executeQuery();
 			conn.commit();
 			if(rs.next()) {
