@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.MemberBean;
 import util.Close;
@@ -124,7 +126,7 @@ public class MemberDAO {
 	}
 	
 	public boolean singUp(MemberBean member) throws SQLException {
-		String SQL = "INSERT INTO member VALUES(null,?,?,?,?,?,?,?,?,?,null,?,?,?,null,false,false)";
+		String SQL = "INSERT INTO member VALUES(null,?,?,?,?,?,?,?,?,?,null,?,?,?,null,false)";
 		try {
 			Date birth = Date.valueOf(member.getM_birth());
 			conn = DBconnection.getConnection();
@@ -184,7 +186,7 @@ public class MemberDAO {
 	}
 	
 	public String login(String m_email, String m_pw) throws SQLException {
-		String member = "SELECT m_pw FROM member WHERE m_email = ? AND m_leave = ?";
+		String member = "SELECT m_pw FROM member WHERE m_email = ?";
 		
 		try {
 			conn = DBconnection.getConnection();
@@ -337,8 +339,7 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				return member;
 			}
@@ -405,8 +406,7 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				return member;
 			}
@@ -441,7 +441,7 @@ public class MemberDAO {
 	}
 	
 	public boolean findPassword(String m_email,String m_name) {
-		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ? AND m_leave = ?";
+		String SQL = "SELECT m_email,m_name FROM member WHERE m_email = ? AND m_name = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -491,18 +491,53 @@ public class MemberDAO {
 		}
 	}
 	
-	public boolean leave(String m_email) throws SQLException{
-		String SQL = "UPDATE member SET m_leave = ? WHERE m_email = ?";
+	public boolean leave(int m_num) throws SQLException{
+		String SQL = "SELECT ep_num FROM electronic_prescription WHERE ep_m_num = ?";
+		
+		List<Integer> ep_numList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setBoolean(1, true);
-			pstmt.setString(2, m_email);
+			pstmt.setInt(1, m_num);
+			rs = pstmt.executeQuery();
+			conn.commit();
+			while(rs.next()) {
+				ep_numList.add(rs.getInt("ep_num"));
+			}
+			pstmt.clearParameters();
+			SQL = "DELETE FROM prescribe_medicine WHERE pm_ep_num = ?";
+			for(int i=0; i<ep_numList.size(); i++) {
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, ep_numList.get(i));
+				pstmt.executeUpdate();
+				conn.commit();
+			}
+			pstmt.clearParameters();
+			SQL = "DELETE FROM electronic_prescription WHERE ep_m_num = ?";
+			for(int i=0; i<ep_numList.size(); i++) {
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, ep_numList.get(i));
+				pstmt.executeUpdate();
+				conn.commit();
+			}
+			pstmt.clearParameters();
+			SQL = "DELETE FROM child WHERE c_m_num = ?";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
+			pstmt.executeUpdate();
+			conn.commit();
+			
+			pstmt.clearParameters();
+			SQL = "DELETE FROM member WHERE m_num = ?";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
 			int result = pstmt.executeUpdate();
 			conn.commit();
-			if(result == 1) return true;
+			
+			if(result > 0 ) return true;
 			return false;
+			
 		}catch (SQLException sqle) {
 			conn.rollback();
 			throw new RuntimeException(sqle.getMessage());
@@ -737,8 +772,7 @@ public class MemberDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				return member;
 			}

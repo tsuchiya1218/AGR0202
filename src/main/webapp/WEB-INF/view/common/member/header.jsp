@@ -41,7 +41,7 @@
 		            <li><a href="#">お知らせ</a></li>
 		            <li><a href="#">問い合わせ</a></li>
 	        	</c:when>
-	        	<c:when test="${requestScope.nav eq 'u06' }">
+	        	<c:when test="${requestScope.nav eq 'u06' || requestScope.nav eq 'u05'}">
 		            <li><a href="MemberController?view=index">ホーム</a></li>
 		            <li><a href="MemberController?action=u08_01">薬歴</a></li>
 		            <li><a href="MemberController?view=u09">My QRコード</a></li>

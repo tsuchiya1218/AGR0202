@@ -239,7 +239,6 @@ public class U06 implements Action {
 		updateMemberBean.setM_i_expiry_date(map.get("insurance_expiry_date"));
 		updateMemberBean.setM_qr_num(member.getM_qr_num());
 		updateMemberBean.setM_auth(member.isM_auth());
-		updateMemberBean.setM_leave(member.isM_leave());
 		updateMemberBean.setAge(memberDAO.countBirth(map.get("birth")));
 		
 		// if update with password

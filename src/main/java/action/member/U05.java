@@ -37,7 +37,7 @@ public class U05 implements Action {
 			return forward;
 		}
 		MemberDAO memberDAO = MemberDAO.getInstance();
-		if(!memberDAO.leave(member.getM_email())) {
+		if(!memberDAO.leave(member.getM_num())) {
 			forward.setErrorMsg("データベースエラーが発生しました。もう一度やり直してください。");
 			return forward;
 		}else {

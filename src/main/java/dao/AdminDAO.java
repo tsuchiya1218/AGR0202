@@ -1207,8 +1207,7 @@ public class AdminDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				memberList.add(member);
 			}
@@ -1250,8 +1249,7 @@ public class AdminDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				memberList.add(member);
 			}
@@ -1293,8 +1291,7 @@ public class AdminDAO {
 						rs.getString("m_i_expiry_date"),
 						rs.getString("m_i_mark"),
 						rs.getString("m_qr_num"),
-						rs.getBoolean("m_auth"),
-						rs.getBoolean("m_leave")
+						rs.getBoolean("m_auth")
 						);
 				memberList.add(member);
 			}
