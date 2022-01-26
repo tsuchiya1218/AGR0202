@@ -26,10 +26,7 @@ public class U16_s1_02 implements Action {
 		String path = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\medicine";
 		int size = 1024 * 1024 * 10; // 20mb
 
-		// cos.jar라이브러리 클래스를 가지고 실제 파일을 업로드하는 과정
 		try {
-			// DefaultFileRenamePolicy 처리는 중복된 이름이 존재할 경우 처리할 때
-			// request, 파일저장경로, 용량, 인코딩타입, 중복파일명에 대한 정책
 			File file = new File(path);
 			if (!file.exists()) {
 				file.mkdirs();

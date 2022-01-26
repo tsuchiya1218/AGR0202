@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBconnection {
-	public static Connection getConnection() { //static을 사용하게되면 인스턴스를 만들지않고도 사용가능
+	public static Connection getConnection() {
 		try {
 			/*
 			 java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
@@ -20,6 +20,6 @@ public class DBconnection {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null; // 오류가 발생시
+		return null;
 	}
 }
