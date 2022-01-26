@@ -69,8 +69,9 @@ public class U06_s2 implements Action {
 		}
 		
 		Gmail gmail = Gmail.getInstance();
-		if(!gmail.sendUpdateEmailNotice(noHashEmail, doctor.getD_name())) {
-			forward.setErrorMsg("個人情報変更のお知らせメールの送信が失敗しましたが。\\n個人情報は変更されましたので再ログインしてください。");
+		gmail.sendUpdateEmailNotice(noHashEmail, doctor.getD_name());
+		if(!gmail.sendUpdateEmailDoctor(new_email, doctor.getD_name())) {
+			forward.setErrorMsg("メールアドレス変更のお知らせメールの送信が失敗しましたが。\\nメールアドレスは変更されましたので再ログインしてください。");
 			session.invalidate();
 			forward.setPath("u02");
 			return forward;

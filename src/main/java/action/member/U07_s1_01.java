@@ -1,10 +1,7 @@
 package action.member;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
@@ -17,7 +14,6 @@ public class U07_s1_01 implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8"); 
-		HttpSession session = request.getSession(true);
 		ActionForward forward = new ActionForward();
 		String c_num_ = request.getParameter("c_num");
 		

@@ -661,11 +661,71 @@ public class Gmail {
 	
 	public boolean sendUpdateEmailNotice(String m_email,String name) {
 		String to = m_email;
-		String subject = "COCO薬局 メールアドレスの変更完了のお知らせ";
+		String subject = "COCO薬局 メールアドレスの変更のお知らせ";
 		
 		String content = name+"\t様<br>"
-				+ "COCO薬局でのお客様のメールアドレスが変更されましたので、再ログインしてご確認ください。<br>"
-				+ "ログイン："+host+dbName+"NonMemberController?view=u02"
+				+ "COCO薬局でのお客様のメールアドレスが変更されました。<br>"
+				+ "<br>"
+				+ "<br>"
+				+ "※当メールに心当たりの無い場合は、誠に恐れ入りますが破棄して頂けますよう、よろしくお願い致します。<br>"
+				+ "＊このメールは自動送信しておりますので、お問い合わせはホームページよりお願いいたします。<br>"
+				+ "<br>"
+				+ "<br>"
+				+ "ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー<br>"
+				+ "<br>"
+				+ "株式会社COCO薬局</br>"
+				+ "<br>"
+				+ "URL："+host + dbName +"index.jsp"
+				+"<br>"
+				+ "住所：〒160-0023　東京都新宿区西新宿5-6-7<br>"
+				+ "TEL ：02-1234-5678";
+		
+		/* SMTPに　接続 */
+		Properties p = new Properties();
+		p.put("mail.smtp.ssl.enable", "true");
+		p.put("mail.smtp.user", from);
+		p.put("mail.smtp.host", "smtp.gmail.com");
+		p.put("mail.smtp.port", "465");
+		p.put("mail.smtp.starttls.enable", "true");
+		p.put("mail.smtp.auth", "true");
+		p.put("mail.smtp.connectiontimeout", "1000");
+		p.put("mail.smtp.socketFactory.port", "465");
+		p.put("mail.smtp.timeout", "1000"); 
+		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		p.put("mail.smtp.socketFactory.fallback", "false");
+		
+		/* 利用者に管理者のメールアドレスを使って送る */
+		try{
+			Authenticator auth = new CompanyGmail(); 
+			Session ses = Session.getInstance(p, auth); 
+			MimeMessage msg = new MimeMessage(ses); //MimeMessaheを利用しメールを送る
+			Address fromAddr = new InternetAddress(from);
+			Address toAddr = new InternetAddress(to); 
+			msg.setSubject(subject); //メールのタイトル
+			msg.setFrom(fromAddr); //受信者の情報
+			msg.addRecipient(Message.RecipientType.TO, toAddr); //受験者の情報
+			msg.setContent(content,"text/html; charset=UTF-8"); //メール内容
+			Transport t = ses.getTransport("smtp");
+			t.connect();
+			t.sendMessage(msg, msg.getAllRecipients());
+			t.close();
+			return true;
+		}catch(MessagingException e) {
+			e.printStackTrace();
+			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean sendUpdateEmailDoctor(String m_email,String name) {
+		String to = m_email;
+		String subject = "COCO薬局 メールアドレスの変更の認証メール";
+		
+		String content = name+"\t様<br>"
+				+ "COCO薬局でのお客様のメールアドレスを変更するためには、以下のURLにアクセスし認証してください。<br>"
+				+ "URL： "+ host + dbName +"NonMemberController?action=AllowToAuthToDoctor&email="+SHA256.getEncrypt(to)
 				+ "<br>"
 				+ "<br>"
 				+ "※当メールに心当たりの無い場合は、誠に恐れ入りますが破棄して頂けますよう、よろしくお願い致します。<br>"

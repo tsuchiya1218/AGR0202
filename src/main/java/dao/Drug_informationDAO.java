@@ -6,16 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Drug_informationBean;
-import model.Electronic_prescriptionBean;
 import util.Close;
 import util.DBconnection;
 
-public class Drug_informationDAO {
-	private Drug_informationDAO() {}
+public class Drug_informationDAO{
+
+	public Drug_informationDAO() {}
 	
 	private static class LazyHolder {
 		public static final Drug_informationDAO INSTANCE = new Drug_informationDAO();
@@ -190,5 +188,4 @@ public class Drug_informationDAO {
 			}
 		}
 	}
-	
 }
