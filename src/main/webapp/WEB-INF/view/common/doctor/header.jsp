@@ -40,7 +40,7 @@
             <ul>
                 <li><a href="DoctorController?view=index" >ホーム</a></li>
 	            <li><a href="DoctorController?view=u10_01_doctor">会員検索</a></li>
-	            <li><a href="DoctorController?action=u06">マイページ</a></li>
+	            <li><a href="DoctorController?action=u06_01">マイページ</a></li>
                 <li><a href="#">お知らせ</a></li>
 	            <li><a href="#">問い合わせ</a></li>
                 <li><a href="DoctorController?action=u04">ログアウト</a></li>
