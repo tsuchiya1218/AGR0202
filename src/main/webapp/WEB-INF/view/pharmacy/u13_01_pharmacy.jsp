@@ -51,7 +51,7 @@
                      </c:if>
                     </div>
                     <div class="items_req">
-                     <span class="items_title">処方箋使用期間</span>
+                     <span class="items_title">処方箋有効期間</span>
                      <span class="items_text">${ep.ep_expiry_date }</span>
                     </div>
                     <div class="items">

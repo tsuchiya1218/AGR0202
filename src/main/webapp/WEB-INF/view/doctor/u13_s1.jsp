@@ -60,7 +60,7 @@
                         </div>
                         <div class="items_req">
                             <label id="ep_expiry_date">
-                                <span class="items_title">処方箋使用期間</span>
+                                <span class="items_title">処方箋有効期間</span>
                                 <c:set var="ep_expiry_date" value="${fn:split(ep.ep_expiry_date, '-') }"/>
                                 <input type="number" name="ep_expiry_date" value="${ep_expiry_date[0] }" placeholder="2022" maxlength="4" min="0" oninput="maxLengthCheck(this)">-
                                 <input type="number" name="ep_expiry_date" value="${ep_expiry_date[1] }" placeholder="08" maxlength="2" min="0" oninput="maxLengthCheck(this)">-

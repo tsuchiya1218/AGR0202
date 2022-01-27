@@ -59,7 +59,7 @@
                         </div>
                         <div class="items_req">
                             <label id="ep_expiry_date">
-                                <span class="items_title">処方箋使用期間</span>
+                                <span class="items_title">処方箋有効期間</span>
                                 <input type="number" name="ep_expiry_date" placeholder="2022" maxlength="4" min="0" oninput="maxLengthCheck(this)">-
                                 <input type="number" name="ep_expiry_date" placeholder="08" maxlength="2" min="0" oninput="maxLengthCheck(this)">-
                                 <input type="number" name="ep_expiry_date" placeholder="27" maxlength="2" min="0" oninput="maxLengthCheck(this)">
@@ -148,7 +148,7 @@
                                 </label>
                                 <label class="two_text">
                                     <span class="medicine_item">分量</span>
-                                    <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>回
+                                    <input type="number" name="pm_dosage" min="1" max="1" value="1" class="pm_dosage" disabled required>回
                                     <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>
                                     <select name="dosage_type" id="dosage_type" disabled>
                                     	<option value="錠">錠</option>
@@ -157,7 +157,7 @@
                                 </label>
                                 <label class="two_text">
                                     <span class="medicine_item">用量</span>
-                                    <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>日
+                                    <input type="number" name="pm_dose" min="1" max="1" value="1" class="pm_dose" disabled required>日
                                     <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>
                                     <select name="dose_type" id="dose_type" disabled>
                                     	<option value="錠">錠</option>
