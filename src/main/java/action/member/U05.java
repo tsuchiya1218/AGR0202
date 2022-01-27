@@ -42,7 +42,7 @@ public class U05 implements Action {
 			return forward;
 		}else {
 			memberDAO.sortM_num();
-			String root = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code";
+			String root = "C:\\Users\\20jy0211\\git\\AGR0202\\src\\main\\webapp\\static\\img\\qr_code\\";
 			String qr_name = member.getM_qr_num()+".png";
 			File file = new File(root+qr_name);
 			file.delete();

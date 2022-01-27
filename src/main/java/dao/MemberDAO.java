@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Electronic_prescriptionBean;
 import model.MemberBean;
 import util.Close;
 import util.DBconnection;
@@ -491,9 +492,9 @@ public class MemberDAO {
 	}
 	
 	public boolean leave(int m_num) throws SQLException{
-		String SQL = "SELECT ep_num FROM electronic_prescription WHERE ep_m_num = ?";
+		String SQL = "SELECT ep_num,ep_di_num FROM electronic_prescription WHERE ep_m_num = ?";
 		
-		List<Integer> ep_numList = new ArrayList<>();
+		List<Electronic_prescriptionBean> epList = new ArrayList<>();
 		try {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
@@ -502,24 +503,37 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			conn.commit();
 			while(rs.next()) {
-				ep_numList.add(rs.getInt("ep_num"));
+				Electronic_prescriptionBean ep = new Electronic_prescriptionBean();
+				ep.setEp_num(rs.getInt("ep_num"));
+				ep.setEp_di_num(rs.getInt("ep_di_num"));
+				epList.add(ep);
 			}
 			pstmt.clearParameters();
 			SQL = "DELETE FROM prescribe_medicine WHERE pm_ep_num = ?";
-			for(int i=0; i<ep_numList.size(); i++) {
+			for(Electronic_prescriptionBean ep : epList) {
 				pstmt = conn.prepareStatement(SQL);
-				pstmt.setInt(1, ep_numList.get(i));
+				pstmt.setInt(1, ep.getEp_num());
+				pstmt.executeUpdate();
+				conn.commit();
+				
+			}
+			
+			pstmt.clearParameters();
+			SQL = "DELETE FROM drug_information WHERE di_num = ?";
+			for(Electronic_prescriptionBean ep : epList) {
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, ep.getEp_di_num());
 				pstmt.executeUpdate();
 				conn.commit();
 			}
+			
 			pstmt.clearParameters();
 			SQL = "DELETE FROM electronic_prescription WHERE ep_m_num = ?";
-			for(int i=0; i<ep_numList.size(); i++) {
-				pstmt = conn.prepareStatement(SQL);
-				pstmt.setInt(1, ep_numList.get(i));
-				pstmt.executeUpdate();
-				conn.commit();
-			}
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
+			pstmt.executeUpdate();
+			conn.commit();
+			
 			pstmt.clearParameters();
 			SQL = "DELETE FROM child WHERE c_m_num = ?";
 			pstmt = conn.prepareStatement(SQL);
