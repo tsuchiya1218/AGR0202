@@ -46,6 +46,7 @@
     
 }
  .items input[type="text"],
+ .items input[type="number"],
  .items_medicine input[type="text"],
  .items_medicine input[type="number"],
  .items_req input[type="text"]{
@@ -83,7 +84,8 @@
 .items_medicine input[type="text"]:disabled,
 .two_text input[type="number"]:disabled,
 .items_req input[type="text"]:disabled,
-.items_req input[type="number"]:disabled{
+.items_req input[type="number"]:disabled,
+.items input[type="number"]:disabled{
      text-align: center;
      color: black;
      border: none;
@@ -94,6 +96,7 @@
  .items_medicine input[type="number"]:focus,
  .items_medicine input[type="text"]:focus,
  .two_text input[type="number"]:focus,
+ .items input[type="number"]:focus,
  .items_another textarea:focus,
  .items_req input[type="number"]:focus{
      border: 1px solid #55b1df;
@@ -284,7 +287,8 @@
      }
      .items input[type="text"],
      .items_req input[type="text"],
-     .items_medicine input[type="number"]{
+     .items_medicine input[type="number"],
+     .items input[type="number"]{
          width: 50%;
          height: 10px;
          font-size: 14px;

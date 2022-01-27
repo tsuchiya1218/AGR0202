@@ -30,9 +30,8 @@
                         </div>
                         <div class="manual_text">
                             <span>1.<a href="MemberController?view=u09">My QRコード</a>
-                                にアクセス</span><br>
-                            <span>2.QRコードを送信ボタンを押す。</span><br>
-                            <span>3.登録したメールにQRコード画像が送られます。</span><br>
+                                にアクセスする。</span><br>
+                            <span>2.ダウンロードボタンを押す。</span>
                         </div>
                     </div>
                     <div class="manual_box">

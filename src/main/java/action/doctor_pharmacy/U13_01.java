@@ -1,6 +1,8 @@
 package action.doctor_pharmacy;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +72,10 @@ public class U13_01 implements Action {
 			forward.setPath("u13_01_doctor");
 			return forward;
 		}else if(session.getAttribute("pharmacy") != null) {
+			Calendar cl = Calendar.getInstance();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        int today = Integer.parseInt(sdf.format(cl.getTime()).replaceAll("-", ""));
+			request.setAttribute("today", today);
 			forward.setPath("u13_01_pharmacy");
 			return forward;
 		}
