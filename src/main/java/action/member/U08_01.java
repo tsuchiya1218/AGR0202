@@ -49,7 +49,8 @@ public class U08_01 implements Action {
 		PharmacyDAO pharmacyDAO = PharmacyDAO.getInstance();
 		HospitalDAO hospitalDAO = HospitalDAO.getInstance();
 		Prescribe_medicineDAO pmDAO = Prescribe_medicineDAO.getInstance();
-
+		int noHaveDiNumSize = 0;
+	
 		if (!epList.isEmpty()) {
 			for (Electronic_prescriptionBean ep : epList) {
 				if (ep.getEp_di_num() != 0) {
@@ -66,6 +67,8 @@ public class U08_01 implements Action {
 					int d_h_num = DoctorDAO.getInstance().findByD_numToD_h_num(ep.getEp_d_num());
 					hospital_nameList.add(hospitalDAO.findByD_h_numToH_name(d_h_num));
 					totalPriceList.add(pmDAO.findByEp_numToDrugTotalPrice(ep.getEp_num()));
+				}else {
+					noHaveDiNumSize++;
 				}
 			}
 		}
@@ -90,7 +93,7 @@ public class U08_01 implements Action {
 		request.setAttribute("hospital_nameList", hospital_nameList);
 		request.setAttribute("pharmacy_nameList", pharmacy_nameList);
 		request.setAttribute("totalPriceList", totalPriceList);
-		
+		request.setAttribute("noHaveDiNumSize", noHaveDiNumSize);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
 

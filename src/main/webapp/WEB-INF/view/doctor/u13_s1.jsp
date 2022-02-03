@@ -166,25 +166,27 @@
                                 </label>
                                 <label class="two_text">
                                     <span class="medicine_item">分量</span>
-                                    <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>回
-                                    <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>
-                                    <select name="dosage_type" id="dosage_type" disabled>
-                                    	<option value="錠">錠</option>
-                                    	<option value="g">g</option>
-                                    </select>
+                                    <div>
+	                                    1回
+	                                    <input type="number" name="pm_dosage" min="0" class="pm_dosage" disabled required>
+	                                    <select name="dosage_type" id="dosage_type" disabled>
+	                                    	<option value="錠">錠</option>
+	                                    	<option value="g">g</option>
+	                                    </select>
+                                    </div>
                                 </label>
                                 <label class="two_text">
                                     <span class="medicine_item">用量</span>
-                                    <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>日
-                                    <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>
-                                    <select name="dose_type" id="dose_type" disabled>
-                                    	<option value="錠">錠</option>
-                                    	<option value="g">g</option>
-                                    </select>
+                                    <div>
+	                                    1日
+	                                    <input type="number" name="pm_dose" min="0" class="pm_dose" disabled required>回
+                                    </div>
                                 </label>
                                 <label>
                                     <span class="medicine_item">用法</span>
                                     <select name="pm_usage" id="pm_usage" disabled>
+                                        <option value="毎食前">毎食前</option>
+                                        <option value="毎食後">毎食後</option>
                                         <option value="朝食前">朝食前</option>
                                         <option value="朝食後" >朝食後</option>
                                         <option value="昼食前">昼食前</option>

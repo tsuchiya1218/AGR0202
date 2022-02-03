@@ -45,6 +45,9 @@
 	            <p><strong>${endDate }</strong>までの検索結果</p>
             </c:if>
             <div class="medcineTable">
+            <c:if test="${requestScope.noHaveDiNumSize ne 0}">
+            	<br><strong style="color:red;">まだ受け取っていない薬剤情報提供書が ${requestScope.noHaveDiNumSize } 件あります。</strong>
+           	</c:if>
                 <table>
                     <tr>
                         <th></th>

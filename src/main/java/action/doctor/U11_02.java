@@ -46,9 +46,7 @@ public class U11_02 implements Action {
 		String m_num_ = request.getParameter("m_num");
 		String c_num_ = request.getParameter("c_num");
 		String dosage_type = request.getParameter("dosage_type");
-		String dose_type = request.getParameter("dose_type");
 		String regPm = "^[0-9]+(.)?[0-9]*$";
-		String regNum = "^[0-9]*$";
 		
 		if (ep_expiry_date[0].length() < 4 || ep_expiry_date[1].length() < 2 || ep_expiry_date[2].length() < 2
 				|| Integer.parseInt(ep_expiry_date[1]) < 1 || Integer.parseInt(ep_expiry_date[1]) > 12
@@ -73,31 +71,27 @@ public class U11_02 implements Action {
 		if (pm_dosage == null) {
 			forward.setErrorMsg("分量を入力してください。");
 			return forward;
-		} else if (dosage_type == null || "".equals(dosage_type)) {
+		} 
+		if (dosage_type == null || "".equals(dosage_type)) {
 			forward.setErrorMsg("分量のタイプを選択してください。");
 			return forward;
-		} else if (pm_dose == null) {
+		} 
+		if (pm_dose == null) {
 			forward.setErrorMsg("用量を入力してください。");
 			return forward;
-		} else if (dose_type == null || "".equals(dose_type)) {
-			forward.setErrorMsg("用量のタイプを選択してください。");
-			return forward;
-		} else if (pm_usage == null || "".equals(pm_usage)) {
+		} 
+		if (pm_usage == null || "".equals(pm_usage)) {
 			forward.setErrorMsg("用法を選択してください。");
 			return forward;
-		} else if (pm_dose_day == null || "".equals(pm_dose_day)) {
+		} 
+		if (pm_dose_day == null || "".equals(pm_dose_day)) {
 			forward.setErrorMsg("日数を入力してください。");
 			return forward;
-		} else if (pm_all_dose_day == null || "".equals(pm_all_dose_day)) {
+		} 
+		if (pm_all_dose_day == null || "".equals(pm_all_dose_day)) {
 			forward.setErrorMsg("総投与日数を入力してください。");
 			return forward;
-		} else if (!pm_dose_day.matches(regNum)) {
-			forward.setErrorMsg("日数は数字のみです。");
-			return forward;
-		} else if (!pm_all_dose_day.matches(regNum)) {
-			forward.setErrorMsg("総投与日数は数字のみです");
-			return forward;
-		}
+		} 
 		if (pm_dosage != null) {
 			for (String dosage : pm_dosage) {
 				if (dosage == null || "".equals(dosage)) {
@@ -131,7 +125,6 @@ public class U11_02 implements Action {
 		pm_dosage = xssFilter.stripTagAll(pm_dosage);
 		dosage_type = xssFilter.stripTagAll(dosage_type);
 		pm_dose = xssFilter.stripTagAll(pm_dose);
-		dose_type = xssFilter.stripTagAll(dose_type);
 		pm_usage = xssFilter.stripTagAll(pm_usage);
 		pm_dose_day = xssFilter.stripTagAll(pm_dose_day);
 		pm_all_dose_day = xssFilter.stripTagAll(pm_all_dose_day);
@@ -185,12 +178,12 @@ public class U11_02 implements Action {
 			}
 			pmBean.setPm_drug_num(drugDAO.findByDrug_numToDrug_name(medicine));
 			pmBean.setPm_ep_num(ep_num);
-			pmBean.setPm_dosage(pm_dosage[index] + "回" + pm_dosage[index + 1] + dosage_type);
+			pmBean.setPm_dosage("1回" + pm_dosage[index] + dosage_type);
 			pmBean.setPm_usage(pm_usage);
-			pmBean.setPm_dose(pm_dose[index] + "日" + pm_dose[index + 1] + dose_type);
+			pmBean.setPm_dose("1日" + pm_dose[index] + "回");
 			pmBean.setPm_dose_day(Integer.parseInt(pm_dose_day));
 			pmBean.setPm_all_dose_day(Integer.parseInt(pm_all_dose_day));
-			index += 2;
+			index ++;
 			pmList.add(pmBean);
 		}
 		// 薬処方を登録する。

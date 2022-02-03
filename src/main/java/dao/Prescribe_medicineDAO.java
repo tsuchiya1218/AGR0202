@@ -62,6 +62,28 @@ public class Prescribe_medicineDAO {
 		}
 	}
 	
+	public boolean deletePm(int pm_ep_num) throws SQLException {
+		String SQL = "DELETE FROM prescribe_medicine WHERE pm_ep_num = ?";
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, pm_ep_num);
+			pstmt.executeUpdate();
+			return true;
+			
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle.getMessage());
+		} catch (NullPointerException nule) {
+			throw new RuntimeException(nule.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, null);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
 	public List<Prescribe_medicineBean> getPmList(int ep_num) throws SQLException {
 		String SQL = "SELECT * FROM prescribe_medicine WHERE pm_ep_num = ?";
 		List<Prescribe_medicineBean> pmList = new ArrayList<>();
@@ -103,8 +125,7 @@ public class Prescribe_medicineDAO {
 	
 	
 	public boolean updateDrug_information(List<Prescribe_medicineBean> pm) throws SQLException {
-		String SQL = "UPDATE prescribe_medicine SET pm_dosage = ?, pm_dose = ?, pm_usage = ?, pm_dose_day = ?,"
-				+ "pm_all_dose_day = ? WHERE pm_ep_num = ?";
+		String SQL = "UPDATE prescribe_medicine SET pm_dosage = ?, pm_dose = ?, pm_usage = ?, pm_dose_day = ?, pm_all_dose_day = ? WHERE pm_ep_num = ?";
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -116,8 +137,8 @@ public class Prescribe_medicineDAO {
 				pstmt.setInt(4, pm.get(i).getPm_dose_day());
 				pstmt.setInt(5, pm.get(i).getPm_all_dose_day());
 				pstmt.setInt(6, pm.get(i).getPm_ep_num());
-				int result = pstmt.executeUpdate();
-				if (result == 0) return false;
+				pstmt.executeUpdate();
+				i++;
 			}
 			return true;
 		} catch (SQLException sqle) {
