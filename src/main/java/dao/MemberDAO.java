@@ -549,6 +549,13 @@ public class MemberDAO {
 			int result = pstmt.executeUpdate();
 			conn.commit();
 			
+			pstmt.clearParameters();
+			SQL = "DELETE FROM questionnaire WHERE q_num = ?";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
+			pstmt.executeUpdate();
+			conn.commit();
+			
 			if(result > 0 ) return true;
 			return false;
 			
