@@ -32,7 +32,6 @@ public class GenerateQRcode {
 			File temp =  new File(path, fileName+".png"); 
 			// tempのpathに QR画像が作られる. 
 			ImageIO.write(qrImage, "png",temp );
-			System.out.println(temp.getName());
 			return fileName;
 		}catch(Exception e) {
 			e.printStackTrace();

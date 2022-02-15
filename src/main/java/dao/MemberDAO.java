@@ -507,8 +507,6 @@ public class MemberDAO {
 				ep.setEp_num(rs.getInt("ep_num"));
 				ep.setEp_di_num(rs.getInt("ep_di_num"));
 				epList.add(ep);
-				System.out.println(ep.getEp_num() + " EP NUM");
-				System.out.println(ep.getEp_di_num() + " EP DI NUM");
 			}
 			pstmt.clearParameters();
 			SQL = "DELETE FROM prescribe_medicine WHERE pm_ep_num = ?";
