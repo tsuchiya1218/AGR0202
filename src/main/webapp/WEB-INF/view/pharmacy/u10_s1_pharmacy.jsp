@@ -76,14 +76,22 @@
                         </div>
                         <div class="items_row">
                             <span class="items_title">
+                                子ども医療証番号
+                            </span>
+                            <span class="items_text">
+                                <c:out value="${children[index].c_medical_num }"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="items">
+                    	<div class="items_row">
+                            <span class="items_title">
                                 性別
                             </span>
                             <span class="items_text">
                                 <c:out value="${children[index].c_gender}"/>
                             </span>
                         </div>
-                    </div>
-                    <div class="items">
                         <div class="items_row">
                             <span class="items_title">
                                 生年月日

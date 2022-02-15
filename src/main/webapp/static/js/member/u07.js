@@ -5,10 +5,7 @@ function addSubmit(form){
 		alert('正しい生年月日を入力してください。\n例 2010 02 09');
 		return;
 	}
-	if(checkI_expiry_date()){
-		alert('正しい保険証有効期限を入力してください。\n例 2025 01 25');
-		return;
-	}
+	
     //space tap enterがあればreturn true
     let regSpace = /\s/g;
     let isError = false;
@@ -81,15 +78,5 @@ function checkBirth(){
     if(brith[2].value.length != 2) return true;
     if(brith[1].value < 1 || brith[1].value > 12) return true;
     if(brith[2].value < 1 || brith[2].value > 31) return true;
-	return false;
-}
-
-function checkI_expiry_date(){
-	let expiry_date = document.querySelectorAll(".expiry_date input[type='number']");
-    if(expiry_date[0].value.length != 4) return true;
-    if(expiry_date[1].value.length != 2) return true;
-    if(expiry_date[2].value.length != 2) return true;
-    if(expiry_date[1].value < 1 || expiry_date[1].value > 12) return true;
-    if(expiry_date[2].value < 1 || expiry_date[2].value > 31) return true;
 	return false;
 }

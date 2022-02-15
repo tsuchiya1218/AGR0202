@@ -85,29 +85,6 @@ public class U07_02 implements Action {
 		String birth = check_birth[0] + "-" + check_birth[1] + "-" + check_birth[2];
 		map.put("birth", birth);
 		
-		if(check_insurance_expiry_date != null) {
-			for(String insurance_expiry_date1 : check_insurance_expiry_date) {
-				if(insurance_expiry_date1 == null || "".equals(insurance_expiry_date1)) {
-					forward.setErrorMsg("保険証有効期限を入力してください。");
-					return forward;
-				}
-				
-			}
-			if (check_insurance_expiry_date[0].length() != 4
-					|| Integer.parseInt(check_insurance_expiry_date[1]) < 1
-					|| Integer.parseInt(check_insurance_expiry_date[1]) > 12
-					|| Integer.parseInt(check_insurance_expiry_date[2]) < 1
-					|| Integer.parseInt(check_insurance_expiry_date[2]) > 31
-					|| check_insurance_expiry_date[1].length() != 2
-					|| check_insurance_expiry_date[2].length() != 2) {
-				forward.setErrorMsg("正しい保険証有効期限を入力してください。 \\n例)2024 04 01");
-				return forward;
-			}
-		}else {
-			forward.setErrorMsg("保険証有効期限を入力してください。");
-			return forward;
-		}
-		
 		String insurance_expiry_date = check_insurance_expiry_date[0] + "-"
 				+ check_insurance_expiry_date[1] + "-"
 				+ check_insurance_expiry_date[2];
@@ -117,13 +94,14 @@ public class U07_02 implements Action {
 
 		ChildDAO childDAO = ChildDAO.getInstance();
 		ChildBean childBean = new ChildBean();
+		
+		if("".equals(map.get("medical_num").replaceAll("\\s", ""))) {
+			forward.setErrorMsg("子ども医療証番号を入力してください。");
+			return forward;
+		}
 
 		if (childDAO.isDuplicateMedical_num(map.get("medical_num"))) {
 			forward.setErrorMsg("既に登録されている子ども医療費番号です。");
-			return forward;
-		}
-		if (childDAO.isDuplicateC_i_num(map.get("insurance_num"))) {
-			forward.setErrorMsg("既に登録されている保険証番号です。");
 			return forward;
 		}
 
