@@ -507,6 +507,8 @@ public class MemberDAO {
 				ep.setEp_num(rs.getInt("ep_num"));
 				ep.setEp_di_num(rs.getInt("ep_di_num"));
 				epList.add(ep);
+				System.out.println(ep.getEp_num() + " EP NUM");
+				System.out.println(ep.getEp_di_num() + " EP DI NUM");
 			}
 			pstmt.clearParameters();
 			SQL = "DELETE FROM prescribe_medicine WHERE pm_ep_num = ?";
@@ -517,6 +519,12 @@ public class MemberDAO {
 				conn.commit();
 				
 			}
+			pstmt.clearParameters();
+			SQL = "DELETE FROM electronic_prescription WHERE ep_m_num = ?";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, m_num);
+			pstmt.executeUpdate();
+			conn.commit();
 			
 			pstmt.clearParameters();
 			SQL = "DELETE FROM drug_information WHERE di_num = ?";
@@ -526,13 +534,6 @@ public class MemberDAO {
 				pstmt.executeUpdate();
 				conn.commit();
 			}
-			
-			pstmt.clearParameters();
-			SQL = "DELETE FROM electronic_prescription WHERE ep_m_num = ?";
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, m_num);
-			pstmt.executeUpdate();
-			conn.commit();
 			
 			pstmt.clearParameters();
 			SQL = "DELETE FROM child WHERE c_m_num = ?";
@@ -560,31 +561,6 @@ public class MemberDAO {
 		}finally {
 			try {
 				Close.close(conn, pstmt, null);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-	}
-	
-	public void sortM_num() throws SQLException {
-		try {
-			String SQL = "SET @COUNT=0;";
-			conn = DBconnection.getConnection();
-			conn.setAutoCommit(false);
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.executeQuery();
-			SQL = "UPDATE member SET m_num =@count:=@count+1;";
-			pstmt.executeUpdate(SQL);
-			conn.commit();
-		} catch (SQLException sqle) {
-			conn.rollback();
-			throw new RuntimeException(sqle.getMessage());
-		} catch (NullPointerException nule) {
-			conn.rollback();
-			throw new RuntimeException(nule.getMessage());
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage());
 			}
